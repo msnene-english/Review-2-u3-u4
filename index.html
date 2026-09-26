@@ -1,0 +1,1007 @@
+<!DOCTYPE html>
+    <html lang="vi">
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>rReview 2 (U3-U4)</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; max-width: 800px; margin: 0 auto; padding: 20px; background-color: #f0f2f5; position: relative; z-index: 1; }
+        .watermark { position: absolute; top: 30px; left: 0; right: 0; text-align: center; font-size: 50px; color: rgba(0, 0, 0, 0.04); font-weight: bold; pointer-events: none; z-index: -1; user-select: none; }
+        .watermark div { transform: rotate(-30deg); margin: 200px 0; }
+        h1, h2 { color: #2c3e50; text-align: center; }
+        .screen { display: none; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .screen.active { display: block; }
+        
+        input[type="text"] { width: 100%; padding: 12px; margin: 10px 0 20px; border: 2px solid #ddd; border-radius: 6px; box-sizing: border-box; font-size: 16px; transition: border-color 0.3s; }
+        input[type="text"]:focus { border-color: #3498db; outline: none; }
+        
+        button { background: #3498db; color: #fff; border: none; padding: 12px 24px; font-size: 16px; border-radius: 6px; cursor: pointer; transition: background 0.3s, transform 0.1s; }
+        button:hover { background: #2980b9; }
+        button:active { transform: scale(0.98); }
+        button:disabled { background: #95a5a6; cursor: not-allowed; }
+        
+        .question-block { margin-bottom: 25px; padding: 15px; background: #f9f9f9; border-left: 4px solid #3498db; border-radius: 0 8px 8px 0; }
+        .instruction-box { margin-bottom: 15px; padding: 10px 15px; background: #e8f4fd; border: 1px solid #b6d4fe; border-radius: 6px; font-weight: bold; color: #004085; }
+        .question-text { font-weight: 500; margin-bottom: 15px; font-size: 16px; line-height: 1.8; }
+        
+        .options { display: flex; flex-direction: column; gap: 10px; margin-top: 10px; }
+        .option { padding: 12px 15px; background: #fff; border: 2px solid #eee; border-radius: 8px; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 10px; }
+        .option:hover { border-color: #3498db; background: #f8faff; }
+        .option.selected { border-color: #3498db; background: #ebf5ff; }
+        .option.correct-opt { border-color: #2ecc71; background: #eafaf1; }
+        .option.wrong-opt { border-color: #e74c3c; background: #fdedec; }
+        
+        .radio-circle { width: 20px; height: 20px; border: 2px solid #ddd; border-radius: 50%; position: relative; }
+        .option.selected .radio-circle::after { content: ''; position: absolute; top: 4px; left: 4px; width: 12px; height: 12px; background: #3498db; border-radius: 50%; }
+        
+        .gap-fill-input { width: 120px !important; padding: 4px 8px !important; margin: 0 5px !important; display: inline-block !important; border: 1px solid #ccc !important; border-radius: 4px !important; font-size: 16px !important; }
+        
+        .reordering-container { display: flex; flex-direction: column; gap: 15px; }
+        .word-bank, .drop-zone { display: flex; flex-wrap: wrap; gap: 8px; min-height: 45px; padding: 10px; background: #fff; border: 2px dashed #ddd; border-radius: 8px; }
+        .word-chip { padding: 8px 16px; background: #3498db; color: #fff; border-radius: 20px; cursor: pointer; user-select: none; font-weight: 500; transition: transform 0.1s; }
+        .word-chip:active { transform: scale(0.95); }
+        .word-chip.correct { background: #2ecc71; }
+        .word-chip.wrong { background: #e74c3c; }
+        
+        .rewrite-input { width: 100%; height: 80px; padding: 12px; border: 2px solid #ddd; border-radius: 6px; resize: vertical; font-size: 16px; font-family: inherit; }
+        
+        .check-btn { margin-top: 15px; background: #3498db; font-size: 14px; padding: 8px 16px; }
+        .explanation { display: none; margin-top: 15px; padding: 15px; background: #eef2f5; border-radius: 6px; font-size: 14.5px; line-height: 1.5; color: #2c3e50; border-left: 4px solid #2ecc71; }
+        
+        .progress-bar { width: 100%; height: 10px; background: #ddd; border-radius: 5px; margin-bottom: 20px; overflow: hidden; }
+        .progress-fill { height: 100%; background: #2ecc71; width: 0%; transition: width 0.3s; }
+        
+        .result-details { margin-top: 20px; padding: 15px; padding-bottom: 30px; background: #f8f9fa; border-radius: 6px; text-align: left; max-height: 60vh; overflow-y: auto; font-size: 14px; }
+        .error-item { margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid #eee; color: #e74c3c; }
+    </style>
+    </head>
+    <body>
+    <div class="watermark">
+        <div>rReview 2 (U3-U4)<br>GV biên soạn: Ms Chí Nên - 0852639652</div>
+        <div>rReview 2 (U3-U4)<br>GV biên soạn: Ms Chí Nên - 0852639652</div>
+        <div>rReview 2 (U3-U4)<br>GV biên soạn: Ms Chí Nên - 0852639652</div>
+        <div>rReview 2 (U3-U4)<br>GV biên soạn: Ms Chí Nên - 0852639652</div>
+    </div>
+    
+    <div id="startScreen" class="screen active">
+        <h1>rReview 2 (U3-U4)</h1>
+        <p style="text-align: center; color: #7f8c8d;">Nhập họ và tên của bạn để bắt đầu làm bài</p>
+        <input type="text" id="studentName" placeholder="Ví dụ: Nguyễn Văn A" autocomplete="off">
+        <div style="text-align: center;">
+            <button onclick="startTest()">Bắt đầu làm bài</button>
+        </div>
+    </div>
+    
+    <div id="testScreen" class="screen">
+        <h2>rReview 2 (U3-U4)</h2>
+        <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+        <div id="questionsContainer"></div>
+        <div style="text-align: center; margin-top: 30px;">
+            <button id="submitBtn" onclick="confirmSubmit()" style="background: #2ecc71; font-weight: bold; padding: 15px 40px;">NỘP BÀI</button>
+        </div>
+    </div>
+    
+    <div id="resultScreen" class="screen" style="text-align: center;">
+        <h1 style="color: #2ecc71; font-size: 36px;">Hoàn thành!</h1>
+        <h2 id="scoreDisplay" style="font-size: 48px; margin: 20px 0; color: #2c3e50;"></h2>
+        <p id="feedbackText" style="font-size: 18px; color: #7f8c8d;"></p>
+        <div class="result-details" id="resultDetails"></div>
+    </div>
+    
+    <div style="text-align: center; margin-top: 50px; padding: 20px; color: #7f8c8d; font-size: 14px; border-top: 1px solid #ddd;">
+        GV biên soạn: Ms Chí Nên - 0852639652
+    </div>
+    
+    <script>
+        const testName = 'rReview 2 (U3-U4)';
+        const quizData = [
+  {
+    "id": "review2_1",
+    "type": "gap_fill_text",
+    "title": "A. Use the word given in capitals at the end of each line to form a word that fits in the gap in the same line.",
+    "explanationHTML": "Word formation. 1. interesting, 2. association, 3. unfortunately, 4. knowledge, 5. equipment, 6. enjoyable, 7. competition, 8. trainer, 9. opponents, 10. medallist.",
+    "questionHTML": "<strong>A new hobby</strong><br><br>I saw some badminton on TV and found it quite {{blank:b1}} (INTEREST), so I thought I'd see if there was a club or {{blank:b2}} (ASSOCIATE) in my area. I looked everywhere but, {{blank:b3}} (FORTUNE), the nearest club was 80 kilometres away. So, without any {{blank:b4}} (KNOW), I decided to form my own club. It was very hard in the beginning – I didn't have any {{blank:b5}} (EQUIP) and I had to convince a few people that it was an {{blank:b6}} (ENJOY) way to keep fit. I organised a small {{blank:b7}} (COMPETE), which was a lot of fun, and things started to grow from there. Now we've got a full-time {{blank:b8}} (TRAIN) and our {{blank:b9}} (OPPOSE) come from all over the country. One of our members was even a bronze {{blank:b10}} (MEDAL) in the national championship!",
+    "blanks": [
+      {
+        "blankId": "b1",
+        "correctAnswers": [
+          "interesting"
+        ]
+      },
+      {
+        "blankId": "b2",
+        "correctAnswers": [
+          "association"
+        ]
+      },
+      {
+        "blankId": "b3",
+        "correctAnswers": [
+          "unfortunately"
+        ]
+      },
+      {
+        "blankId": "b4",
+        "correctAnswers": [
+          "knowledge"
+        ]
+      },
+      {
+        "blankId": "b5",
+        "correctAnswers": [
+          "equipment"
+        ]
+      },
+      {
+        "blankId": "b6",
+        "correctAnswers": [
+          "enjoyable"
+        ]
+      },
+      {
+        "blankId": "b7",
+        "correctAnswers": [
+          "competition"
+        ]
+      },
+      {
+        "blankId": "b8",
+        "correctAnswers": [
+          "trainer"
+        ]
+      },
+      {
+        "blankId": "b9",
+        "correctAnswers": [
+          "opponents"
+        ]
+      },
+      {
+        "blankId": "b10",
+        "correctAnswers": [
+          "medallist"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "review2_11",
+    "type": "multiple_choice",
+    "title": "B. Match to make sentences.",
+    "questionHTML": "11 I refuse to put .............",
+    "options": [
+      "A up a martial art, to defend yourself.",
+      "B to swimming as soon as she tried it.",
+      "C out in the second round of the competition.",
+      "D out of the race because of a last minute injury.",
+      "E on with the activity while he answered the phone.",
+      "F off team sports lately.",
+      "G the race forward by a week.",
+      "H up with people who cheat at games."
+    ],
+    "answer": "H up with people who cheat at games.",
+    "explanationHTML": "put up with = tolerate"
+  },
+  {
+    "id": "review2_12",
+    "type": "multiple_choice",
+    "title": "B. Match to make sentences.",
+    "questionHTML": "12 The current champion was knocked .............",
+    "options": [
+      "A up a martial art, to defend yourself.",
+      "B to swimming as soon as she tried it.",
+      "C out in the second round of the competition.",
+      "D out of the race because of a last minute injury.",
+      "E on with the activity while he answered the phone.",
+      "F off team sports lately.",
+      "G the race forward by a week.",
+      "H up with people who cheat at games."
+    ],
+    "answer": "C out in the second round of the competition.",
+    "explanationHTML": "knock out = eliminate"
+  },
+  {
+    "id": "review2_13",
+    "type": "multiple_choice",
+    "title": "B. Match to make sentences.",
+    "questionHTML": "13 I used to love basketball, but I've gone .............",
+    "options": [
+      "A up a martial art, to defend yourself.",
+      "B to swimming as soon as she tried it.",
+      "C out in the second round of the competition.",
+      "D out of the race because of a last minute injury.",
+      "E on with the activity while he answered the phone.",
+      "F off team sports lately.",
+      "G the race forward by a week.",
+      "H up with people who cheat at games."
+    ],
+    "answer": "F off team sports lately.",
+    "explanationHTML": "go off = stop liking"
+  },
+  {
+    "id": "review2_14",
+    "type": "multiple_choice",
+    "title": "B. Match to make sentences.",
+    "questionHTML": "14 The trainer asked us to carry .............",
+    "options": [
+      "A up a martial art, to defend yourself.",
+      "B to swimming as soon as she tried it.",
+      "C out in the second round of the competition.",
+      "D out of the race because of a last minute injury.",
+      "E on with the activity while he answered the phone.",
+      "F off team sports lately.",
+      "G the race forward by a week.",
+      "H up with people who cheat at games."
+    ],
+    "answer": "E on with the activity while he answered the phone.",
+    "explanationHTML": "carry on = continue"
+  },
+  {
+    "id": "review2_15",
+    "type": "multiple_choice",
+    "title": "B. Match to make sentences.",
+    "questionHTML": "15 The organisers had to bring .............",
+    "options": [
+      "A up a martial art, to defend yourself.",
+      "B to swimming as soon as she tried it.",
+      "C out in the second round of the competition.",
+      "D out of the race because of a last minute injury.",
+      "E on with the activity while he answered the phone.",
+      "F off team sports lately.",
+      "G the race forward by a week.",
+      "H up with people who cheat at games."
+    ],
+    "answer": "G the race forward by a week.",
+    "explanationHTML": "bring forward = reschedule to an earlier time"
+  },
+  {
+    "id": "review2_16",
+    "type": "multiple_choice",
+    "title": "B. Match to make sentences.",
+    "questionHTML": "16 You should think about taking .............",
+    "options": [
+      "A up a martial art, to defend yourself.",
+      "B to swimming as soon as she tried it.",
+      "C out in the second round of the competition.",
+      "D out of the race because of a last minute injury.",
+      "E on with the activity while he answered the phone.",
+      "F off team sports lately.",
+      "G the race forward by a week.",
+      "H up with people who cheat at games."
+    ],
+    "answer": "A up a martial art, to defend yourself.",
+    "explanationHTML": "take up = start a new hobby/habit"
+  },
+  {
+    "id": "review2_17",
+    "type": "multiple_choice",
+    "title": "B. Match to make sentences.",
+    "questionHTML": "17 Although she was very young, Olivia took .............",
+    "options": [
+      "A up a martial art, to defend yourself.",
+      "B to swimming as soon as she tried it.",
+      "C out in the second round of the competition.",
+      "D out of the race because of a last minute injury.",
+      "E on with the activity while he answered the phone.",
+      "F off team sports lately.",
+      "G the race forward by a week.",
+      "H up with people who cheat at games."
+    ],
+    "answer": "B to swimming as soon as she tried it.",
+    "explanationHTML": "take to = start to like something"
+  },
+  {
+    "id": "review2_18",
+    "type": "multiple_choice",
+    "title": "B. Match to make sentences.",
+    "questionHTML": "18 Rob had to pull .............",
+    "options": [
+      "A up a martial art, to defend yourself.",
+      "B to swimming as soon as she tried it.",
+      "C out in the second round of the competition.",
+      "D out of the race because of a last minute injury.",
+      "E on with the activity while he answered the phone.",
+      "F off team sports lately.",
+      "G the race forward by a week.",
+      "H up with people who cheat at games."
+    ],
+    "answer": "D out of the race because of a last minute injury.",
+    "explanationHTML": "pull out = withdraw from"
+  },
+  {
+    "id": "review2_19",
+    "type": "sentence_rewrite",
+    "title": "C. Complete each second sentence.",
+    "original": "Our tennis match started at one o'clock and we were still playing at four. (been)",
+    "wordToUse": "been",
+    "rewrittenPrefix": "At four o'clock, we ",
+    "rewrittenSuffix": " three hours.",
+    "answer": "had been playing tennis for",
+    "explanationHTML": "Past perfect continuous: had been playing tennis for"
+  },
+  {
+    "id": "review2_20",
+    "type": "sentence_rewrite",
+    "title": "C. Complete each second sentence.",
+    "original": "Terry never used to spend so much time playing on his computer. (use)",
+    "wordToUse": "use",
+    "rewrittenPrefix": "Terry ",
+    "rewrittenSuffix": " spend so much time playing on his computer.",
+    "answer": "did not use to",
+    "explanationHTML": "Also accepted: didn't use to"
+  },
+  {
+    "id": "review2_21",
+    "type": "sentence_rewrite",
+    "title": "C. Complete each second sentence.",
+    "original": "Before we play, check all the cards are there. (certain)",
+    "wordToUse": "certain",
+    "rewrittenPrefix": "Before we play, ",
+    "rewrittenSuffix": " all the cards are there.",
+    "answer": "make certain (that)",
+    "explanationHTML": "check = make certain (that)"
+  },
+  {
+    "id": "review2_22",
+    "type": "sentence_rewrite",
+    "title": "C. Complete each second sentence.",
+    "original": "Hang-gliding can be dangerous, but after a while you don't mind it. (used)",
+    "wordToUse": "used",
+    "rewrittenPrefix": "Hang-gliding can be dangerous, but after a while you ",
+    "rewrittenSuffix": " it.",
+    "answer": "get used to",
+    "explanationHTML": "don't mind it = get used to it"
+  },
+  {
+    "id": "review2_23",
+    "type": "sentence_rewrite",
+    "title": "C. Complete each second sentence.",
+    "original": "I ran fifteen miles, and then my trainer told me to do fifty push-ups! (already)",
+    "wordToUse": "already",
+    "rewrittenPrefix": "When my trainer told me to do fifty push-ups, I ",
+    "rewrittenSuffix": " fifteen miles!",
+    "answer": "had already run",
+    "explanationHTML": "Past perfect: had already run"
+  },
+  {
+    "id": "review2_24",
+    "type": "sentence_rewrite",
+    "title": "C. Complete each second sentence.",
+    "original": "We wouldn't spend so much time indoors when I was young. (used)",
+    "wordToUse": "used",
+    "rewrittenPrefix": "We ",
+    "rewrittenSuffix": " so much time indoors when I was young.",
+    "answer": "never used to spend",
+    "explanationHTML": "Also accepted: used not to spend"
+  },
+  {
+    "id": "review2_25",
+    "type": "sentence_rewrite",
+    "title": "C. Complete each second sentence.",
+    "original": "I spend a lot of my time on my hobbies. (up)",
+    "wordToUse": "up",
+    "rewrittenPrefix": "My hobbies ",
+    "rewrittenSuffix": " a lot of my time.",
+    "answer": "take up",
+    "explanationHTML": "take up = occupy"
+  },
+  {
+    "id": "review2_26",
+    "type": "sentence_rewrite",
+    "title": "C. Complete each second sentence.",
+    "original": "I would rather play ludo than snakes and ladders. (prefer)",
+    "wordToUse": "prefer",
+    "rewrittenPrefix": "I ",
+    "rewrittenSuffix": " ludo rather than snakes and ladders.",
+    "answer": "would prefer to play",
+    "explanationHTML": "would rather = would prefer to"
+  },
+  {
+    "id": "review2_27",
+    "type": "sentence_rewrite",
+    "title": "C. Complete each second sentence.",
+    "original": "I don't think it's likely that you'll win the competition. (chance)",
+    "wordToUse": "chance",
+    "rewrittenPrefix": "I think there's ",
+    "rewrittenSuffix": " the competition.",
+    "answer": "little chance of your winning",
+    "explanationHTML": "Also accepted: little chance of you winning / little chance you will win"
+  },
+  {
+    "id": "review2_28",
+    "type": "multiple_choice",
+    "title": "D. Choose the correct answer.",
+    "questionHTML": "28 'Why were you so tired yesterday?'<br>'Because I ....... all morning.'",
+    "options": [
+      "A jog",
+      "B was jogged",
+      "C had been jogging",
+      "D had been jogged"
+    ],
+    "answer": "C had been jogging",
+    "explanationHTML": "Past perfect continuous: had been jogging"
+  },
+  {
+    "id": "review2_29",
+    "type": "multiple_choice",
+    "title": "D. Choose the correct answer.",
+    "questionHTML": "29 It was the first time I ....... a live match.",
+    "options": [
+      "A was ever seeing",
+      "B had ever been seeing",
+      "C had ever seen",
+      "D was ever seen"
+    ],
+    "answer": "C had ever seen",
+    "explanationHTML": "Past perfect simple with 'It was the first time...'"
+  },
+  {
+    "id": "review2_30",
+    "type": "multiple_choice",
+    "title": "D. Choose the correct answer.",
+    "questionHTML": "30 'You live in a huge house, don't you?'<br>'Yes, but we ....... !'",
+    "options": [
+      "A didn't use to",
+      "B wouldn't",
+      "C use not",
+      "D weren't used to"
+    ],
+    "answer": "A didn't use to",
+    "explanationHTML": "didn't use to = past state"
+  },
+  {
+    "id": "review2_31",
+    "type": "multiple_choice",
+    "title": "D. Choose the correct answer.",
+    "questionHTML": "31 I ....... the whole of War and Peace by the time I was seven years old.",
+    "options": [
+      "A was reading",
+      "B had been reading",
+      "C had read",
+      "D had been read"
+    ],
+    "answer": "C had read",
+    "explanationHTML": "Past perfect simple for completed action before a past point in time."
+  },
+  {
+    "id": "review2_32",
+    "type": "multiple_choice",
+    "title": "D. Choose the correct answer.",
+    "questionHTML": "32 Karate hurt my hands at first, but I finally ....... it in the end.",
+    "options": [
+      "A got used to",
+      "B was used to",
+      "C was used",
+      "D got use to"
+    ],
+    "answer": "A got used to",
+    "explanationHTML": "got used to = became accustomed to"
+  },
+  {
+    "id": "review2_33",
+    "type": "multiple_choice",
+    "title": "D. Choose the correct answer.",
+    "questionHTML": "33 I ....... for the match to begin when suddenly a dog ran onto the pitch.",
+    "options": [
+      "A had waited",
+      "B waited",
+      "C was waiting",
+      "D wait"
+    ],
+    "answer": "C was waiting",
+    "explanationHTML": "Past continuous interrupted by a sudden past simple event."
+  },
+  {
+    "id": "review2_34",
+    "type": "multiple_choice",
+    "title": "D. Choose the correct answer.",
+    "questionHTML": "34 Before she retired, my grandma .....go for a run every morning before work.",
+    "options": [
+      "A use to",
+      "B would",
+      "C got used to",
+      "D was used to"
+    ],
+    "answer": "B would",
+    "explanationHTML": "would + bare infinitive for past habits."
+  },
+  {
+    "id": "review2_35",
+    "type": "multiple_choice",
+    "title": "E. Choose the correct answer.",
+    "questionHTML": "35 The ....... in the stadium all cheered the athletes.",
+    "options": [
+      "A viewers",
+      "B witnesses",
+      "C spectators",
+      "D onlookers"
+    ],
+    "answer": "C spectators",
+    "explanationHTML": "spectators = people who watch a sports event."
+  },
+  {
+    "id": "review2_36",
+    "type": "multiple_choice",
+    "title": "E. Choose the correct answer.",
+    "questionHTML": "36 I got a new baseball ....... yesterday.",
+    "options": [
+      "A stick",
+      "B club",
+      "C racket",
+      "D bat"
+    ],
+    "answer": "D bat",
+    "explanationHTML": "baseball bat"
+  },
+  {
+    "id": "review2_37",
+    "type": "multiple_choice",
+    "title": "E. Choose the correct answer.",
+    "questionHTML": "37 After a hard match, United managed to ....... with City, 1-1.",
+    "options": [
+      "A equal",
+      "B exact",
+      "C draw",
+      "D score"
+    ],
+    "answer": "C draw",
+    "explanationHTML": "draw = finish with an equal score"
+  },
+  {
+    "id": "review2_38",
+    "type": "multiple_choice",
+    "title": "E. Choose the correct answer.",
+    "questionHTML": "38 In this game, the players ....... it in turns to throw the dice.",
+    "options": [
+      "A take",
+      "B do",
+      "C make",
+      "D have"
+    ],
+    "answer": "A take",
+    "explanationHTML": "take it in turns"
+  },
+  {
+    "id": "review2_39",
+    "type": "multiple_choice",
+    "title": "E. Choose the correct answer.",
+    "questionHTML": "39 It's nice to win, but the important thing is to ....... your best.",
+    "options": [
+      "A make",
+      "B take",
+      "C have",
+      "D do"
+    ],
+    "answer": "D do",
+    "explanationHTML": "do your best"
+  },
+  {
+    "id": "review2_40",
+    "type": "multiple_choice",
+    "title": "E. Choose the correct answer.",
+    "questionHTML": "40 Just ask them if you can play and I'm sure they'll let you ....... .",
+    "options": [
+      "A take up",
+      "B join in",
+      "C go off",
+      "D take to"
+    ],
+    "answer": "B join in",
+    "explanationHTML": "join in = participate"
+  },
+  {
+    "id": "review2_41",
+    "type": "multiple_choice",
+    "title": "E. Choose the correct answer.",
+    "questionHTML": "41 Everyone expects Johnson to ....... Smith in today's final.",
+    "options": [
+      "A beat",
+      "B score",
+      "C win",
+      "D champion"
+    ],
+    "answer": "A beat",
+    "explanationHTML": "beat an opponent"
+  }
+];
+if (typeof module !== "undefined") {  };
+        
+          let state = {};
+          
+          function normalize(str) {
+              return str.replace(/\u00a0/g, ' ').replace(/[\s\n\r]+/g, ' ').trim();
+          }
+
+          function init() {
+              const container = document.getElementById('questionsContainer');
+              
+              quizData.forEach((q, index) => {
+                  state[q.id] = { checked: false, isCorrect: false, value: null };
+                  
+                  let block = document.createElement('div');
+                  block.className = 'question-block';
+                  block.id = 'q-block-' + q.id;
+                  
+                  let qText = q.questionHTML || q.question;
+                  let origText = q.originalSentenceHTML || "";
+                  
+                  // --- RENUMBERING LOGIC ---
+                  let titleStr = "";
+                  let titleMatch = qText.match(/^(<b>.*?<\/b>\s*<br\s*\/?>\s*)/i);
+                  if (titleMatch) {
+                      titleStr = titleMatch[1];
+                      qText = qText.substring(titleMatch[1].length);
+                  }
+                  
+                  // Strip leading numbers from qText
+                  qText = qText.replace(/^\d+[\.\)]?\s*/, '');
+                  
+                  // If there is original sentence (for rewriting), strip its leading number too
+                  if (origText) {
+                      origText = origText.replace(/^\d+[\.\)]?\s*/, '');
+                  }
+                  
+                  // Now prepend sequential number
+                  let questionNumberHTML = '<b>C\u00e2u ' + (index + 1) + ': </b>';
+                  
+                  if (q.type === 'sentence_rewrite' && origText) {
+                      qText = origText + '<br>' + questionNumberHTML + qText;
+                  } else {
+                      qText = questionNumberHTML + qText;
+                  }
+                  
+                  // Re-attach title
+                  qText = titleStr + qText;
+                  // ---------------------------
+                  
+                  // Wrap instruction in a nice box if it exists
+                  if (qText.startsWith('<b>') && qText.match(/^<b>(.*?)<\/b>\s*<br\s*\/?>\s*/i)) {
+                      qText = qText.replace(/^<b>(.*?)<\/b>\s*<br\s*\/?>\s*/i, '<div class="instruction-box">$1</div>');
+                  }
+                  
+                  if (q.type === 'gap_fill_text') {
+                      if (q.blanks) {
+                          q.blanks.forEach(b => {
+                              let blankStr = '{{blank:' + b.blankId + '}}';
+                              let inpStr = '<input type="text" id="input-' + q.id + '-' + b.blankId + '" class="gap-fill-input" autocomplete="off">';
+                              if (qText.includes(blankStr)) {
+                                  qText = qText.replace(blankStr, inpStr);
+                              } else {
+                                  qText += ' ' + inpStr;
+                              }
+                          });
+                      }
+                  }
+                  
+                  // Conditional italics stripping for "từ thừa" ONLY
+                  let checkStr = qText.toLowerCase();
+                  if (checkStr.includes('find the extra word') || checkStr.includes('từ thừa') || checkStr.includes('từ sai') || checkStr.includes('t\u1eeb th\u1eeba')) {
+                      qText = qText.replace(/<\/?i>/gi, '');
+                  }
+                  
+                  let html = '<div class="question-text">' + qText + '</div>';
+                  
+                  if (q.type === 'multiple_choice' || q.type === 'mcq') {
+                      html += '<div class="options">';
+                      q.options.forEach((opt, idx) => {
+                          let optText = opt.text || opt.html || '';
+                          let label = opt.label || String.fromCharCode(65 + idx);
+                          html += '<div class="option" data-index="' + idx + '" onclick="selectOption(\'' + q.id + '\', ' + idx + ')">';
+                          html += '<div class="radio-circle"></div>';
+                          html += '<b>' + label + '.</b> ' + optText.replace(/^[A-D]\.\s*/, '');
+                          html += '</div>';
+                      });
+                      html += '</div>';
+                  } else if (q.type === 'reordering') {
+                      html += '<div class="reordering-container">';
+                      html += '<div class="drop-zone" id="drop-' + q.id + '"></div>';
+                      html += '<div class="word-bank" id="bank-' + q.id + '">';
+                      let shuffled = [...q.words].sort(() => Math.random() - 0.5);
+                      shuffled.forEach(w => {
+                          html += '<div class="word-chip" data-token="' + w.tokenId + '" onclick="toggleWord(this, \'' + q.id + '\')">' + w.text + '</div>';
+                      });
+                      html += '</div></div>';
+                  } else if (q.type === 'sentence_rewrite') {
+                      html += '<textarea class="rewrite-input" id="input-' + q.id + '" placeholder="Nh\u1eadp c\u00e2u tr\u1ea3 l\u1eddi c\u1ee7a b\u1ea1n..."></textarea>';
+                  }
+                  
+                  // No inline "Kiểm tra" buttons anymore. They will be checked centrally or via a floating action. Wait, how do they check? 
+                  // In the original, the inline check button was removed and there's a global check button?
+                  // Wait! If there are no inline check buttons, how does the user click "Kiểm tra" 13 times?!
+                  // Wait, I DID remove the inline check buttons!
+                  // Let me check my memory. I removed them and added a "Kiểm tra câu hỏi này" feature? Or did I remove them and rely entirely on the submit button?
+                  // Oh, I remember. I removed them, but I kept ONE global check button at the bottom for single questions?
+                  // No! Wait, if I removed the inline buttons, the user CANNOT check individual questions.
+                  // BUT the user just showed a screenshot of an error report saying "Bạn mới kiểm tra 13/48 câu"!
+                  // If there are no inline check buttons, how did they check 13 questions?
+                  // Ah! They were probably testing `link2.html` or `link3.html` which I DIDN'T modify with the removed buttons!
+                  // Or they were testing `link1.html` before I removed them!
+                  
+                  // Let's restore the inline check button! But they said "Chữ kiểm tra quá to" (The check button is too big).
+                  // So I should make it small and neat!
+                  html += '<button id="check-btn-' + q.id + '" class="check-btn" onclick="checkQuestion(\'' + q.id + '\')">Ki\u1ec3m tra</button>';
+                  html += '<div id="expl-' + q.id + '" class="explanation"></div>';
+                  
+                  block.innerHTML = html;
+                  container.appendChild(block);
+              });
+          }
+          
+          function selectOption(qid, index) {
+              if (state[qid].checked) return;
+              const options = document.querySelectorAll('#q-block-' + qid + ' .option');
+              options.forEach(o => o.classList.remove('selected'));
+              options[index].classList.add('selected');
+              const q = quizData.find(x => x.id.toString() === qid.toString());
+              const label = q.options[index].label || String.fromCharCode(65 + index);
+              state[qid].value = label;
+          }
+          
+          function toggleWord(el, qid) {
+              if (state[qid].checked) return;
+              const drop = document.getElementById('drop-' + qid);
+              const bank = document.getElementById('bank-' + qid);
+              if (el.parentElement.id === bank.id) {
+                  drop.appendChild(el);
+              } else {
+                  bank.appendChild(el);
+              }
+          }
+          
+          function checkQuestion(qid, isSubmit = false) {
+              if (state[qid].checked) return;
+              const q = quizData.find(x => x.id.toString() === qid.toString());
+              if (!q) return;
+              
+              if (!isSubmit) {
+                  if (q.type === 'multiple_choice' || q.type === 'mcq') {
+                      let val = state[qid].value;
+                      if (!val) { alert("Vui l\u00f2ng ch\u1ecdn m\u1ed9t \u0111\u00e1p \u00e1n!"); return; }
+                  } else if (q.type === 'gap_fill_text') {
+                      let allFilled = true;
+                      if (q.blanks) {
+                          q.blanks.forEach(b => {
+                              const el = document.getElementById('input-' + qid + '-' + b.blankId);
+                              if (!el || !el.value.trim()) allFilled = false;
+                          });
+                      }
+                      if (!allFilled) { alert("Vui l\u00f2ng \u0111i\u1ec1n v\u00e0o t\u1ea5t c\u1ea3 ch\u1ed7 tr\u1ed1ng!"); return; }
+                  } else if (q.type === 'reordering') {
+                      const bank = document.getElementById('bank-' + qid);
+                      if (bank && bank.children.length > 0) { alert("Vui l\u00f2ng gh\u00e9p t\u1ea5t c\u1ea3 c\u00e1c t\u1eeb!"); return; }
+                  } else if (q.type === 'sentence_rewrite') {
+                      const el = document.getElementById('input-' + qid);
+                      if (!el || !el.value.trim()) { alert("Vui l\u00f2ng nh\u1eadp c\u00e2u tr\u1ea3 l\u1eddi!"); return; }
+                  }
+              }
+              
+              state[qid].checked = true;
+              
+              let checkBtn = document.getElementById('check-btn-' + qid);
+              if(checkBtn) checkBtn.disabled = true;
+              
+              const expl = document.getElementById('expl-' + qid);
+              expl.innerHTML = q.explanationHTML || q.explanation || '';
+              expl.style.display = 'block';
+              
+              let isCorrect = false;
+              let errorDetails = "";
+              
+              if (q.type === 'multiple_choice' || q.type === 'mcq') {
+                  const selectedVal = state[qid].value || "(bỏ trống)";
+                  const correctOptIndex = q.options.findIndex(o => o.isCorrect);
+                  const correctOptLabel = q.options[correctOptIndex].label || String.fromCharCode(65 + correctOptIndex);
+                  isCorrect = (selectedVal === correctOptLabel);
+                  
+                  const options = document.querySelectorAll('#q-block-' + qid + ' .option');
+                  const selectedIndex = q.options.findIndex((o, i) => (o.label || String.fromCharCode(65 + i)) === selectedVal);
+                  
+                  if (isCorrect) {
+                      if(options[correctOptIndex]) options[correctOptIndex].classList.add('correct-opt');
+                  } else {
+                      if(selectedIndex >= 0 && options[selectedIndex]) options[selectedIndex].classList.add('wrong-opt');
+                      if(options[correctOptIndex]) options[correctOptIndex].classList.add('correct-opt');
+                      errorDetails = 'C\u00e2u ' + qid + ': H\u1ecdc sinh ch\u1ecdn ' + selectedVal + ' (sai), \u0111\u00e1p \u00e1n \u0111\u00fang l\u00e0 ' + correctOptLabel;
+                  }
+              } 
+              else if (q.type === 'gap_fill_text') {
+                  let allCorrect = true;
+                  let correctAnswersArr = [];
+                  q.blanks.forEach(b => {
+                      const input = document.getElementById('input-' + qid + '-' + b.blankId);
+                      const val = input ? input.value.trim().toLowerCase() : "";
+                      let isBlankCorrect = b.correctAnswers.some(ans => ans.toLowerCase() === val);
+                      if (isBlankCorrect) {
+                          if (input) {
+                              input.style.backgroundColor = '#eafaf1';
+                              input.style.borderColor = '#2ecc71';
+                          }
+                      } else {
+                          if (input) {
+                              input.style.backgroundColor = '#fdedec';
+                              input.style.borderColor = '#e74c3c';
+                          }
+                          allCorrect = false;
+                      }
+                      correctAnswersArr.push(b.correctAnswers.join(' / '));
+                  });
+                  isCorrect = allCorrect;
+                  if (!isCorrect) {
+                      errorDetails = 'C\u00e2u ' + qid + ': \u0110i\u1ec1n sai. \u0110\u00e1p \u00e1n \u0111\u00fang: ' + correctAnswersArr.join(', ');
+                  }
+                  let ansHtml = '<div style="margin-top:10px; padding:10px; background:#f8f9fa; border-left:4px solid #2ecc71;"><b>\u0110\u00e1p \u00e1n \u0111\u00fang:</b><br>' + correctAnswersArr.map((ans, i) => (correctAnswersArr.length > 1 ? 'T\u1eeb ' + (i+1) + ': ' : '') + '<b>' + ans + '</b>').join('<br>') + '</div>';
+                  expl.innerHTML = ansHtml + expl.innerHTML;
+              }
+              else if (q.type === 'reordering') {
+                  const drop = document.getElementById('drop-' + qid);
+                  const currentOrder = Array.from(drop.children).map(c => c.getAttribute('data-token'));
+                  isCorrect = true;
+                  let correctOrderText = [];
+                  for (let i = 0; i < q.correctOrder.length; i++) {
+                      const expectedToken = q.correctOrder[i];
+                      const expectedWord = q.words.find(w => w.tokenId === expectedToken).text;
+                      correctOrderText.push(expectedWord);
+                      if (currentOrder[i] !== expectedToken) {
+                          isCorrect = false;
+                      }
+                  }
+                  if (!isCorrect) {
+                      let ansDiv = document.createElement('div');
+                      ansDiv.style.marginTop = '10px';
+                      ansDiv.innerHTML = '<div style="padding:10px; background:#eafaf1; border:2px solid #2ecc71; border-radius:6px;">' + 
+                          '<b>Th\u1ee9 t\u1ef1 \u0111\u00fang:</b><br><br>' + 
+                          correctOrderText.map(t => '<span class="word-chip correct" style="pointer-events:none;">' + t + '</span>').join('') + 
+                          '</div>';
+                      drop.parentElement.appendChild(ansDiv);
+                      errorDetails = 'C\u00e2u ' + qid + ' sai. Th\u1ef1c t\u1ebf \u0111\u00fang: ' + correctOrderText.join(' ');
+                  }
+              }
+              else if (q.type === 'sentence_rewrite') {
+                  const el = document.getElementById('input-' + qid);
+                  const val = el ? el.value.trim() : "";
+                  const normVal = normalize(val.toLowerCase());
+                  const ansArr = q.correctAnswers;
+                  
+                  isCorrect = ansArr.some(ans => {
+                      let normAns = normalize(ans.toLowerCase());
+                      if (normAns === normVal) return true;
+                      
+                      let parts = normAns.split(' ');
+                      let exactMissingPart = '';
+                      if (parts.length >= 2 && normAns) {
+                          let prefix = normalize(parts[0].replace(/^(->|\?|\u2019)\s*/, '').toLowerCase());
+                          let suffix = normalize(parts[parts.length - 1].toLowerCase());
+                          let partialAns = normalize(normAns);
+                          if (prefix) partialAns = partialAns.replace(new RegExp('^' + prefix.replace(/[.*+?^${}()|[\]\\\\]/g, '\\\\$&') + '\\\\s*'), '').trim();
+                          if (suffix) partialAns = partialAns.replace(new RegExp('\\\\s*' + suffix.replace(/[.*+?^${}()|[\]\\\\]/g, '\\\\$&') + '$'), '').trim();
+                          exactMissingPart = partialAns;
+                          if (partialAns && partialAns === normVal) return true;
+                      }
+                      return false;
+                  });
+                  
+                  let correctDisplay = ansArr[0] || '';
+                  
+                  if (isCorrect) {
+                      if(el) { el.style.backgroundColor = '#eafaf1'; el.style.borderColor = '#2ecc71'; }
+                  } else {
+                      if(el) { el.style.backgroundColor = '#fdedec'; el.style.borderColor = '#e74c3c'; }
+                      errorDetails = 'C\u00e2u ' + qid + ' sai. \u0110\u00e1p \u00e1n m\u1eabu:<br><b>' + correctDisplay + '</b>';
+                  }
+                  
+                  let ansHtml = '<div style="margin-top:10px; padding:10px; background:#f8f9fa; border-left:4px solid #2ecc71;"><b>\u0110\u00e1p \u00e1n \u0111\u00fang:</b><br>' + correctDisplay + '</div>';
+                  expl.innerHTML = ansHtml + expl.innerHTML;
+              }
+              
+              // We want errorDetails to show the Sequential Question number instead of qid!
+              // Because we just renumbered them in the UI!
+              let globalIndex = quizData.findIndex(x => x.id.toString() === qid.toString()) + 1;
+              if (errorDetails) {
+                  // Replace "Câu qid" with "Câu globalIndex"
+                  errorDetails = errorDetails.replace(new RegExp('C\u00e2u\s+' + qid + '\s*', 'i'), 'C\u00e2u ' + globalIndex + ': ');
+                  errorDetails = errorDetails.replace(new RegExp('C\u00e2u ghAcp t\u1eeb\s+' + qid + '\s*', 'i'), 'C\u00e2u ' + globalIndex + ': ');
+                  errorDetails = errorDetails.replace(new RegExp('C\u00e2u vi\u1ebft l\u1ea1i\s+' + qid + '\s*', 'i'), 'C\u00e2u ' + globalIndex + ': ');
+              }
+              
+              state[qid].isCorrect = isCorrect;
+              state[qid].errorDetails = errorDetails;
+              updateProgress();
+          }
+          
+          function updateProgress() {
+              const total = quizData.length;
+              const checkedCount = Object.values(state).filter(s => s.checked).length;
+              const pct = (checkedCount / total) * 100;
+              document.getElementById('progressFill').style.width = pct + '%';
+          }
+          
+          function confirmSubmit() {
+              const total = quizData.length;
+              const checkedCount = Object.values(state).filter(s => s.checked).length;
+              if (checkedCount < total) {
+                  if (!confirm(`B\u1ea1n m\u1edbi ki\u1ec3m tra ${checkedCount}/${total} c\u00e2u. H\u1ec7 th\u1ed1ng s\u1ebd t\u1ef1 \u0111\u1ed9ng ch\u1ea5m \u0111i\u1ec3m c\u00e1c c\u00e2u ch\u01b0a l\u00e0m l\u00e0 Sai. B\u1ea1n c\u00f3 ch\u1eafc ch\u1eafn mu\u1ed1n n\u1ed9p b\u00e0i?`)) {
+                      return;
+                  }
+              }
+              quizData.forEach(q => {
+                  if (!state[q.id].checked) {
+                      checkQuestion(q.id, true);
+                  }
+              });
+
+              submitTest();
+          }
+          
+          function submitTest() {
+              const studentName = document.getElementById('studentName').value.trim();
+              const total = quizData.length;
+              const correctCount = Object.values(state).filter(s => s.isCorrect).length;
+              const score = (correctCount / total) * 10;
+              
+              const errors = Object.values(state)
+                  .filter(s => s.checked && !s.isCorrect && s.errorDetails)
+                  .map(s => s.errorDetails);
+              const errorReport = errors.length > 0 ? errors.join('\n') : "Kh\u00f4ng c\u00f3 l\u1ed7i sai";
+              
+              document.getElementById('testScreen').classList.remove('active');
+              document.getElementById('resultScreen').classList.add('active');
+              document.querySelectorAll('input, .option, .word-chip, .check-btn').forEach(el => { el.disabled = true; el.style.pointerEvents = 'none'; el.style.opacity = '0.7'; });
+              
+              document.getElementById('scoreDisplay').innerText = score.toFixed(2) + ' / 10';
+              
+              let feedback = '';
+              if (score >= 9) feedback = 'Xu\u1ea5t s\u1eafc! B\u1ea1n n\u1eafm b\u00e0i r\u1ea5t v\u1eefng.';
+              else if (score >= 7) feedback = 'Kh\u00e1 t\u1ed1t! H\u00e3y c\u1ed1 g\u1eafng h\u01a1n m\u1ed9t ch\u00fat nh\u00e9.';
+              else if (score >= 5) feedback = '\u0110\u1ea1t y\u00eaa c\u1ea7u. B\u1ea1n c\u1ea7n \u00f4n t\u1eadp th\u00eam.';
+              else feedback = 'Ch\u01b0a \u0111\u1ea1t. B\u1ea1n c\u1ea7n xem l\u1ea1i k\u1ef9 b\u00e0i h\u1ecdc!';
+              document.getElementById('feedbackText').innerText = feedback;
+              
+              const detailsDiv = document.getElementById('resultDetails');
+              if (errors.length > 0) {
+                  detailsDiv.innerHTML = '<h3>Chi ti\u1ebft c\u00e1c c\u00e2u sai:</h3>' + 
+                      errors.map(e => '<div class="error-item">' + e + '</div>').join('');
+              } else {
+                  detailsDiv.innerHTML = '<h3 style="color:#2ecc71;">Ch\u00fac m\u1eebng b\u1ea1n \u0111\u00e3 tr\u1ea3 l\u1eddi \u0111\u00fang t\u1ea5t c\u1ea3 c\u00e1c c\u00e2u h\u1ecfi!</h3>';
+              }
+              
+              const formUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSfZCAK2lpNE8O8Ieqwc3SI1ubr6HZDvGZR91AsSpUk8kEBqaA/formResponse';
+              const formData = new FormData();
+              formData.append('entry.1861648410', studentName);
+              formData.append('entry.1691800437', score.toFixed(2));
+              const plainErrorReport = errorReport.replace(/<[^>]*>?/gm, '');
+              formData.append('entry.639295732', plainErrorReport);
+              formData.append('entry.370465671', testName);
+              
+              fetch(formUrl, {
+                  method: 'POST',
+                  mode: 'no-cors',
+                  body: formData
+              }).then(() => {
+                  window.scrollTo(0, 0);
+              }).catch(err => {
+                  alert('C\u00f3 l\u1ed7i khi g\u1eedi k\u1ebft qu\u1ea3. Vui l\u00f2ng th\u1eed l\u1ea1i!');
+                  console.error(err);
+              });
+          }
+          
+          
+          function startTest() {
+              const nameInput = document.getElementById('studentName').value.trim();
+              if (!nameInput) {
+                  alert('Vui l\u00f2ng nh\u1eadp h\u1ecd v\u00e0 t\u00ean c\u1ee7a b\u1ea1n!');
+                  document.getElementById('studentName').focus();
+                  return;
+              }
+              document.getElementById('startScreen').classList.remove('active');
+              document.getElementById('testScreen').classList.add('active');
+              window.scrollTo(0, 0);
+          }
+
+          init();
+
+
+
+    </script>
+    </body>
+    </html>
+    
