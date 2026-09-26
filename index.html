@@ -1,80 +1,75 @@
 <!DOCTYPE html>
-    <html lang="vi">
-    <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Review 2 (Units 3 - 4)</title>
-    <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; max-width: 800px; margin: 0 auto; padding: 20px; background-color: #f0f2f5; position: relative; z-index: 1; }
-        .watermark { position: absolute; top: 30px; left: 0; right: 0; text-align: center; font-size: 50px; color: rgba(0, 0, 0, 0.04); font-weight: bold; pointer-events: none; z-index: -1; user-select: none; }
-        .watermark div { transform: rotate(-30deg); margin: 200px 0; }
-        h1, h2 { color: #2c3e50; text-align: center; }
-        .screen { display: none; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
-        .screen.active { display: block; }
-        
-        input[type="text"] { width: 100%; padding: 12px; margin: 10px 0 20px; border: 2px solid #ddd; border-radius: 6px; box-sizing: border-box; font-size: 16px; transition: border-color 0.3s; }
-        input[type="text"]:focus { border-color: #3498db; outline: none; }
-        
-        button { background: #3498db; color: #fff; border: none; padding: 12px 24px; font-size: 16px; border-radius: 6px; cursor: pointer; transition: background 0.3s, transform 0.1s; }
-        button:hover { background: #2980b9; }
-        button:active { transform: scale(0.98); }
-        button:disabled { background: #95a5a6; cursor: not-allowed; }
-        
-        .question-block { margin-bottom: 25px; padding: 15px; background: #f9f9f9; border-left: 4px solid #3498db; border-radius: 0 8px 8px 0; }
-        .instruction-box { margin-bottom: 15px; padding: 10px 15px; background: #e8f4fd; border: 1px solid #b6d4fe; border-radius: 6px; font-weight: bold; color: #004085; }
-        .question-text { font-weight: 500; margin-bottom: 15px; font-size: 16px; line-height: 1.8; }
-        
-        .options { display: flex; flex-direction: column; gap: 10px; margin-top: 10px; }
-        .option { padding: 12px 15px; background: #fff; border: 2px solid #eee; border-radius: 8px; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 10px; }
-        .option:hover { border-color: #3498db; background: #f8faff; }
-        .option.selected { border-color: #3498db; background: #ebf5ff; }
-        .option.correct-opt { border-color: #2ecc71; background: #eafaf1; }
-        .option.wrong-opt { border-color: #e74c3c; background: #fdedec; }
-        
-        .radio-circle { width: 20px; height: 20px; border: 2px solid #ddd; border-radius: 50%; position: relative; }
-        .option.selected .radio-circle::after { content: ''; position: absolute; top: 4px; left: 4px; width: 12px; height: 12px; background: #3498db; border-radius: 50%; }
-        
-        .gap-fill-input { width: 120px !important; padding: 4px 8px !important; margin: 0 5px !important; display: inline-block !important; border: 1px solid #ccc !important; border-radius: 4px !important; font-size: 16px !important; }
-        
-        .reordering-container { display: flex; flex-direction: column; gap: 15px; }
-        .word-bank, .drop-zone { display: flex; flex-wrap: wrap; gap: 8px; min-height: 45px; padding: 10px; background: #fff; border: 2px dashed #ddd; border-radius: 8px; }
-        .word-chip { padding: 8px 16px; background: #3498db; color: #fff; border-radius: 20px; cursor: pointer; user-select: none; font-weight: 500; transition: transform 0.1s; }
-        .word-chip:active { transform: scale(0.95); }
-        .word-chip.correct { background: #2ecc71; }
-        .word-chip.wrong { background: #e74c3c; }
-        
-        .rewrite-input { width: 100%; height: 80px; padding: 12px; border: 2px solid #ddd; border-radius: 6px; resize: vertical; font-size: 16px; font-family: inherit; }
-        
-        .check-btn { margin-top: 15px; background: #3498db; font-size: 14px; padding: 8px 16px; }
-        .explanation { display: none; margin-top: 15px; padding: 15px; background: #eef2f5; border-radius: 6px; font-size: 14.5px; line-height: 1.5; color: #2c3e50; border-left: 4px solid #2ecc71; }
-        
-        .progress-bar { width: 100%; height: 10px; background: #ddd; border-radius: 5px; margin-bottom: 20px; overflow: hidden; }
-        .progress-fill { height: 100%; background: #2ecc71; width: 0%; transition: width 0.3s; }
-        
-        .result-details { margin-top: 20px; padding: 15px; padding-bottom: 30px; background: #f8f9fa; border-radius: 6px; text-align: left; max-height: 60vh; overflow-y: auto; font-size: 14px; }
-        .error-item { margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid #eee; color: #e74c3c; }
-    </style>
-    </head>
-    <body>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Review 2 (u3-u4)</title>
+<style>
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; max-width: 800px; margin: 0 auto; padding: 20px; background-color: #f0f2f5; position: relative; z-index: 1; overflow-x: hidden; }
+    .watermark { position: absolute; top: 30px; left: 0; right: 0; text-align: center; font-size: 50px; color: rgba(0, 0, 0, 0.04); font-weight: bold; pointer-events: none; z-index: -1; user-select: none; }
+    .watermark div { transform: rotate(-30deg); margin: 200px 0; }
+    @media (max-width: 600px) { .watermark { font-size: 20px; top: 10px; } .watermark div { margin: 90px 0; } }
+    @media (max-width: 400px) { .watermark { font-size: 16px; } .watermark div { margin: 70px 0; } }
+    h1, h2 { color: #2c3e50; text-align: center; }
+    .screen { position: relative; display: none; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+    .screen.active { display: block; }
+    
+    input[type="text"] { width: 100%; padding: 12px; margin: 10px 0 20px; border: 2px solid #ddd; border-radius: 6px; box-sizing: border-box; font-size: 16px; transition: border-color 0.3s; }
+    input[type="text"]:focus { border-color: #3498db; outline: none; }
+    
+    button { background: #3498db; color: #fff; border: none; padding: 12px 24px; font-size: 16px; border-radius: 6px; cursor: pointer; transition: background 0.3s, transform 0.1s; }
+    button:hover { background: #2980b9; }
+    button:active { transform: scale(0.98); }
+    button:disabled { background: #95a5a6; cursor: not-allowed; }
+    
+    .question-block { margin-bottom: 25px; padding: 15px; background: #f9f9f9; border-left: 4px solid #3498db; border-radius: 0 8px 8px 0; }
+    .instruction-box { margin-bottom: 15px; padding: 10px 15px; background: #e8f4fd; border: 1px solid #b6d4fe; border-radius: 6px; font-weight: bold; color: #004085; }
+    .question-text { font-weight: 500; margin-bottom: 15px; font-size: 16px; line-height: 1.8; }
+    
+    .options { display: flex; flex-direction: column; gap: 10px; margin-top: 10px; }
+    .option { padding: 12px 15px; background: #fff; border: 2px solid #eee; border-radius: 8px; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 10px; }
+    .option:hover { border-color: #3498db; background: #f8faff; }
+    .option.selected { border-color: #3498db; background: #ebf5ff; }
+    .option.correct-opt { border-color: #2ecc71; background: #eafaf1; }
+    .option.wrong-opt { border-color: #e74c3c; background: #fdedec; }
+    
+    .radio-circle { width: 20px; height: 20px; border: 2px solid #ddd; border-radius: 50%; position: relative; }
+    .option.selected .radio-circle::after { content: ''; position: absolute; top: 4px; left: 4px; width: 12px; height: 12px; background: #3498db; border-radius: 50%; }
+    
+    .gap-fill-input { width: 120px !important; padding: 4px 8px !important; margin: 0 5px !important; display: inline-block !important; border: 1px solid #ccc !important; border-radius: 4px !important; font-size: 16px !important; }
+    
+    .word-bank, .drop-zone { display: flex; flex-wrap: wrap; gap: 8px; min-height: 45px; padding: 10px; background: #fff; border: 2px dashed #ddd; border-radius: 8px; margin-top: 10px;}
+    .word-chip { padding: 8px 16px; background: #3498db; color: #fff; border-radius: 20px; cursor: pointer; user-select: none; font-weight: 500; transition: transform 0.1s; }
+    .word-chip:active { transform: scale(0.95); }
+    
+    .rewrite-input { width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 6px; font-size: 16px; font-family: inherit; }
+    
+    .check-btn { margin-top: 15px; background: #3498db; font-size: 14px; padding: 8px 16px; }
+    .explanation { display: none; margin-top: 15px; padding: 15px; background: #eef2f5; border-radius: 6px; font-size: 14.5px; line-height: 1.5; color: #2c3e50; border-left: 4px solid #2ecc71; }
+    
+    .result-details { margin-top: 20px; padding: 15px; padding-bottom: 30px; background: #f8f9fa; border-radius: 6px; text-align: left; max-height: 60vh; overflow-y: auto; font-size: 14px; border: 1px solid #ddd; }
+    .error-item { margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid #eee; color: #333; }
+</style>
+</head>
+<body>
     <div class="watermark">
-        <div>Review 2 (Units 3 - 4)<br>GV biên soạn: Ms Chí Nên - 0852639652</div>
-        <div>Review 2 (Units 3 - 4)<br>GV biên soạn: Ms Chí Nên - 0852639652</div>
-        <div>Review 2 (Units 3 - 4)<br>GV biên soạn: Ms Chí Nên - 0852639652</div>
-        <div>Review 2 (Units 3 - 4)<br>GV biên soạn: Ms Chí Nên - 0852639652</div>
+        <div>Review 2 (u3-u4)<br>GV biên soạn: Ms Chí Nên - 0852639652</div>
+        <div>Review 2 (u3-u4)<br>GV biên soạn: Ms Chí Nên - 0852639652</div>
+        <div>Review 2 (u3-u4)<br>GV biên soạn: Ms Chí Nên - 0852639652</div>
+        <div>Review 2 (u3-u4)<br>GV biên soạn: Ms Chí Nên - 0852639652</div>
     </div>
     
     <div id="startScreen" class="screen active">
-        <h1>Review 2 (Units 3 - 4)</h1>
+        <h1>Review 2 (u3-u4)</h1>
         <p style="text-align: center; color: #7f8c8d;">Nhập họ và tên của bạn để bắt đầu làm bài</p>
-        <input type="text" id="studentName" placeholder="Ví dụ: Nguyễn Văn A" autocomplete="off">
+        <input type="text" id="studentName"  autocomplete="off">
         <div style="text-align: center;">
             <button onclick="startTest()">Bắt đầu làm bài</button>
         </div>
     </div>
     
     <div id="testScreen" class="screen">
-        <h2>Review 2 (Units 3 - 4)</h2>
-        <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+        <div style="position:absolute; top:15px; left:20px; font-size:13px; color:#7f8c8d;">GV biên soạn: Ms Chí Nên - 0852639652</div><h2>Review 2 (u3-u4)</h2>
         <div id="questionsContainer"></div>
         <div style="text-align: center; margin-top: 30px;">
             <button id="submitBtn" onclick="confirmSubmit()" style="background: #2ecc71; font-weight: bold; padding: 15px 40px;">NỘP BÀI</button>
@@ -83,1562 +78,586 @@
     
     <div id="resultScreen" class="screen" style="text-align: center;">
         <h1 style="color: #2ecc71; font-size: 36px;">Hoàn thành!</h1>
-        <h2 id="scoreDisplay" style="font-size: 48px; margin: 20px 0; color: #2c3e50;"></h2>
-        <p id="feedbackText" style="font-size: 18px; color: #7f8c8d;"></p>
+        <div style="font-size: 24px; color: #555;">Điểm của bạn:</div>
+        <h2 id="scoreDisplay" style="font-size: 48px; margin: 10px 0; color: #2c3e50;"></h2>
         <div class="result-details" id="resultDetails"></div>
     </div>
     
-    <div style="text-align: center; margin-top: 50px; padding: 20px; color: #7f8c8d; font-size: 14px; border-top: 1px solid #ddd;">
-        GV biên soạn: Ms Chí Nên - 0852639652
-    </div>
-    
     <script>
-        const testName = 'rReview 2 (Units 3 - 4)';
-        const quizData = [
-  {
-    "id": "review2_1",
-    "type": "gap_fill_text",
-    "title": "A. Use the word given in capitals at the end of each line to form a word that fits in the gap in the same line.",
-    "explanationHTML": "Word formation. 1. interesting, 2. association, 3. unfortunately, 4. knowledge, 5. equipment, 6. enjoyable, 7. competition, 8. trainer, 9. opponents, 10. medallist.",
-    "questionHTML": "<strong>A new hobby</strong><br><br>I saw some badminton on TV and found it quite {{blank:b1}} (INTEREST), so I thought I'd see if there was a club or {{blank:b2}} (ASSOCIATE) in my area. I looked everywhere but, {{blank:b3}} (FORTUNE), the nearest club was 80 kilometres away. So, without any {{blank:b4}} (KNOW), I decided to form my own club. It was very hard in the beginning – I didn't have any {{blank:b5}} (EQUIP) and I had to convince a few people that it was an {{blank:b6}} (ENJOY) way to keep fit. I organised a small {{blank:b7}} (COMPETE), which was a lot of fun, and things started to grow from there. Now we've got a full-time {{blank:b8}} (TRAIN) and our {{blank:b9}} (OPPOSE) come from all over the country. One of our members was even a bronze {{blank:b10}} (MEDAL) in the national championship!",
-    "blanks": [
-      {
-        "blankId": "b1",
-        "correctAnswers": [
-          "interesting"
-        ]
-      },
-      {
-        "blankId": "b2",
-        "correctAnswers": [
-          "association"
-        ]
-      },
-      {
-        "blankId": "b3",
-        "correctAnswers": [
-          "unfortunately"
-        ]
-      },
-      {
-        "blankId": "b4",
-        "correctAnswers": [
-          "knowledge"
-        ]
-      },
-      {
-        "blankId": "b5",
-        "correctAnswers": [
-          "equipment"
-        ]
-      },
-      {
-        "blankId": "b6",
-        "correctAnswers": [
-          "enjoyable"
-        ]
-      },
-      {
-        "blankId": "b7",
-        "correctAnswers": [
-          "competition"
-        ]
-      },
-      {
-        "blankId": "b8",
-        "correctAnswers": [
-          "trainer"
-        ]
-      },
-      {
-        "blankId": "b9",
-        "correctAnswers": [
-          "opponents"
-        ]
-      },
-      {
-        "blankId": "b10",
-        "correctAnswers": [
-          "medallist"
-        ]
-      }
-    ]
-  },
-  {
-    "id": "review2_11",
-    "type": "multiple_choice",
-    "title": "B. Match to make sentences.",
-    "questionHTML": "11 I refuse to put .............",
-    "options": [
-      {
-        "text": "up a martial art, to defend yourself.",
-        "html": "up a martial art, to defend yourself.",
-        "label": "A",
-        "isCorrect": false
-      },
-      {
-        "text": "to swimming as soon as she tried it.",
-        "html": "to swimming as soon as she tried it.",
-        "label": "B",
-        "isCorrect": false
-      },
-      {
-        "text": "out in the second round of the competition.",
-        "html": "out in the second round of the competition.",
-        "label": "C",
-        "isCorrect": false
-      },
-      {
-        "text": "out of the race because of a last minute injury.",
-        "html": "out of the race because of a last minute injury.",
-        "label": "D",
-        "isCorrect": false
-      },
-      {
-        "text": "on with the activity while he answered the phone.",
-        "html": "on with the activity while he answered the phone.",
-        "label": "E",
-        "isCorrect": false
-      },
-      {
-        "text": "off team sports lately.",
-        "html": "off team sports lately.",
-        "label": "F",
-        "isCorrect": false
-      },
-      {
-        "text": "the race forward by a week.",
-        "html": "the race forward by a week.",
-        "label": "G",
-        "isCorrect": false
-      },
-      {
-        "text": "up with people who cheat at games.",
-        "html": "up with people who cheat at games.",
-        "label": "H",
-        "isCorrect": true
-      }
-    ],
-    "answer": "H up with people who cheat at games.",
-    "explanationHTML": "put up with = tolerate"
-  },
-  {
-    "id": "review2_12",
-    "type": "multiple_choice",
-    "title": "B. Match to make sentences.",
-    "questionHTML": "12 The current champion was knocked .............",
-    "options": [
-      {
-        "text": "up a martial art, to defend yourself.",
-        "html": "up a martial art, to defend yourself.",
-        "label": "A",
-        "isCorrect": false
-      },
-      {
-        "text": "to swimming as soon as she tried it.",
-        "html": "to swimming as soon as she tried it.",
-        "label": "B",
-        "isCorrect": false
-      },
-      {
-        "text": "out in the second round of the competition.",
-        "html": "out in the second round of the competition.",
-        "label": "C",
-        "isCorrect": true
-      },
-      {
-        "text": "out of the race because of a last minute injury.",
-        "html": "out of the race because of a last minute injury.",
-        "label": "D",
-        "isCorrect": false
-      },
-      {
-        "text": "on with the activity while he answered the phone.",
-        "html": "on with the activity while he answered the phone.",
-        "label": "E",
-        "isCorrect": false
-      },
-      {
-        "text": "off team sports lately.",
-        "html": "off team sports lately.",
-        "label": "F",
-        "isCorrect": false
-      },
-      {
-        "text": "the race forward by a week.",
-        "html": "the race forward by a week.",
-        "label": "G",
-        "isCorrect": false
-      },
-      {
-        "text": "up with people who cheat at games.",
-        "html": "up with people who cheat at games.",
-        "label": "H",
-        "isCorrect": false
-      }
-    ],
-    "answer": "C out in the second round of the competition.",
-    "explanationHTML": "knock out = eliminate"
-  },
-  {
-    "id": "review2_13",
-    "type": "multiple_choice",
-    "title": "B. Match to make sentences.",
-    "questionHTML": "13 I used to love basketball, but I've gone .............",
-    "options": [
-      {
-        "text": "up a martial art, to defend yourself.",
-        "html": "up a martial art, to defend yourself.",
-        "label": "A",
-        "isCorrect": false
-      },
-      {
-        "text": "to swimming as soon as she tried it.",
-        "html": "to swimming as soon as she tried it.",
-        "label": "B",
-        "isCorrect": false
-      },
-      {
-        "text": "out in the second round of the competition.",
-        "html": "out in the second round of the competition.",
-        "label": "C",
-        "isCorrect": false
-      },
-      {
-        "text": "out of the race because of a last minute injury.",
-        "html": "out of the race because of a last minute injury.",
-        "label": "D",
-        "isCorrect": false
-      },
-      {
-        "text": "on with the activity while he answered the phone.",
-        "html": "on with the activity while he answered the phone.",
-        "label": "E",
-        "isCorrect": false
-      },
-      {
-        "text": "off team sports lately.",
-        "html": "off team sports lately.",
-        "label": "F",
-        "isCorrect": true
-      },
-      {
-        "text": "the race forward by a week.",
-        "html": "the race forward by a week.",
-        "label": "G",
-        "isCorrect": false
-      },
-      {
-        "text": "up with people who cheat at games.",
-        "html": "up with people who cheat at games.",
-        "label": "H",
-        "isCorrect": false
-      }
-    ],
-    "answer": "F off team sports lately.",
-    "explanationHTML": "go off = stop liking"
-  },
-  {
-    "id": "review2_14",
-    "type": "multiple_choice",
-    "title": "B. Match to make sentences.",
-    "questionHTML": "14 The trainer asked us to carry .............",
-    "options": [
-      {
-        "text": "up a martial art, to defend yourself.",
-        "html": "up a martial art, to defend yourself.",
-        "label": "A",
-        "isCorrect": false
-      },
-      {
-        "text": "to swimming as soon as she tried it.",
-        "html": "to swimming as soon as she tried it.",
-        "label": "B",
-        "isCorrect": false
-      },
-      {
-        "text": "out in the second round of the competition.",
-        "html": "out in the second round of the competition.",
-        "label": "C",
-        "isCorrect": false
-      },
-      {
-        "text": "out of the race because of a last minute injury.",
-        "html": "out of the race because of a last minute injury.",
-        "label": "D",
-        "isCorrect": false
-      },
-      {
-        "text": "on with the activity while he answered the phone.",
-        "html": "on with the activity while he answered the phone.",
-        "label": "E",
-        "isCorrect": true
-      },
-      {
-        "text": "off team sports lately.",
-        "html": "off team sports lately.",
-        "label": "F",
-        "isCorrect": false
-      },
-      {
-        "text": "the race forward by a week.",
-        "html": "the race forward by a week.",
-        "label": "G",
-        "isCorrect": false
-      },
-      {
-        "text": "up with people who cheat at games.",
-        "html": "up with people who cheat at games.",
-        "label": "H",
-        "isCorrect": false
-      }
-    ],
-    "answer": "E on with the activity while he answered the phone.",
-    "explanationHTML": "carry on = continue"
-  },
-  {
-    "id": "review2_15",
-    "type": "multiple_choice",
-    "title": "B. Match to make sentences.",
-    "questionHTML": "15 The organisers had to bring .............",
-    "options": [
-      {
-        "text": "up a martial art, to defend yourself.",
-        "html": "up a martial art, to defend yourself.",
-        "label": "A",
-        "isCorrect": false
-      },
-      {
-        "text": "to swimming as soon as she tried it.",
-        "html": "to swimming as soon as she tried it.",
-        "label": "B",
-        "isCorrect": false
-      },
-      {
-        "text": "out in the second round of the competition.",
-        "html": "out in the second round of the competition.",
-        "label": "C",
-        "isCorrect": false
-      },
-      {
-        "text": "out of the race because of a last minute injury.",
-        "html": "out of the race because of a last minute injury.",
-        "label": "D",
-        "isCorrect": false
-      },
-      {
-        "text": "on with the activity while he answered the phone.",
-        "html": "on with the activity while he answered the phone.",
-        "label": "E",
-        "isCorrect": false
-      },
-      {
-        "text": "off team sports lately.",
-        "html": "off team sports lately.",
-        "label": "F",
-        "isCorrect": false
-      },
-      {
-        "text": "the race forward by a week.",
-        "html": "the race forward by a week.",
-        "label": "G",
-        "isCorrect": true
-      },
-      {
-        "text": "up with people who cheat at games.",
-        "html": "up with people who cheat at games.",
-        "label": "H",
-        "isCorrect": false
-      }
-    ],
-    "answer": "G the race forward by a week.",
-    "explanationHTML": "bring forward = reschedule to an earlier time"
-  },
-  {
-    "id": "review2_16",
-    "type": "multiple_choice",
-    "title": "B. Match to make sentences.",
-    "questionHTML": "16 You should think about taking .............",
-    "options": [
-      {
-        "text": "up a martial art, to defend yourself.",
-        "html": "up a martial art, to defend yourself.",
-        "label": "A",
-        "isCorrect": true
-      },
-      {
-        "text": "to swimming as soon as she tried it.",
-        "html": "to swimming as soon as she tried it.",
-        "label": "B",
-        "isCorrect": false
-      },
-      {
-        "text": "out in the second round of the competition.",
-        "html": "out in the second round of the competition.",
-        "label": "C",
-        "isCorrect": false
-      },
-      {
-        "text": "out of the race because of a last minute injury.",
-        "html": "out of the race because of a last minute injury.",
-        "label": "D",
-        "isCorrect": false
-      },
-      {
-        "text": "on with the activity while he answered the phone.",
-        "html": "on with the activity while he answered the phone.",
-        "label": "E",
-        "isCorrect": false
-      },
-      {
-        "text": "off team sports lately.",
-        "html": "off team sports lately.",
-        "label": "F",
-        "isCorrect": false
-      },
-      {
-        "text": "the race forward by a week.",
-        "html": "the race forward by a week.",
-        "label": "G",
-        "isCorrect": false
-      },
-      {
-        "text": "up with people who cheat at games.",
-        "html": "up with people who cheat at games.",
-        "label": "H",
-        "isCorrect": false
-      }
-    ],
-    "answer": "A up a martial art, to defend yourself.",
-    "explanationHTML": "take up = start a new hobby/habit"
-  },
-  {
-    "id": "review2_17",
-    "type": "multiple_choice",
-    "title": "B. Match to make sentences.",
-    "questionHTML": "17 Although she was very young, Olivia took .............",
-    "options": [
-      {
-        "text": "up a martial art, to defend yourself.",
-        "html": "up a martial art, to defend yourself.",
-        "label": "A",
-        "isCorrect": false
-      },
-      {
-        "text": "to swimming as soon as she tried it.",
-        "html": "to swimming as soon as she tried it.",
-        "label": "B",
-        "isCorrect": true
-      },
-      {
-        "text": "out in the second round of the competition.",
-        "html": "out in the second round of the competition.",
-        "label": "C",
-        "isCorrect": false
-      },
-      {
-        "text": "out of the race because of a last minute injury.",
-        "html": "out of the race because of a last minute injury.",
-        "label": "D",
-        "isCorrect": false
-      },
-      {
-        "text": "on with the activity while he answered the phone.",
-        "html": "on with the activity while he answered the phone.",
-        "label": "E",
-        "isCorrect": false
-      },
-      {
-        "text": "off team sports lately.",
-        "html": "off team sports lately.",
-        "label": "F",
-        "isCorrect": false
-      },
-      {
-        "text": "the race forward by a week.",
-        "html": "the race forward by a week.",
-        "label": "G",
-        "isCorrect": false
-      },
-      {
-        "text": "up with people who cheat at games.",
-        "html": "up with people who cheat at games.",
-        "label": "H",
-        "isCorrect": false
-      }
-    ],
-    "answer": "B to swimming as soon as she tried it.",
-    "explanationHTML": "take to = start to like something"
-  },
-  {
-    "id": "review2_18",
-    "type": "multiple_choice",
-    "title": "B. Match to make sentences.",
-    "questionHTML": "18 Rob had to pull .............",
-    "options": [
-      {
-        "text": "up a martial art, to defend yourself.",
-        "html": "up a martial art, to defend yourself.",
-        "label": "A",
-        "isCorrect": false
-      },
-      {
-        "text": "to swimming as soon as she tried it.",
-        "html": "to swimming as soon as she tried it.",
-        "label": "B",
-        "isCorrect": false
-      },
-      {
-        "text": "out in the second round of the competition.",
-        "html": "out in the second round of the competition.",
-        "label": "C",
-        "isCorrect": false
-      },
-      {
-        "text": "out of the race because of a last minute injury.",
-        "html": "out of the race because of a last minute injury.",
-        "label": "D",
-        "isCorrect": true
-      },
-      {
-        "text": "on with the activity while he answered the phone.",
-        "html": "on with the activity while he answered the phone.",
-        "label": "E",
-        "isCorrect": false
-      },
-      {
-        "text": "off team sports lately.",
-        "html": "off team sports lately.",
-        "label": "F",
-        "isCorrect": false
-      },
-      {
-        "text": "the race forward by a week.",
-        "html": "the race forward by a week.",
-        "label": "G",
-        "isCorrect": false
-      },
-      {
-        "text": "up with people who cheat at games.",
-        "html": "up with people who cheat at games.",
-        "label": "H",
-        "isCorrect": false
-      }
-    ],
-    "answer": "D out of the race because of a last minute injury.",
-    "explanationHTML": "pull out = withdraw from"
-  },
-  {
-    "id": "review2_19",
-    "type": "sentence_rewrite",
-    "title": "C. Complete each second sentence.",
-    "original": "Our tennis match started at one o'clock and we were still playing at four. (been)",
-    "wordToUse": "been",
-    "rewrittenPrefix": "At four o'clock, we ",
-    "rewrittenSuffix": " three hours.",
-    "answer": "had been playing tennis for",
-    "explanationHTML": "Past perfect continuous: had been playing tennis for",
-    "originalSentenceHTML": "Our tennis match started at one o'clock and we were still playing at four. (been) <b>(been)</b>",
-    "questionHTML": "At four o'clock, we  _______  three hours.",
-    "correctAnswers": [
-      "At four o'clock, we had been playing tennis for three hours."
-    ]
-  },
-  {
-    "id": "review2_20",
-    "type": "sentence_rewrite",
-    "title": "C. Complete each second sentence.",
-    "original": "Terry never used to spend so much time playing on his computer. (use)",
-    "wordToUse": "use",
-    "rewrittenPrefix": "Terry ",
-    "rewrittenSuffix": " spend so much time playing on his computer.",
-    "answer": "did not use to",
-    "explanationHTML": "Also accepted: didn't use to",
-    "originalSentenceHTML": "Terry never used to spend so much time playing on his computer. (use) <b>(use)</b>",
-    "questionHTML": "Terry  _______  spend so much time playing on his computer.",
-    "correctAnswers": [
-      "Terry did not use to spend so much time playing on his computer."
-    ]
-  },
-  {
-    "id": "review2_21",
-    "type": "sentence_rewrite",
-    "title": "C. Complete each second sentence.",
-    "original": "Before we play, check all the cards are there. (certain)",
-    "wordToUse": "certain",
-    "rewrittenPrefix": "Before we play, ",
-    "rewrittenSuffix": " all the cards are there.",
-    "answer": "make certain (that)",
-    "explanationHTML": "check = make certain (that)",
-    "originalSentenceHTML": "Before we play, check all the cards are there. (certain) <b>(certain)</b>",
-    "questionHTML": "Before we play,  _______  all the cards are there.",
-    "correctAnswers": [
-      "Before we play, make certain (that) all the cards are there."
-    ]
-  },
-  {
-    "id": "review2_22",
-    "type": "sentence_rewrite",
-    "title": "C. Complete each second sentence.",
-    "original": "Hang-gliding can be dangerous, but after a while you don't mind it. (used)",
-    "wordToUse": "used",
-    "rewrittenPrefix": "Hang-gliding can be dangerous, but after a while you ",
-    "rewrittenSuffix": " it.",
-    "answer": "get used to",
-    "explanationHTML": "don't mind it = get used to it",
-    "originalSentenceHTML": "Hang-gliding can be dangerous, but after a while you don't mind it. (used) <b>(used)</b>",
-    "questionHTML": "Hang-gliding can be dangerous, but after a while you  _______  it.",
-    "correctAnswers": [
-      "Hang-gliding can be dangerous, but after a while you get used to it."
-    ]
-  },
-  {
-    "id": "review2_23",
-    "type": "sentence_rewrite",
-    "title": "C. Complete each second sentence.",
-    "original": "I ran fifteen miles, and then my trainer told me to do fifty push-ups! (already)",
-    "wordToUse": "already",
-    "rewrittenPrefix": "When my trainer told me to do fifty push-ups, I ",
-    "rewrittenSuffix": " fifteen miles!",
-    "answer": "had already run",
-    "explanationHTML": "Past perfect: had already run",
-    "originalSentenceHTML": "I ran fifteen miles, and then my trainer told me to do fifty push-ups! (already) <b>(already)</b>",
-    "questionHTML": "When my trainer told me to do fifty push-ups, I  _______  fifteen miles!",
-    "correctAnswers": [
-      "When my trainer told me to do fifty push-ups, I had already run fifteen miles!"
-    ]
-  },
-  {
-    "id": "review2_24",
-    "type": "sentence_rewrite",
-    "title": "C. Complete each second sentence.",
-    "original": "We wouldn't spend so much time indoors when I was young. (used)",
-    "wordToUse": "used",
-    "rewrittenPrefix": "We ",
-    "rewrittenSuffix": " so much time indoors when I was young.",
-    "answer": "never used to spend",
-    "explanationHTML": "Also accepted: used not to spend",
-    "originalSentenceHTML": "We wouldn't spend so much time indoors when I was young. (used) <b>(used)</b>",
-    "questionHTML": "We  _______  so much time indoors when I was young.",
-    "correctAnswers": [
-      "We never used to spend so much time indoors when I was young."
-    ]
-  },
-  {
-    "id": "review2_25",
-    "type": "sentence_rewrite",
-    "title": "C. Complete each second sentence.",
-    "original": "I spend a lot of my time on my hobbies. (up)",
-    "wordToUse": "up",
-    "rewrittenPrefix": "My hobbies ",
-    "rewrittenSuffix": " a lot of my time.",
-    "answer": "take up",
-    "explanationHTML": "take up = occupy",
-    "originalSentenceHTML": "I spend a lot of my time on my hobbies. (up) <b>(up)</b>",
-    "questionHTML": "My hobbies  _______  a lot of my time.",
-    "correctAnswers": [
-      "My hobbies take up a lot of my time."
-    ]
-  },
-  {
-    "id": "review2_26",
-    "type": "sentence_rewrite",
-    "title": "C. Complete each second sentence.",
-    "original": "I would rather play ludo than snakes and ladders. (prefer)",
-    "wordToUse": "prefer",
-    "rewrittenPrefix": "I ",
-    "rewrittenSuffix": " ludo rather than snakes and ladders.",
-    "answer": "would prefer to play",
-    "explanationHTML": "would rather = would prefer to",
-    "originalSentenceHTML": "I would rather play ludo than snakes and ladders. (prefer) <b>(prefer)</b>",
-    "questionHTML": "I  _______  ludo rather than snakes and ladders.",
-    "correctAnswers": [
-      "I would prefer to play ludo rather than snakes and ladders."
-    ]
-  },
-  {
-    "id": "review2_27",
-    "type": "sentence_rewrite",
-    "title": "C. Complete each second sentence.",
-    "original": "I don't think it's likely that you'll win the competition. (chance)",
-    "wordToUse": "chance",
-    "rewrittenPrefix": "I think there's ",
-    "rewrittenSuffix": " the competition.",
-    "answer": "little chance of your winning",
-    "explanationHTML": "Also accepted: little chance of you winning / little chance you will win",
-    "originalSentenceHTML": "I don't think it's likely that you'll win the competition. (chance) <b>(chance)</b>",
-    "questionHTML": "I think there's  _______  the competition.",
-    "correctAnswers": [
-      "I think there's little chance of your winning the competition."
-    ]
-  },
-  {
-    "id": "review2_28",
-    "type": "multiple_choice",
-    "title": "D. Choose the correct answer.",
-    "questionHTML": "28 'Why were you so tired yesterday?'<br>'Because I ....... all morning.'",
-    "options": [
-      {
-        "text": "jog",
-        "html": "jog",
-        "label": "A",
-        "isCorrect": false
-      },
-      {
-        "text": "was jogged",
-        "html": "was jogged",
-        "label": "B",
-        "isCorrect": false
-      },
-      {
-        "text": "had been jogging",
-        "html": "had been jogging",
-        "label": "C",
-        "isCorrect": true
-      },
-      {
-        "text": "had been jogged",
-        "html": "had been jogged",
-        "label": "D",
-        "isCorrect": false
-      }
-    ],
-    "answer": "C had been jogging",
-    "explanationHTML": "Past perfect continuous: had been jogging"
-  },
-  {
-    "id": "review2_29",
-    "type": "multiple_choice",
-    "title": "D. Choose the correct answer.",
-    "questionHTML": "29 It was the first time I ....... a live match.",
-    "options": [
-      {
-        "text": "was ever seeing",
-        "html": "was ever seeing",
-        "label": "A",
-        "isCorrect": false
-      },
-      {
-        "text": "had ever been seeing",
-        "html": "had ever been seeing",
-        "label": "B",
-        "isCorrect": false
-      },
-      {
-        "text": "had ever seen",
-        "html": "had ever seen",
-        "label": "C",
-        "isCorrect": true
-      },
-      {
-        "text": "was ever seen",
-        "html": "was ever seen",
-        "label": "D",
-        "isCorrect": false
-      }
-    ],
-    "answer": "C had ever seen",
-    "explanationHTML": "Past perfect simple with 'It was the first time...'"
-  },
-  {
-    "id": "review2_30",
-    "type": "multiple_choice",
-    "title": "D. Choose the correct answer.",
-    "questionHTML": "30 'You live in a huge house, don't you?'<br>'Yes, but we ....... !'",
-    "options": [
-      {
-        "text": "didn't use to",
-        "html": "didn't use to",
-        "label": "A",
-        "isCorrect": true
-      },
-      {
-        "text": "wouldn't",
-        "html": "wouldn't",
-        "label": "B",
-        "isCorrect": false
-      },
-      {
-        "text": "use not",
-        "html": "use not",
-        "label": "C",
-        "isCorrect": false
-      },
-      {
-        "text": "weren't used to",
-        "html": "weren't used to",
-        "label": "D",
-        "isCorrect": false
-      }
-    ],
-    "answer": "A didn't use to",
-    "explanationHTML": "didn't use to = past state"
-  },
-  {
-    "id": "review2_31",
-    "type": "multiple_choice",
-    "title": "D. Choose the correct answer.",
-    "questionHTML": "31 I ....... the whole of War and Peace by the time I was seven years old.",
-    "options": [
-      {
-        "text": "was reading",
-        "html": "was reading",
-        "label": "A",
-        "isCorrect": false
-      },
-      {
-        "text": "had been reading",
-        "html": "had been reading",
-        "label": "B",
-        "isCorrect": false
-      },
-      {
-        "text": "had read",
-        "html": "had read",
-        "label": "C",
-        "isCorrect": true
-      },
-      {
-        "text": "had been read",
-        "html": "had been read",
-        "label": "D",
-        "isCorrect": false
-      }
-    ],
-    "answer": "C had read",
-    "explanationHTML": "Past perfect simple for completed action before a past point in time."
-  },
-  {
-    "id": "review2_32",
-    "type": "multiple_choice",
-    "title": "D. Choose the correct answer.",
-    "questionHTML": "32 Karate hurt my hands at first, but I finally ....... it in the end.",
-    "options": [
-      {
-        "text": "got used to",
-        "html": "got used to",
-        "label": "A",
-        "isCorrect": true
-      },
-      {
-        "text": "was used to",
-        "html": "was used to",
-        "label": "B",
-        "isCorrect": false
-      },
-      {
-        "text": "was used",
-        "html": "was used",
-        "label": "C",
-        "isCorrect": false
-      },
-      {
-        "text": "got use to",
-        "html": "got use to",
-        "label": "D",
-        "isCorrect": false
-      }
-    ],
-    "answer": "A got used to",
-    "explanationHTML": "got used to = became accustomed to"
-  },
-  {
-    "id": "review2_33",
-    "type": "multiple_choice",
-    "title": "D. Choose the correct answer.",
-    "questionHTML": "33 I ....... for the match to begin when suddenly a dog ran onto the pitch.",
-    "options": [
-      {
-        "text": "had waited",
-        "html": "had waited",
-        "label": "A",
-        "isCorrect": false
-      },
-      {
-        "text": "waited",
-        "html": "waited",
-        "label": "B",
-        "isCorrect": false
-      },
-      {
-        "text": "was waiting",
-        "html": "was waiting",
-        "label": "C",
-        "isCorrect": true
-      },
-      {
-        "text": "wait",
-        "html": "wait",
-        "label": "D",
-        "isCorrect": false
-      }
-    ],
-    "answer": "C was waiting",
-    "explanationHTML": "Past continuous interrupted by a sudden past simple event."
-  },
-  {
-    "id": "review2_34",
-    "type": "multiple_choice",
-    "title": "D. Choose the correct answer.",
-    "questionHTML": "34 Before she retired, my grandma .....go for a run every morning before work.",
-    "options": [
-      {
-        "text": "use to",
-        "html": "use to",
-        "label": "A",
-        "isCorrect": false
-      },
-      {
-        "text": "would",
-        "html": "would",
-        "label": "B",
-        "isCorrect": true
-      },
-      {
-        "text": "got used to",
-        "html": "got used to",
-        "label": "C",
-        "isCorrect": false
-      },
-      {
-        "text": "was used to",
-        "html": "was used to",
-        "label": "D",
-        "isCorrect": false
-      }
-    ],
-    "answer": "B would",
-    "explanationHTML": "would + bare infinitive for past habits."
-  },
-  {
-    "id": "review2_35",
-    "type": "multiple_choice",
-    "title": "E. Choose the correct answer.",
-    "questionHTML": "35 The ....... in the stadium all cheered the athletes.",
-    "options": [
-      {
-        "text": "viewers",
-        "html": "viewers",
-        "label": "A",
-        "isCorrect": false
-      },
-      {
-        "text": "witnesses",
-        "html": "witnesses",
-        "label": "B",
-        "isCorrect": false
-      },
-      {
-        "text": "spectators",
-        "html": "spectators",
-        "label": "C",
-        "isCorrect": true
-      },
-      {
-        "text": "onlookers",
-        "html": "onlookers",
-        "label": "D",
-        "isCorrect": false
-      }
-    ],
-    "answer": "C spectators",
-    "explanationHTML": "spectators = people who watch a sports event."
-  },
-  {
-    "id": "review2_36",
-    "type": "multiple_choice",
-    "title": "E. Choose the correct answer.",
-    "questionHTML": "36 I got a new baseball ....... yesterday.",
-    "options": [
-      {
-        "text": "stick",
-        "html": "stick",
-        "label": "A",
-        "isCorrect": false
-      },
-      {
-        "text": "club",
-        "html": "club",
-        "label": "B",
-        "isCorrect": false
-      },
-      {
-        "text": "racket",
-        "html": "racket",
-        "label": "C",
-        "isCorrect": false
-      },
-      {
-        "text": "bat",
-        "html": "bat",
-        "label": "D",
-        "isCorrect": true
-      }
-    ],
-    "answer": "D bat",
-    "explanationHTML": "baseball bat"
-  },
-  {
-    "id": "review2_37",
-    "type": "multiple_choice",
-    "title": "E. Choose the correct answer.",
-    "questionHTML": "37 After a hard match, United managed to ....... with City, 1-1.",
-    "options": [
-      {
-        "text": "equal",
-        "html": "equal",
-        "label": "A",
-        "isCorrect": false
-      },
-      {
-        "text": "exact",
-        "html": "exact",
-        "label": "B",
-        "isCorrect": false
-      },
-      {
-        "text": "draw",
-        "html": "draw",
-        "label": "C",
-        "isCorrect": true
-      },
-      {
-        "text": "score",
-        "html": "score",
-        "label": "D",
-        "isCorrect": false
-      }
-    ],
-    "answer": "C draw",
-    "explanationHTML": "draw = finish with an equal score"
-  },
-  {
-    "id": "review2_38",
-    "type": "multiple_choice",
-    "title": "E. Choose the correct answer.",
-    "questionHTML": "38 In this game, the players ....... it in turns to throw the dice.",
-    "options": [
-      {
-        "text": "take",
-        "html": "take",
-        "label": "A",
-        "isCorrect": true
-      },
-      {
-        "text": "do",
-        "html": "do",
-        "label": "B",
-        "isCorrect": false
-      },
-      {
-        "text": "make",
-        "html": "make",
-        "label": "C",
-        "isCorrect": false
-      },
-      {
-        "text": "have",
-        "html": "have",
-        "label": "D",
-        "isCorrect": false
-      }
-    ],
-    "answer": "A take",
-    "explanationHTML": "take it in turns"
-  },
-  {
-    "id": "review2_39",
-    "type": "multiple_choice",
-    "title": "E. Choose the correct answer.",
-    "questionHTML": "39 It's nice to win, but the important thing is to ....... your best.",
-    "options": [
-      {
-        "text": "make",
-        "html": "make",
-        "label": "A",
-        "isCorrect": false
-      },
-      {
-        "text": "take",
-        "html": "take",
-        "label": "B",
-        "isCorrect": false
-      },
-      {
-        "text": "have",
-        "html": "have",
-        "label": "C",
-        "isCorrect": false
-      },
-      {
-        "text": "do",
-        "html": "do",
-        "label": "D",
-        "isCorrect": true
-      }
-    ],
-    "answer": "D do",
-    "explanationHTML": "do your best"
-  },
-  {
-    "id": "review2_40",
-    "type": "multiple_choice",
-    "title": "E. Choose the correct answer.",
-    "questionHTML": "40 Just ask them if you can play and I'm sure they'll let you ....... .",
-    "options": [
-      {
-        "text": "take up",
-        "html": "take up",
-        "label": "A",
-        "isCorrect": false
-      },
-      {
-        "text": "join in",
-        "html": "join in",
-        "label": "B",
-        "isCorrect": true
-      },
-      {
-        "text": "go off",
-        "html": "go off",
-        "label": "C",
-        "isCorrect": false
-      },
-      {
-        "text": "take to",
-        "html": "take to",
-        "label": "D",
-        "isCorrect": false
-      }
-    ],
-    "answer": "B join in",
-    "explanationHTML": "join in = participate"
-  },
-  {
-    "id": "review2_41",
-    "type": "multiple_choice",
-    "title": "E. Choose the correct answer.",
-    "questionHTML": "41 Everyone expects Johnson to ....... Smith in today's final.",
-    "options": [
-      {
-        "text": "beat",
-        "html": "beat",
-        "label": "A",
-        "isCorrect": true
-      },
-      {
-        "text": "score",
-        "html": "score",
-        "label": "B",
-        "isCorrect": false
-      },
-      {
-        "text": "win",
-        "html": "win",
-        "label": "C",
-        "isCorrect": false
-      },
-      {
-        "text": "champion",
-        "html": "champion",
-        "label": "D",
-        "isCorrect": false
-      }
-    ],
-    "answer": "A beat",
-    "explanationHTML": "beat an opponent"
-  }
-];
-if (typeof module !== "undefined") {  };
+    const __B64_QUIZ_DATA__ = 'WwogIHsKICAgICJpZCI6ICJyZXZpZXcyXzEiLAogICAgInR5cGUiOiAiZ2FwX2ZpbGxfdGV4dCIsCiAgICAidGl0bGUiOiAiQS4gVXNlIHRoZSB3b3JkIGdpdmVuIGluIGNhcGl0YWxzIGF0IHRoZSBlbmQgb2YgZWFjaCBsaW5lIHRvIGZvcm0gYSB3b3JkIHRoYXQgZml0cyBpbiB0aGUgZ2FwIGluIHRoZSBzYW1lIGxpbmUuIiwKICAgICJleHBsYW5hdGlvbkhUTUwiOiAiV29yZCBmb3JtYXRpb24uIDEuIGludGVyZXN0aW5nLCAyLiBhc3NvY2lhdGlvbiwgMy4gdW5mb3J0dW5hdGVseSwgNC4ga25vd2xlZGdlLCA1LiBlcXVpcG1lbnQsIDYuIGVuam95YWJsZSwgNy4gY29tcGV0aXRpb24sIDguIHRyYWluZXIsIDkuIG9wcG9uZW50cywgMTAuIG1lZGFsbGlzdC4iLAogICAgInF1ZXN0aW9uSFRNTCI6ICI8c3Ryb25nPkEgbmV3IGhvYmJ5PC9zdHJvbmc+PGJyPjxicj5JIHNhdyBzb21lIGJhZG1pbnRvbiBvbiBUViBhbmQgZm91bmQgaXQgcXVpdGUge3tibGFuazpiMX19IChJTlRFUkVTVCksIHNvIEkgdGhvdWdodCBJJ2Qgc2VlIGlmIHRoZXJlIHdhcyBhIGNsdWIgb3Ige3tibGFuazpiMn19IChBU1NPQ0lBVEUpIGluIG15IGFyZWEuIEkgbG9va2VkIGV2ZXJ5d2hlcmUgYnV0LCB7e2JsYW5rOmIzfX0gKEZPUlRVTkUpLCB0aGUgbmVhcmVzdCBjbHViIHdhcyA4MCBraWxvbWV0cmVzIGF3YXkuIFNvLCB3aXRob3V0IGFueSB7e2JsYW5rOmI0fX0gKEtOT1cpLCBJIGRlY2lkZWQgdG8gZm9ybSBteSBvd24gY2x1Yi4gSXQgd2FzIHZlcnkgaGFyZCBpbiB0aGUgYmVnaW5uaW5nIOKAkyBJIGRpZG4ndCBoYXZlIGFueSB7e2JsYW5rOmI1fX0gKEVRVUlQKSBhbmQgSSBoYWQgdG8gY29udmluY2UgYSBmZXcgcGVvcGxlIHRoYXQgaXQgd2FzIGFuIHt7Ymxhbms6YjZ9fSAoRU5KT1kpIHdheSB0byBrZWVwIGZpdC4gSSBvcmdhbmlzZWQgYSBzbWFsbCB7e2JsYW5rOmI3fX0gKENPTVBFVEUpLCB3aGljaCB3YXMgYSBsb3Qgb2YgZnVuLCBhbmQgdGhpbmdzIHN0YXJ0ZWQgdG8gZ3JvdyBmcm9tIHRoZXJlLiBOb3cgd2UndmUgZ290IGEgZnVsbC10aW1lIHt7Ymxhbms6Yjh9fSAoVFJBSU4pIGFuZCBvdXIge3tibGFuazpiOX19IChPUFBPU0UpIGNvbWUgZnJvbSBhbGwgb3ZlciB0aGUgY291bnRyeS4gT25lIG9mIG91ciBtZW1iZXJzIHdhcyBldmVuIGEgYnJvbnplIHt7Ymxhbms6YjEwfX0gKE1FREFMKSBpbiB0aGUgbmF0aW9uYWwgY2hhbXBpb25zaGlwISIsCiAgICAiYmxhbmtzIjogWwogICAgICB7CiAgICAgICAgImJsYW5rSWQiOiAiYjEiLAogICAgICAgICJjb3JyZWN0QW5zd2VycyI6IFsKICAgICAgICAgICJpbnRlcmVzdGluZyIKICAgICAgICBdCiAgICAgIH0sCiAgICAgIHsKICAgICAgICAiYmxhbmtJZCI6ICJiMiIsCiAgICAgICAgImNvcnJlY3RBbnN3ZXJzIjogWwogICAgICAgICAgImFzc29jaWF0aW9uIgogICAgICAgIF0KICAgICAgfSwKICAgICAgewogICAgICAgICJibGFua0lkIjogImIzIiwKICAgICAgICAiY29ycmVjdEFuc3dlcnMiOiBbCiAgICAgICAgICAidW5mb3J0dW5hdGVseSIKICAgICAgICBdCiAgICAgIH0sCiAgICAgIHsKICAgICAgICAiYmxhbmtJZCI6ICJiNCIsCiAgICAgICAgImNvcnJlY3RBbnN3ZXJzIjogWwogICAgICAgICAgImtub3dsZWRnZSIKICAgICAgICBdCiAgICAgIH0sCiAgICAgIHsKICAgICAgICAiYmxhbmtJZCI6ICJiNSIsCiAgICAgICAgImNvcnJlY3RBbnN3ZXJzIjogWwogICAgICAgICAgImVxdWlwbWVudCIKICAgICAgICBdCiAgICAgIH0sCiAgICAgIHsKICAgICAgICAiYmxhbmtJZCI6ICJiNiIsCiAgICAgICAgImNvcnJlY3RBbnN3ZXJzIjogWwogICAgICAgICAgImVuam95YWJsZSIKICAgICAgICBdCiAgICAgIH0sCiAgICAgIHsKICAgICAgICAiYmxhbmtJZCI6ICJiNyIsCiAgICAgICAgImNvcnJlY3RBbnN3ZXJzIjogWwogICAgICAgICAgImNvbXBldGl0aW9uIgogICAgICAgIF0KICAgICAgfSwKICAgICAgewogICAgICAgICJibGFua0lkIjogImI4IiwKICAgICAgICAiY29ycmVjdEFuc3dlcnMiOiBbCiAgICAgICAgICAidHJhaW5lciIKICAgICAgICBdCiAgICAgIH0sCiAgICAgIHsKICAgICAgICAiYmxhbmtJZCI6ICJiOSIsCiAgICAgICAgImNvcnJlY3RBbnN3ZXJzIjogWwogICAgICAgICAgIm9wcG9uZW50cyIKICAgICAgICBdCiAgICAgIH0sCiAgICAgIHsKICAgICAgICAiYmxhbmtJZCI6ICJiMTAiLAogICAgICAgICJjb3JyZWN0QW5zd2VycyI6IFsKICAgICAgICAgICJtZWRhbGxpc3QiCiAgICAgICAgXQogICAgICB9CiAgICBdCiAgfSwKICB7CiAgICAiaWQiOiAicmV2aWV3Ml8xMSIsCiAgICAidHlwZSI6ICJtdWx0aXBsZV9jaG9pY2UiLAogICAgInRpdGxlIjogIkIuIE1hdGNoIHRvIG1ha2Ugc2VudGVuY2VzLiIsCiAgICAicXVlc3Rpb25IVE1MIjogIjExIEkgcmVmdXNlIHRvIHB1dCAuLi4uLi4uLi4uLi4uIiwKICAgICJvcHRpb25zIjogWwogICAgICB7CiAgICAgICAgInRleHQiOiAidXAgYSBtYXJ0aWFsIGFydCwgdG8gZGVmZW5kIHlvdXJzZWxmLiIsCiAgICAgICAgImh0bWwiOiAidXAgYSBtYXJ0aWFsIGFydCwgdG8gZGVmZW5kIHlvdXJzZWxmLiIsCiAgICAgICAgImxhYmVsIjogIkEiLAogICAgICAgICJpc0NvcnJlY3QiOiBmYWxzZQogICAgICB9LAogICAgICB7CiAgICAgICAgInRleHQiOiAidG8gc3dpbW1pbmcgYXMgc29vbiBhcyBzaGUgdHJpZWQgaXQuIiwKICAgICAgICAiaHRtbCI6ICJ0byBzd2ltbWluZyBhcyBzb29uIGFzIHNoZSB0cmllZCBpdC4iLAogICAgICAgICJsYWJlbCI6ICJCIiwKICAgICAgICAiaXNDb3JyZWN0IjogZmFsc2UKICAgICAgfSwKICAgICAgewogICAgICAgICJ0ZXh0IjogIm91dCBpbiB0aGUgc2Vjb25kIHJvdW5kIG9mIHRoZSBjb21wZXRpdGlvbi4iLAogICAgICAgICJodG1sIjogIm91dCBpbiB0aGUgc2Vjb25kIHJvdW5kIG9mIHRoZSBjb21wZXRpdGlvbi4iLAogICAgICAgICJsYWJlbCI6ICJDIiwKICAgICAgICAiaXNDb3JyZWN0IjogZmFsc2UKICAgICAgfSwKICAgICAgewogICAgICAgICJ0ZXh0IjogIm91dCBvZiB0aGUgcmFjZSBiZWNhdXNlIG9mIGEgbGFzdCBtaW51dGUgaW5qdXJ5LiIsCiAgICAgICAgImh0bWwiOiAib3V0IG9mIHRoZSByYWNlIGJlY2F1c2Ugb2YgYSBsYXN0IG1pbnV0ZSBpbmp1cnkuIiwKICAgICAgICAibGFiZWwiOiAiRCIsCiAgICAgICAgImlzQ29ycmVjdCI6IGZhbHNlCiAgICAgIH0sCiAgICAgIHsKICAgICAgICAidGV4dCI6ICJvbiB3aXRoIHRoZSBhY3Rpdml0eSB3aGlsZSBoZSBhbnN3ZXJlZCB0aGUgcGhvbmUuIiwKICAgICAgICAiaHRtbCI6ICJvbiB3aXRoIHRoZSBhY3Rpdml0eSB3aGlsZSBoZSBhbnN3ZXJlZCB0aGUgcGhvbmUuIiwKICAgICAgICAibGFiZWwiOiAiRSIsCiAgICAgICAgImlzQ29ycmVjdCI6IGZhbHNlCiAgICAgIH0sCiAgICAgIHsKICAgICAgICAidGV4dCI6ICJvZmYgdGVhbSBzcG9ydHMgbGF0ZWx5LiIsCiAgICAgICAgImh0bWwiOiAib2ZmIHRlYW0gc3BvcnRzIGxhdGVseS4iLAogICAgICAgICJsYWJlbCI6ICJGIiwKICAgICAgICAiaXNDb3JyZWN0IjogZmFsc2UKICAgICAgfSwKICAgICAgewogICAgICAgICJ0ZXh0IjogInRoZSByYWNlIGZvcndhcmQgYnkgYSB3ZWVrLiIsCiAgICAgICAgImh0bWwiOiAidGhlIHJhY2UgZm9yd2FyZCBieSBhIHdlZWsuIiwKICAgICAgICAibGFiZWwiOiAiRyIsCiAgICAgICAgImlzQ29ycmVjdCI6IGZhbHNlCiAgICAgIH0sCiAgICAgIHsKICAgICAgICAidGV4dCI6ICJ1cCB3aXRoIHBlb3BsZSB3aG8gY2hlYXQgYXQgZ2FtZXMuIiwKICAgICAgICAiaHRtbCI6ICJ1cCB3aXRoIHBlb3BsZSB3aG8gY2hlYXQgYXQgZ2FtZXMuIiwKICAgICAgICAibGFiZWwiOiAiSCIsCiAgICAgICAgImlzQ29ycmVjdCI6IHRydWUKICAgICAgfQogICAgXSwKICAgICJhbnN3ZXIiOiAiSCB1cCB3aXRoIHBlb3BsZSB3aG8gY2hlYXQgYXQgZ2FtZXMuIiwKICAgICJleHBsYW5hdGlvbkhUTUwiOiAicHV0IHVwIHdpdGggPSB0b2xlcmF0ZSIKICB9LAogIHsKICAgICJpZCI6ICJyZXZpZXcyXzEyIiwKICAgICJ0eXBlIjogIm11bHRpcGxlX2Nob2ljZSIsCiAgICAidGl0bGUiOiAiQi4gTWF0Y2ggdG8gbWFrZSBzZW50ZW5jZXMuIiwKICAgICJxdWVzdGlvbkhUTUwiOiAiMTIgVGhlIGN1cnJlbnQgY2hhbXBpb24gd2FzIGtub2NrZWQgLi4uLi4uLi4uLi4uLiIsCiAgICAib3B0aW9ucyI6IFsKICAgICAgewogICAgICAgICJ0ZXh0IjogInVwIGEgbWFydGlhbCBhcnQsIHRvIGRlZmVuZCB5b3Vyc2VsZi4iLAogICAgICAgICJodG1sIjogInVwIGEgbWFydGlhbCBhcnQsIHRvIGRlZmVuZCB5b3Vyc2VsZi4iLAogICAgICAgICJsYWJlbCI6ICJBIiwKICAgICAgICAiaXNDb3JyZWN0IjogZmFsc2UKICAgICAgfSwKICAgICAgewogICAgICAgICJ0ZXh0IjogInRvIHN3aW1taW5nIGFzIHNvb24gYXMgc2hlIHRyaWVkIGl0LiIsCiAgICAgICAgImh0bWwiOiAidG8gc3dpbW1pbmcgYXMgc29vbiBhcyBzaGUgdHJpZWQgaXQuIiwKICAgICAgICAibGFiZWwiOiAiQiIsCiAgICAgICAgImlzQ29ycmVjdCI6IGZhbHNlCiAgICAgIH0sCiAgICAgIHsKICAgICAgICAidGV4dCI6ICJvdXQgaW4gdGhlIHNlY29uZCByb3VuZCBvZiB0aGUgY29tcGV0aXRpb24uIiwKICAgICAgICAiaHRtbCI6ICJvdXQgaW4gdGhlIHNlY29uZCByb3VuZCBvZiB0aGUgY29tcGV0aXRpb24uIiwKICAgICAgICAibGFiZWwiOiAiQyIsCiAgICAgICAgImlzQ29ycmVjdCI6IHRydWUKICAgICAgfSwKICAgICAgewogICAgICAgICJ0ZXh0IjogIm91dCBvZiB0aGUgcmFjZSBiZWNhdXNlIG9mIGEgbGFzdCBtaW51dGUgaW5qdXJ5LiIsCiAgICAgICAgImh0bWwiOiAib3V0IG9mIHRoZSByYWNlIGJlY2F1c2Ugb2YgYSBsYXN0IG1pbnV0ZSBpbmp1cnkuIiwKICAgICAgICAibGFiZWwiOiAiRCIsCiAgICAgICAgImlzQ29ycmVjdCI6IGZhbHNlCiAgICAgIH0sCiAgICAgIHsKICAgICAgICAidGV4dCI6ICJvbiB3aXRoIHRoZSBhY3Rpdml0eSB3aGlsZSBoZSBhbnN3ZXJlZCB0aGUgcGhvbmUuIiwKICAgICAgICAiaHRtbCI6ICJvbiB3aXRoIHRoZSBhY3Rpdml0eSB3aGlsZSBoZSBhbnN3ZXJlZCB0aGUgcGhvbmUuIiwKICAgICAgICAibGFiZWwiOiAiRSIsCiAgICAgICAgImlzQ29ycmVjdCI6IGZhbHNlCiAgICAgIH0sCiAgICAgIHsKICAgICAgICAidGV4dCI6ICJvZmYgdGVhbSBzcG9ydHMgbGF0ZWx5LiIsCiAgICAgICAgImh0bWwiOiAib2ZmIHRlYW0gc3BvcnRzIGxhdGVseS4iLAogICAgICAgICJsYWJlbCI6ICJGIiwKICAgICAgICAiaXNDb3JyZWN0IjogZmFsc2UKICAgICAgfSwKICAgICAgewogICAgICAgICJ0ZXh0IjogInRoZSByYWNlIGZvcndhcmQgYnkgYSB3ZWVrLiIsCiAgICAgICAgImh0bWwiOiAidGhlIHJhY2UgZm9yd2FyZCBieSBhIHdlZWsuIiwKICAgICAgICAibGFiZWwiOiAiRyIsCiAgICAgICAgImlzQ29ycmVjdCI6IGZhbHNlCiAgICAgIH0sCiAgICAgIHsKICAgICAgICAidGV4dCI6ICJ1cCB3aXRoIHBlb3BsZSB3aG8gY2hlYXQgYXQgZ2FtZXMuIiwKICAgICAgICAiaHRtbCI6ICJ1cCB3aXRoIHBlb3BsZSB3aG8gY2hlYXQgYXQgZ2FtZXMuIiwKICAgICAgICAibGFiZWwiOiAiSCIsCiAgICAgICAgImlzQ29ycmVjdCI6IGZhbHNlCiAgICAgIH0KICAgIF0sCiAgICAiYW5zd2VyIjogIkMgb3V0IGluIHRoZSBzZWNvbmQgcm91bmQgb2YgdGhlIGNvbXBldGl0aW9uLiIsCiAgICAiZXhwbGFuYXRpb25IVE1MIjogImtub2NrIG91dCA9IGVsaW1pbmF0ZSIKICB9LAogIHsKICAgICJpZCI6ICJyZXZpZXcyXzEzIiwKICAgICJ0eXBlIjogIm11bHRpcGxlX2Nob2ljZSIsCiAgICAidGl0bGUiOiAiQi4gTWF0Y2ggdG8gbWFrZSBzZW50ZW5jZXMuIiwKICAgICJxdWVzdGlvbkhUTUwiOiAiMTMgSSB1c2VkIHRvIGxvdmUgYmFza2V0YmFsbCwgYnV0IEkndmUgZ29uZSAuLi4uLi4uLi4uLi4uIiwKICAgICJvcHRpb25zIjogWwogICAgICB7CiAgICAgICAgInRleHQiOiAidXAgYSBtYXJ0aWFsIGFydCwgdG8gZGVmZW5kIHlvdXJzZWxmLiIsCiAgICAgICAgImh0bWwiOiAidXAgYSBtYXJ0aWFsIGFydCwgdG8gZGVmZW5kIHlvdXJzZWxmLiIsCiAgICAgICAgImxhYmVsIjogIkEiLAogICAgICAgICJpc0NvcnJlY3QiOiBmYWxzZQogICAgICB9LAogICAgICB7CiAgICAgICAgInRleHQiOiAidG8gc3dpbW1pbmcgYXMgc29vbiBhcyBzaGUgdHJpZWQgaXQuIiwKICAgICAgICAiaHRtbCI6ICJ0byBzd2ltbWluZyBhcyBzb29uIGFzIHNoZSB0cmllZCBpdC4iLAogICAgICAgICJsYWJlbCI6ICJCIiwKICAgICAgICAiaXNDb3JyZWN0IjogZmFsc2UKICAgICAgfSwKICAgICAgewogICAgICAgICJ0ZXh0IjogIm91dCBpbiB0aGUgc2Vjb25kIHJvdW5kIG9mIHRoZSBjb21wZXRpdGlvbi4iLAogICAgICAgICJodG1sIjogIm91dCBpbiB0aGUgc2Vjb25kIHJvdW5kIG9mIHRoZSBjb21wZXRpdGlvbi4iLAogICAgICAgICJsYWJlbCI6ICJDIiwKICAgICAgICAiaXNDb3JyZWN0IjogZmFsc2UKICAgICAgfSwKICAgICAgewogICAgICAgICJ0ZXh0IjogIm91dCBvZiB0aGUgcmFjZSBiZWNhdXNlIG9mIGEgbGFzdCBtaW51dGUgaW5qdXJ5LiIsCiAgICAgICAgImh0bWwiOiAib3V0IG9mIHRoZSByYWNlIGJlY2F1c2Ugb2YgYSBsYXN0IG1pbnV0ZSBpbmp1cnkuIiwKICAgICAgICAibGFiZWwiOiAiRCIsCiAgICAgICAgImlzQ29ycmVjdCI6IGZhbHNlCiAgICAgIH0sCiAgICAgIHsKICAgICAgICAidGV4dCI6ICJvbiB3aXRoIHRoZSBhY3Rpdml0eSB3aGlsZSBoZSBhbnN3ZXJlZCB0aGUgcGhvbmUuIiwKICAgICAgICAiaHRtbCI6ICJvbiB3aXRoIHRoZSBhY3Rpdml0eSB3aGlsZSBoZSBhbnN3ZXJlZCB0aGUgcGhvbmUuIiwKICAgICAgICAibGFiZWwiOiAiRSIsCiAgICAgICAgImlzQ29ycmVjdCI6IGZhbHNlCiAgICAgIH0sCiAgICAgIHsKICAgICAgICAidGV4dCI6ICJvZmYgdGVhbSBzcG9ydHMgbGF0ZWx5LiIsCiAgICAgICAgImh0bWwiOiAib2ZmIHRlYW0gc3BvcnRzIGxhdGVseS4iLAogICAgICAgICJsYWJlbCI6ICJGIiwKICAgICAgICAiaXNDb3JyZWN0IjogdHJ1ZQogICAgICB9LAogICAgICB7CiAgICAgICAgInRleHQiOiAidGhlIHJhY2UgZm9yd2FyZCBieSBhIHdlZWsuIiwKICAgICAgICAiaHRtbCI6ICJ0aGUgcmFjZSBmb3J3YXJkIGJ5IGEgd2Vlay4iLAogICAgICAgICJsYWJlbCI6ICJHIiwKICAgICAgICAiaXNDb3JyZWN0IjogZmFsc2UKICAgICAgfSwKICAgICAgewogICAgICAgICJ0ZXh0IjogInVwIHdpdGggcGVvcGxlIHdobyBjaGVhdCBhdCBnYW1lcy4iLAogICAgICAgICJodG1sIjogInVwIHdpdGggcGVvcGxlIHdobyBjaGVhdCBhdCBnYW1lcy4iLAogICAgICAgICJsYWJlbCI6ICJIIiwKICAgICAgICAiaXNDb3JyZWN0IjogZmFsc2UKICAgICAgfQogICAgXSwKICAgICJhbnN3ZXIiOiAiRiBvZmYgdGVhbSBzcG9ydHMgbGF0ZWx5LiIsCiAgICAiZXhwbGFuYXRpb25IVE1MIjogImdvIG9mZiA9IHN0b3AgbGlraW5nIgogIH0sCiAgewogICAgImlkIjogInJldmlldzJfMTQiLAogICAgInR5cGUiOiAibXVsdGlwbGVfY2hvaWNlIiwKICAgICJ0aXRsZSI6ICJCLiBNYXRjaCB0byBtYWtlIHNlbnRlbmNlcy4iLAogICAgInF1ZXN0aW9uSFRNTCI6ICIxNCBUaGUgdHJhaW5lciBhc2tlZCB1cyB0byBjYXJyeSAuLi4uLi4uLi4uLi4uIiwKICAgICJvcHRpb25zIjogWwogICAgICB7CiAgICAgICAgInRleHQiOiAidXAgYSBtYXJ0aWFsIGFydCwgdG8gZGVmZW5kIHlvdXJzZWxmLiIsCiAgICAgICAgImh0bWwiOiAidXAgYSBtYXJ0aWFsIGFydCwgdG8gZGVmZW5kIHlvdXJzZWxmLiIsCiAgICAgICAgImxhYmVsIjogIkEiLAogICAgICAgICJpc0NvcnJlY3QiOiBmYWxzZQogICAgICB9LAogICAgICB7CiAgICAgICAgInRleHQiOiAidG8gc3dpbW1pbmcgYXMgc29vbiBhcyBzaGUgdHJpZWQgaXQuIiwKICAgICAgICAiaHRtbCI6ICJ0byBzd2ltbWluZyBhcyBzb29uIGFzIHNoZSB0cmllZCBpdC4iLAogICAgICAgICJsYWJlbCI6ICJCIiwKICAgICAgICAiaXNDb3JyZWN0IjogZmFsc2UKICAgICAgfSwKICAgICAgewogICAgICAgICJ0ZXh0IjogIm91dCBpbiB0aGUgc2Vjb25kIHJvdW5kIG9mIHRoZSBjb21wZXRpdGlvbi4iLAogICAgICAgICJodG1sIjogIm91dCBpbiB0aGUgc2Vjb25kIHJvdW5kIG9mIHRoZSBjb21wZXRpdGlvbi4iLAogICAgICAgICJsYWJlbCI6ICJDIiwKICAgICAgICAiaXNDb3JyZWN0IjogZmFsc2UKICAgICAgfSwKICAgICAgewogICAgICAgICJ0ZXh0IjogIm91dCBvZiB0aGUgcmFjZSBiZWNhdXNlIG9mIGEgbGFzdCBtaW51dGUgaW5qdXJ5LiIsCiAgICAgICAgImh0bWwiOiAib3V0IG9mIHRoZSByYWNlIGJlY2F1c2Ugb2YgYSBsYXN0IG1pbnV0ZSBpbmp1cnkuIiwKICAgICAgICAibGFiZWwiOiAiRCIsCiAgICAgICAgImlzQ29ycmVjdCI6IGZhbHNlCiAgICAgIH0sCiAgICAgIHsKICAgICAgICAidGV4dCI6ICJvbiB3aXRoIHRoZSBhY3Rpdml0eSB3aGlsZSBoZSBhbnN3ZXJlZCB0aGUgcGhvbmUuIiwKICAgICAgICAiaHRtbCI6ICJvbiB3aXRoIHRoZSBhY3Rpdml0eSB3aGlsZSBoZSBhbnN3ZXJlZCB0aGUgcGhvbmUuIiwKICAgICAgICAibGFiZWwiOiAiRSIsCiAgICAgICAgImlzQ29ycmVjdCI6IHRydWUKICAgICAgfSwKICAgICAgewogICAgICAgICJ0ZXh0IjogIm9mZiB0ZWFtIHNwb3J0cyBsYXRlbHkuIiwKICAgICAgICAiaHRtbCI6ICJvZmYgdGVhbSBzcG9ydHMgbGF0ZWx5LiIsCiAgICAgICAgImxhYmVsIjogIkYiLAogICAgICAgICJpc0NvcnJlY3QiOiBmYWxzZQogICAgICB9LAogICAgICB7CiAgICAgICAgInRleHQiOiAidGhlIHJhY2UgZm9yd2FyZCBieSBhIHdlZWsuIiwKICAgICAgICAiaHRtbCI6ICJ0aGUgcmFjZSBmb3J3YXJkIGJ5IGEgd2Vlay4iLAogICAgICAgICJsYWJlbCI6ICJHIiwKICAgICAgICAiaXNDb3JyZWN0IjogZmFsc2UKICAgICAgfSwKICAgICAgewogICAgICAgICJ0ZXh0IjogInVwIHdpdGggcGVvcGxlIHdobyBjaGVhdCBhdCBnYW1lcy4iLAogICAgICAgICJodG1sIjogInVwIHdpdGggcGVvcGxlIHdobyBjaGVhdCBhdCBnYW1lcy4iLAogICAgICAgICJsYWJlbCI6ICJIIiwKICAgICAgICAiaXNDb3JyZWN0IjogZmFsc2UKICAgICAgfQogICAgXSwKICAgICJhbnN3ZXIiOiAiRSBvbiB3aXRoIHRoZSBhY3Rpdml0eSB3aGlsZSBoZSBhbnN3ZXJlZCB0aGUgcGhvbmUuIiwKICAgICJleHBsYW5hdGlvbkhUTUwiOiAiY2Fycnkgb24gPSBjb250aW51ZSIKICB9LAogIHsKICAgICJpZCI6ICJyZXZpZXcyXzE1IiwKICAgICJ0eXBlIjogIm11bHRpcGxlX2Nob2ljZSIsCiAgICAidGl0bGUiOiAiQi4gTWF0Y2ggdG8gbWFrZSBzZW50ZW5jZXMuIiwKICAgICJxdWVzdGlvbkhUTUwiOiAiMTUgVGhlIG9yZ2FuaXNlcnMgaGFkIHRvIGJyaW5nIC4uLi4uLi4uLi4uLi4iLAogICAgIm9wdGlvbnMiOiBbCiAgICAgIHsKICAgICAgICAidGV4dCI6ICJ1cCBhIG1hcnRpYWwgYXJ0LCB0byBkZWZlbmQgeW91cnNlbGYuIiwKICAgICAgICAiaHRtbCI6ICJ1cCBhIG1hcnRpYWwgYXJ0LCB0byBkZWZlbmQgeW91cnNlbGYuIiwKICAgICAgICAibGFiZWwiOiAiQSIsCiAgICAgICAgImlzQ29ycmVjdCI6IGZhbHNlCiAgICAgIH0sCiAgICAgIHsKICAgICAgICAidGV4dCI6ICJ0byBzd2ltbWluZyBhcyBzb29uIGFzIHNoZSB0cmllZCBpdC4iLAogICAgICAgICJodG1sIjogInRvIHN3aW1taW5nIGFzIHNvb24gYXMgc2hlIHRyaWVkIGl0LiIsCiAgICAgICAgImxhYmVsIjogIkIiLAogICAgICAgICJpc0NvcnJlY3QiOiBmYWxzZQogICAgICB9LAogICAgICB7CiAgICAgICAgInRleHQiOiAib3V0IGluIHRoZSBzZWNvbmQgcm91bmQgb2YgdGhlIGNvbXBldGl0aW9uLiIsCiAgICAgICAgImh0bWwiOiAib3V0IGluIHRoZSBzZWNvbmQgcm91bmQgb2YgdGhlIGNvbXBldGl0aW9uLiIsCiAgICAgICAgImxhYmVsIjogIkMiLAogICAgICAgICJpc0NvcnJlY3QiOiBmYWxzZQogICAgICB9LAogICAgICB7CiAgICAgICAgInRleHQiOiAib3V0IG9mIHRoZSByYWNlIGJlY2F1c2Ugb2YgYSBsYXN0IG1pbnV0ZSBpbmp1cnkuIiwKICAgICAgICAiaHRtbCI6ICJvdXQgb2YgdGhlIHJhY2UgYmVjYXVzZSBvZiBhIGxhc3QgbWludXRlIGluanVyeS4iLAogICAgICAgICJsYWJlbCI6ICJEIiwKICAgICAgICAiaXNDb3JyZWN0IjogZmFsc2UKICAgICAgfSwKICAgICAgewogICAgICAgICJ0ZXh0IjogIm9uIHdpdGggdGhlIGFjdGl2aXR5IHdoaWxlIGhlIGFuc3dlcmVkIHRoZSBwaG9uZS4iLAogICAgICAgICJodG1sIjogIm9uIHdpdGggdGhlIGFjdGl2aXR5IHdoaWxlIGhlIGFuc3dlcmVkIHRoZSBwaG9uZS4iLAogICAgICAgICJsYWJlbCI6ICJFIiwKICAgICAgICAiaXNDb3JyZWN0IjogZmFsc2UKICAgICAgfSwKICAgICAgewogICAgICAgICJ0ZXh0IjogIm9mZiB0ZWFtIHNwb3J0cyBsYXRlbHkuIiwKICAgICAgICAiaHRtbCI6ICJvZmYgdGVhbSBzcG9ydHMgbGF0ZWx5LiIsCiAgICAgICAgImxhYmVsIjogIkYiLAogICAgICAgICJpc0NvcnJlY3QiOiBmYWxzZQogICAgICB9LAogICAgICB7CiAgICAgICAgInRleHQiOiAidGhlIHJhY2UgZm9yd2FyZCBieSBhIHdlZWsuIiwKICAgICAgICAiaHRtbCI6ICJ0aGUgcmFjZSBmb3J3YXJkIGJ5IGEgd2Vlay4iLAogICAgICAgICJsYWJlbCI6ICJHIiwKICAgICAgICAiaXNDb3JyZWN0IjogdHJ1ZQogICAgICB9LAogICAgICB7CiAgICAgICAgInRleHQiOiAidXAgd2l0aCBwZW9wbGUgd2hvIGNoZWF0IGF0IGdhbWVzLiIsCiAgICAgICAgImh0bWwiOiAidXAgd2l0aCBwZW9wbGUgd2hvIGNoZWF0IGF0IGdhbWVzLiIsCiAgICAgICAgImxhYmVsIjogIkgiLAogICAgICAgICJpc0NvcnJlY3QiOiBmYWxzZQogICAgICB9CiAgICBdLAogICAgImFuc3dlciI6ICJHIHRoZSByYWNlIGZvcndhcmQgYnkgYSB3ZWVrLiIsCiAgICAiZXhwbGFuYXRpb25IVE1MIjogImJyaW5nIGZvcndhcmQgPSByZXNjaGVkdWxlIHRvIGFuIGVhcmxpZXIgdGltZSIKICB9LAogIHsKICAgICJpZCI6ICJyZXZpZXcyXzE2IiwKICAgICJ0eXBlIjogIm11bHRpcGxlX2Nob2ljZSIsCiAgICAidGl0bGUiOiAiQi4gTWF0Y2ggdG8gbWFrZSBzZW50ZW5jZXMuIiwKICAgICJxdWVzdGlvbkhUTUwiOiAiMTYgWW91IHNob3VsZCB0aGluayBhYm91dCB0YWtpbmcgLi4uLi4uLi4uLi4uLiIsCiAgICAib3B0aW9ucyI6IFsKICAgICAgewogICAgICAgICJ0ZXh0IjogInVwIGEgbWFydGlhbCBhcnQsIHRvIGRlZmVuZCB5b3Vyc2VsZi4iLAogICAgICAgICJodG1sIjogInVwIGEgbWFydGlhbCBhcnQsIHRvIGRlZmVuZCB5b3Vyc2VsZi4iLAogICAgICAgICJsYWJlbCI6ICJBIiwKICAgICAgICAiaXNDb3JyZWN0IjogdHJ1ZQogICAgICB9LAogICAgICB7CiAgICAgICAgInRleHQiOiAidG8gc3dpbW1pbmcgYXMgc29vbiBhcyBzaGUgdHJpZWQgaXQuIiwKICAgICAgICAiaHRtbCI6ICJ0byBzd2ltbWluZyBhcyBzb29uIGFzIHNoZSB0cmllZCBpdC4iLAogICAgICAgICJsYWJlbCI6ICJCIiwKICAgICAgICAiaXNDb3JyZWN0IjogZmFsc2UKICAgICAgfSwKICAgICAgewogICAgICAgICJ0ZXh0IjogIm91dCBpbiB0aGUgc2Vjb25kIHJvdW5kIG9mIHRoZSBjb21wZXRpdGlvbi4iLAogICAgICAgICJodG1sIjogIm91dCBpbiB0aGUgc2Vjb25kIHJvdW5kIG9mIHRoZSBjb21wZXRpdGlvbi4iLAogICAgICAgICJsYWJlbCI6ICJDIiwKICAgICAgICAiaXNDb3JyZWN0IjogZmFsc2UKICAgICAgfSwKICAgICAgewogICAgICAgICJ0ZXh0IjogIm91dCBvZiB0aGUgcmFjZSBiZWNhdXNlIG9mIGEgbGFzdCBtaW51dGUgaW5qdXJ5LiIsCiAgICAgICAgImh0bWwiOiAib3V0IG9mIHRoZSByYWNlIGJlY2F1c2Ugb2YgYSBsYXN0IG1pbnV0ZSBpbmp1cnkuIiwKICAgICAgICAibGFiZWwiOiAiRCIsCiAgICAgICAgImlzQ29ycmVjdCI6IGZhbHNlCiAgICAgIH0sCiAgICAgIHsKICAgICAgICAidGV4dCI6ICJvbiB3aXRoIHRoZSBhY3Rpdml0eSB3aGlsZSBoZSBhbnN3ZXJlZCB0aGUgcGhvbmUuIiwKICAgICAgICAiaHRtbCI6ICJvbiB3aXRoIHRoZSBhY3Rpdml0eSB3aGlsZSBoZSBhbnN3ZXJlZCB0aGUgcGhvbmUuIiwKICAgICAgICAibGFiZWwiOiAiRSIsCiAgICAgICAgImlzQ29ycmVjdCI6IGZhbHNlCiAgICAgIH0sCiAgICAgIHsKICAgICAgICAidGV4dCI6ICJvZmYgdGVhbSBzcG9ydHMgbGF0ZWx5LiIsCiAgICAgICAgImh0bWwiOiAib2ZmIHRlYW0gc3BvcnRzIGxhdGVseS4iLAogICAgICAgICJsYWJlbCI6ICJGIiwKICAgICAgICAiaXNDb3JyZWN0IjogZmFsc2UKICAgICAgfSwKICAgICAgewogICAgICAgICJ0ZXh0IjogInRoZSByYWNlIGZvcndhcmQgYnkgYSB3ZWVrLiIsCiAgICAgICAgImh0bWwiOiAidGhlIHJhY2UgZm9yd2FyZCBieSBhIHdlZWsuIiwKICAgICAgICAibGFiZWwiOiAiRyIsCiAgICAgICAgImlzQ29ycmVjdCI6IGZhbHNlCiAgICAgIH0sCiAgICAgIHsKICAgICAgICAidGV4dCI6ICJ1cCB3aXRoIHBlb3BsZSB3aG8gY2hlYXQgYXQgZ2FtZXMuIiwKICAgICAgICAiaHRtbCI6ICJ1cCB3aXRoIHBlb3BsZSB3aG8gY2hlYXQgYXQgZ2FtZXMuIiwKICAgICAgICAibGFiZWwiOiAiSCIsCiAgICAgICAgImlzQ29ycmVjdCI6IGZhbHNlCiAgICAgIH0KICAgIF0sCiAgICAiYW5zd2VyIjogIkEgdXAgYSBtYXJ0aWFsIGFydCwgdG8gZGVmZW5kIHlvdXJzZWxmLiIsCiAgICAiZXhwbGFuYXRpb25IVE1MIjogInRha2UgdXAgPSBzdGFydCBhIG5ldyBob2JieS9oYWJpdCIKICB9LAogIHsKICAgICJpZCI6ICJyZXZpZXcyXzE3IiwKICAgICJ0eXBlIjogIm11bHRpcGxlX2Nob2ljZSIsCiAgICAidGl0bGUiOiAiQi4gTWF0Y2ggdG8gbWFrZSBzZW50ZW5jZXMuIiwKICAgICJxdWVzdGlvbkhUTUwiOiAiMTcgQWx0aG91Z2ggc2hlIHdhcyB2ZXJ5IHlvdW5nLCBPbGl2aWEgdG9vayAuLi4uLi4uLi4uLi4uIiwKICAgICJvcHRpb25zIjogWwogICAgICB7CiAgICAgICAgInRleHQiOiAidXAgYSBtYXJ0aWFsIGFydCwgdG8gZGVmZW5kIHlvdXJzZWxmLiIsCiAgICAgICAgImh0bWwiOiAidXAgYSBtYXJ0aWFsIGFydCwgdG8gZGVmZW5kIHlvdXJzZWxmLiIsCiAgICAgICAgImxhYmVsIjogIkEiLAogICAgICAgICJpc0NvcnJlY3QiOiBmYWxzZQogICAgICB9LAogICAgICB7CiAgICAgICAgInRleHQiOiAidG8gc3dpbW1pbmcgYXMgc29vbiBhcyBzaGUgdHJpZWQgaXQuIiwKICAgICAgICAiaHRtbCI6ICJ0byBzd2ltbWluZyBhcyBzb29uIGFzIHNoZSB0cmllZCBpdC4iLAogICAgICAgICJsYWJlbCI6ICJCIiwKICAgICAgICAiaXNDb3JyZWN0IjogdHJ1ZQogICAgICB9LAogICAgICB7CiAgICAgICAgInRleHQiOiAib3V0IGluIHRoZSBzZWNvbmQgcm91bmQgb2YgdGhlIGNvbXBldGl0aW9uLiIsCiAgICAgICAgImh0bWwiOiAib3V0IGluIHRoZSBzZWNvbmQgcm91bmQgb2YgdGhlIGNvbXBldGl0aW9uLiIsCiAgICAgICAgImxhYmVsIjogIkMiLAogICAgICAgICJpc0NvcnJlY3QiOiBmYWxzZQogICAgICB9LAogICAgICB7CiAgICAgICAgInRleHQiOiAib3V0IG9mIHRoZSByYWNlIGJlY2F1c2Ugb2YgYSBsYXN0IG1pbnV0ZSBpbmp1cnkuIiwKICAgICAgICAiaHRtbCI6ICJvdXQgb2YgdGhlIHJhY2UgYmVjYXVzZSBvZiBhIGxhc3QgbWludXRlIGluanVyeS4iLAogICAgICAgICJsYWJlbCI6ICJEIiwKICAgICAgICAiaXNDb3JyZWN0IjogZmFsc2UKICAgICAgfSwKICAgICAgewogICAgICAgICJ0ZXh0IjogIm9uIHdpdGggdGhlIGFjdGl2aXR5IHdoaWxlIGhlIGFuc3dlcmVkIHRoZSBwaG9uZS4iLAogICAgICAgICJodG1sIjogIm9uIHdpdGggdGhlIGFjdGl2aXR5IHdoaWxlIGhlIGFuc3dlcmVkIHRoZSBwaG9uZS4iLAogICAgICAgICJsYWJlbCI6ICJFIiwKICAgICAgICAiaXNDb3JyZWN0IjogZmFsc2UKICAgICAgfSwKICAgICAgewogICAgICAgICJ0ZXh0IjogIm9mZiB0ZWFtIHNwb3J0cyBsYXRlbHkuIiwKICAgICAgICAiaHRtbCI6ICJvZmYgdGVhbSBzcG9ydHMgbGF0ZWx5LiIsCiAgICAgICAgImxhYmVsIjogIkYiLAogICAgICAgICJpc0NvcnJlY3QiOiBmYWxzZQogICAgICB9LAogICAgICB7CiAgICAgICAgInRleHQiOiAidGhlIHJhY2UgZm9yd2FyZCBieSBhIHdlZWsuIiwKICAgICAgICAiaHRtbCI6ICJ0aGUgcmFjZSBmb3J3YXJkIGJ5IGEgd2Vlay4iLAogICAgICAgICJsYWJlbCI6ICJHIiwKICAgICAgICAiaXNDb3JyZWN0IjogZmFsc2UKICAgICAgfSwKICAgICAgewogICAgICAgICJ0ZXh0IjogInVwIHdpdGggcGVvcGxlIHdobyBjaGVhdCBhdCBnYW1lcy4iLAogICAgICAgICJodG1sIjogInVwIHdpdGggcGVvcGxlIHdobyBjaGVhdCBhdCBnYW1lcy4iLAogICAgICAgICJsYWJlbCI6ICJIIiwKICAgICAgICAiaXNDb3JyZWN0IjogZmFsc2UKICAgICAgfQogICAgXSwKICAgICJhbnN3ZXIiOiAiQiB0byBzd2ltbWluZyBhcyBzb29uIGFzIHNoZSB0cmllZCBpdC4iLAogICAgImV4cGxhbmF0aW9uSFRNTCI6ICJ0YWtlIHRvID0gc3RhcnQgdG8gbGlrZSBzb21ldGhpbmciCiAgfSwKICB7CiAgICAiaWQiOiAicmV2aWV3Ml8xOCIsCiAgICAidHlwZSI6ICJtdWx0aXBsZV9jaG9pY2UiLAogICAgInRpdGxlIjogIkIuIE1hdGNoIHRvIG1ha2Ugc2VudGVuY2VzLiIsCiAgICAicXVlc3Rpb25IVE1MIjogIjE4IFJvYiBoYWQgdG8gcHVsbCAuLi4uLi4uLi4uLi4uIiwKICAgICJvcHRpb25zIjogWwogICAgICB7CiAgICAgICAgInRleHQiOiAidXAgYSBtYXJ0aWFsIGFydCwgdG8gZGVmZW5kIHlvdXJzZWxmLiIsCiAgICAgICAgImh0bWwiOiAidXAgYSBtYXJ0aWFsIGFydCwgdG8gZGVmZW5kIHlvdXJzZWxmLiIsCiAgICAgICAgImxhYmVsIjogIkEiLAogICAgICAgICJpc0NvcnJlY3QiOiBmYWxzZQogICAgICB9LAogICAgICB7CiAgICAgICAgInRleHQiOiAidG8gc3dpbW1pbmcgYXMgc29vbiBhcyBzaGUgdHJpZWQgaXQuIiwKICAgICAgICAiaHRtbCI6ICJ0byBzd2ltbWluZyBhcyBzb29uIGFzIHNoZSB0cmllZCBpdC4iLAogICAgICAgICJsYWJlbCI6ICJCIiwKICAgICAgICAiaXNDb3JyZWN0IjogZmFsc2UKICAgICAgfSwKICAgICAgewogICAgICAgICJ0ZXh0IjogIm91dCBpbiB0aGUgc2Vjb25kIHJvdW5kIG9mIHRoZSBjb21wZXRpdGlvbi4iLAogICAgICAgICJodG1sIjogIm91dCBpbiB0aGUgc2Vjb25kIHJvdW5kIG9mIHRoZSBjb21wZXRpdGlvbi4iLAogICAgICAgICJsYWJlbCI6ICJDIiwKICAgICAgICAiaXNDb3JyZWN0IjogZmFsc2UKICAgICAgfSwKICAgICAgewogICAgICAgICJ0ZXh0IjogIm91dCBvZiB0aGUgcmFjZSBiZWNhdXNlIG9mIGEgbGFzdCBtaW51dGUgaW5qdXJ5LiIsCiAgICAgICAgImh0bWwiOiAib3V0IG9mIHRoZSByYWNlIGJlY2F1c2Ugb2YgYSBsYXN0IG1pbnV0ZSBpbmp1cnkuIiwKICAgICAgICAibGFiZWwiOiAiRCIsCiAgICAgICAgImlzQ29ycmVjdCI6IHRydWUKICAgICAgfSwKICAgICAgewogICAgICAgICJ0ZXh0IjogIm9uIHdpdGggdGhlIGFjdGl2aXR5IHdoaWxlIGhlIGFuc3dlcmVkIHRoZSBwaG9uZS4iLAogICAgICAgICJodG1sIjogIm9uIHdpdGggdGhlIGFjdGl2aXR5IHdoaWxlIGhlIGFuc3dlcmVkIHRoZSBwaG9uZS4iLAogICAgICAgICJsYWJlbCI6ICJFIiwKICAgICAgICAiaXNDb3JyZWN0IjogZmFsc2UKICAgICAgfSwKICAgICAgewogICAgICAgICJ0ZXh0IjogIm9mZiB0ZWFtIHNwb3J0cyBsYXRlbHkuIiwKICAgICAgICAiaHRtbCI6ICJvZmYgdGVhbSBzcG9ydHMgbGF0ZWx5LiIsCiAgICAgICAgImxhYmVsIjogIkYiLAogICAgICAgICJpc0NvcnJlY3QiOiBmYWxzZQogICAgICB9LAogICAgICB7CiAgICAgICAgInRleHQiOiAidGhlIHJhY2UgZm9yd2FyZCBieSBhIHdlZWsuIiwKICAgICAgICAiaHRtbCI6ICJ0aGUgcmFjZSBmb3J3YXJkIGJ5IGEgd2Vlay4iLAogICAgICAgICJsYWJlbCI6ICJHIiwKICAgICAgICAiaXNDb3JyZWN0IjogZmFsc2UKICAgICAgfSwKICAgICAgewogICAgICAgICJ0ZXh0IjogInVwIHdpdGggcGVvcGxlIHdobyBjaGVhdCBhdCBnYW1lcy4iLAogICAgICAgICJodG1sIjogInVwIHdpdGggcGVvcGxlIHdobyBjaGVhdCBhdCBnYW1lcy4iLAogICAgICAgICJsYWJlbCI6ICJIIiwKICAgICAgICAiaXNDb3JyZWN0IjogZmFsc2UKICAgICAgfQogICAgXSwKICAgICJhbnN3ZXIiOiAiRCBvdXQgb2YgdGhlIHJhY2UgYmVjYXVzZSBvZiBhIGxhc3QgbWludXRlIGluanVyeS4iLAogICAgImV4cGxhbmF0aW9uSFRNTCI6ICJwdWxsIG91dCA9IHdpdGhkcmF3IGZyb20iCiAgfSwKICB7CiAgICAiaWQiOiAicmV2aWV3Ml8xOSIsCiAgICAidHlwZSI6ICJzZW50ZW5jZV9yZXdyaXRlIiwKICAgICJ0aXRsZSI6ICJDLiBDb21wbGV0ZSBlYWNoIHNlY29uZCBzZW50ZW5jZS4iLAogICAgIm9yaWdpbmFsIjogIk91ciB0ZW5uaXMgbWF0Y2ggc3RhcnRlZCBhdCBvbmUgbydjbG9jayBhbmQgd2Ugd2VyZSBzdGlsbCBwbGF5aW5nIGF0IGZvdXIuIChiZWVuKSIsCiAgICAid29yZFRvVXNlIjogImJlZW4iLAogICAgInJld3JpdHRlblByZWZpeCI6ICJBdCBmb3VyIG8nY2xvY2ssIHdlICIsCiAgICAicmV3cml0dGVuU3VmZml4IjogIiB0aHJlZSBob3Vycy4iLAogICAgImFuc3dlciI6ICJoYWQgYmVlbiBwbGF5aW5nIHRlbm5pcyBmb3IiLAogICAgImV4cGxhbmF0aW9uSFRNTCI6ICJQYXN0IHBlcmZlY3QgY29udGludW91czogaGFkIGJlZW4gcGxheWluZyB0ZW5uaXMgZm9yIiwKICAgICJvcmlnaW5hbFNlbnRlbmNlSFRNTCI6ICJPdXIgdGVubmlzIG1hdGNoIHN0YXJ0ZWQgYXQgb25lIG8nY2xvY2sgYW5kIHdlIHdlcmUgc3RpbGwgcGxheWluZyBhdCBmb3VyLiAoYmVlbikgPGI+KGJlZW4pPC9iPiIsCiAgICAicXVlc3Rpb25IVE1MIjogIkF0IGZvdXIgbydjbG9jaywgd2UgIF9fX19fX18gIHRocmVlIGhvdXJzLiIsCiAgICAiY29ycmVjdEFuc3dlcnMiOiBbCiAgICAgICJBdCBmb3VyIG8nY2xvY2ssIHdlIGhhZCBiZWVuIHBsYXlpbmcgdGVubmlzIGZvciB0aHJlZSBob3Vycy4iCiAgICBdCiAgfSwKICB7CiAgICAiaWQiOiAicmV2aWV3Ml8yMCIsCiAgICAidHlwZSI6ICJzZW50ZW5jZV9yZXdyaXRlIiwKICAgICJ0aXRsZSI6ICJDLiBDb21wbGV0ZSBlYWNoIHNlY29uZCBzZW50ZW5jZS4iLAogICAgIm9yaWdpbmFsIjogIlRlcnJ5IG5ldmVyIHVzZWQgdG8gc3BlbmQgc28gbXVjaCB0aW1lIHBsYXlpbmcgb24gaGlzIGNvbXB1dGVyLiAodXNlKSIsCiAgICAid29yZFRvVXNlIjogInVzZSIsCiAgICAicmV3cml0dGVuUHJlZml4IjogIlRlcnJ5ICIsCiAgICAicmV3cml0dGVuU3VmZml4IjogIiBzcGVuZCBzbyBtdWNoIHRpbWUgcGxheWluZyBvbiBoaXMgY29tcHV0ZXIuIiwKICAgICJhbnN3ZXIiOiAiZGlkIG5vdCB1c2UgdG8iLAogICAgImV4cGxhbmF0aW9uSFRNTCI6ICJBbHNvIGFjY2VwdGVkOiBkaWRuJ3QgdXNlIHRvIiwKICAgICJvcmlnaW5hbFNlbnRlbmNlSFRNTCI6ICJUZXJyeSBuZXZlciB1c2VkIHRvIHNwZW5kIHNvIG11Y2ggdGltZSBwbGF5aW5nIG9uIGhpcyBjb21wdXRlci4gKHVzZSkgPGI+KHVzZSk8L2I+IiwKICAgICJxdWVzdGlvbkhUTUwiOiAiVGVycnkgIF9fX19fX18gIHNwZW5kIHNvIG11Y2ggdGltZSBwbGF5aW5nIG9uIGhpcyBjb21wdXRlci4iLAogICAgImNvcnJlY3RBbnN3ZXJzIjogWwogICAgICAiVGVycnkgZGlkIG5vdCB1c2UgdG8gc3BlbmQgc28gbXVjaCB0aW1lIHBsYXlpbmcgb24gaGlzIGNvbXB1dGVyLiIKICAgIF0KICB9LAogIHsKICAgICJpZCI6ICJyZXZpZXcyXzIxIiwKICAgICJ0eXBlIjogInNlbnRlbmNlX3Jld3JpdGUiLAogICAgInRpdGxlIjogIkMuIENvbXBsZXRlIGVhY2ggc2Vjb25kIHNlbnRlbmNlLiIsCiAgICAib3JpZ2luYWwiOiAiQmVmb3JlIHdlIHBsYXksIGNoZWNrIGFsbCB0aGUgY2FyZHMgYXJlIHRoZXJlLiAoY2VydGFpbikiLAogICAgIndvcmRUb1VzZSI6ICJjZXJ0YWluIiwKICAgICJyZXdyaXR0ZW5QcmVmaXgiOiAiQmVmb3JlIHdlIHBsYXksICIsCiAgICAicmV3cml0dGVuU3VmZml4IjogIiBhbGwgdGhlIGNhcmRzIGFyZSB0aGVyZS4iLAogICAgImFuc3dlciI6ICJtYWtlIGNlcnRhaW4gKHRoYXQpIiwKICAgICJleHBsYW5hdGlvbkhUTUwiOiAiY2hlY2sgPSBtYWtlIGNlcnRhaW4gKHRoYXQpIiwKICAgICJvcmlnaW5hbFNlbnRlbmNlSFRNTCI6ICJCZWZvcmUgd2UgcGxheSwgY2hlY2sgYWxsIHRoZSBjYXJkcyBhcmUgdGhlcmUuIChjZXJ0YWluKSA8Yj4oY2VydGFpbik8L2I+IiwKICAgICJxdWVzdGlvbkhUTUwiOiAiQmVmb3JlIHdlIHBsYXksICBfX19fX19fICBhbGwgdGhlIGNhcmRzIGFyZSB0aGVyZS4iLAogICAgImNvcnJlY3RBbnN3ZXJzIjogWwogICAgICAiQmVmb3JlIHdlIHBsYXksIG1ha2UgY2VydGFpbiAodGhhdCkgYWxsIHRoZSBjYXJkcyBhcmUgdGhlcmUuIgogICAgXQogIH0sCiAgewogICAgImlkIjogInJldmlldzJfMjIiLAogICAgInR5cGUiOiAic2VudGVuY2VfcmV3cml0ZSIsCiAgICAidGl0bGUiOiAiQy4gQ29tcGxldGUgZWFjaCBzZWNvbmQgc2VudGVuY2UuIiwKICAgICJvcmlnaW5hbCI6ICJIYW5nLWdsaWRpbmcgY2FuIGJlIGRhbmdlcm91cywgYnV0IGFmdGVyIGEgd2hpbGUgeW91IGRvbid0IG1pbmQgaXQuICh1c2VkKSIsCiAgICAid29yZFRvVXNlIjogInVzZWQiLAogICAgInJld3JpdHRlblByZWZpeCI6ICJIYW5nLWdsaWRpbmcgY2FuIGJlIGRhbmdlcm91cywgYnV0IGFmdGVyIGEgd2hpbGUgeW91ICIsCiAgICAicmV3cml0dGVuU3VmZml4IjogIiBpdC4iLAogICAgImFuc3dlciI6ICJnZXQgdXNlZCB0byIsCiAgICAiZXhwbGFuYXRpb25IVE1MIjogImRvbid0IG1pbmQgaXQgPSBnZXQgdXNlZCB0byBpdCIsCiAgICAib3JpZ2luYWxTZW50ZW5jZUhUTUwiOiAiSGFuZy1nbGlkaW5nIGNhbiBiZSBkYW5nZXJvdXMsIGJ1dCBhZnRlciBhIHdoaWxlIHlvdSBkb24ndCBtaW5kIGl0LiAodXNlZCkgPGI+KHVzZWQpPC9iPiIsCiAgICAicXVlc3Rpb25IVE1MIjogIkhhbmctZ2xpZGluZyBjYW4gYmUgZGFuZ2Vyb3VzLCBidXQgYWZ0ZXIgYSB3aGlsZSB5b3UgIF9fX19fX18gIGl0LiIsCiAgICAiY29ycmVjdEFuc3dlcnMiOiBbCiAgICAgICJIYW5nLWdsaWRpbmcgY2FuIGJlIGRhbmdlcm91cywgYnV0IGFmdGVyIGEgd2hpbGUgeW91IGdldCB1c2VkIHRvIGl0LiIKICAgIF0KICB9LAogIHsKICAgICJpZCI6ICJyZXZpZXcyXzIzIiwKICAgICJ0eXBlIjogInNlbnRlbmNlX3Jld3JpdGUiLAogICAgInRpdGxlIjogIkMuIENvbXBsZXRlIGVhY2ggc2Vjb25kIHNlbnRlbmNlLiIsCiAgICAib3JpZ2luYWwiOiAiSSByYW4gZmlmdGVlbiBtaWxlcywgYW5kIHRoZW4gbXkgdHJhaW5lciB0b2xkIG1lIHRvIGRvIGZpZnR5IHB1c2gtdXBzISAoYWxyZWFkeSkiLAogICAgIndvcmRUb1VzZSI6ICJhbHJlYWR5IiwKICAgICJyZXdyaXR0ZW5QcmVmaXgiOiAiV2hlbiBteSB0cmFpbmVyIHRvbGQgbWUgdG8gZG8gZmlmdHkgcHVzaC11cHMsIEkgIiwKICAgICJyZXdyaXR0ZW5TdWZmaXgiOiAiIGZpZnRlZW4gbWlsZXMhIiwKICAgICJhbnN3ZXIiOiAiaGFkIGFscmVhZHkgcnVuIiwKICAgICJleHBsYW5hdGlvbkhUTUwiOiAiUGFzdCBwZXJmZWN0OiBoYWQgYWxyZWFkeSBydW4iLAogICAgIm9yaWdpbmFsU2VudGVuY2VIVE1MIjogIkkgcmFuIGZpZnRlZW4gbWlsZXMsIGFuZCB0aGVuIG15IHRyYWluZXIgdG9sZCBtZSB0byBkbyBmaWZ0eSBwdXNoLXVwcyEgKGFscmVhZHkpIDxiPihhbHJlYWR5KTwvYj4iLAogICAgInF1ZXN0aW9uSFRNTCI6ICJXaGVuIG15IHRyYWluZXIgdG9sZCBtZSB0byBkbyBmaWZ0eSBwdXNoLXVwcywgSSAgX19fX19fXyAgZmlmdGVlbiBtaWxlcyEiLAogICAgImNvcnJlY3RBbnN3ZXJzIjogWwogICAgICAiV2hlbiBteSB0cmFpbmVyIHRvbGQgbWUgdG8gZG8gZmlmdHkgcHVzaC11cHMsIEkgaGFkIGFscmVhZHkgcnVuIGZpZnRlZW4gbWlsZXMhIgogICAgXQogIH0sCiAgewogICAgImlkIjogInJldmlldzJfMjQiLAogICAgInR5cGUiOiAic2VudGVuY2VfcmV3cml0ZSIsCiAgICAidGl0bGUiOiAiQy4gQ29tcGxldGUgZWFjaCBzZWNvbmQgc2VudGVuY2UuIiwKICAgICJvcmlnaW5hbCI6ICJXZSB3b3VsZG4ndCBzcGVuZCBzbyBtdWNoIHRpbWUgaW5kb29ycyB3aGVuIEkgd2FzIHlvdW5nLiAodXNlZCkiLAogICAgIndvcmRUb1VzZSI6ICJ1c2VkIiwKICAgICJyZXdyaXR0ZW5QcmVmaXgiOiAiV2UgIiwKICAgICJyZXdyaXR0ZW5TdWZmaXgiOiAiIHNvIG11Y2ggdGltZSBpbmRvb3JzIHdoZW4gSSB3YXMgeW91bmcuIiwKICAgICJhbnN3ZXIiOiAibmV2ZXIgdXNlZCB0byBzcGVuZCIsCiAgICAiZXhwbGFuYXRpb25IVE1MIjogIkFsc28gYWNjZXB0ZWQ6IHVzZWQgbm90IHRvIHNwZW5kIiwKICAgICJvcmlnaW5hbFNlbnRlbmNlSFRNTCI6ICJXZSB3b3VsZG4ndCBzcGVuZCBzbyBtdWNoIHRpbWUgaW5kb29ycyB3aGVuIEkgd2FzIHlvdW5nLiAodXNlZCkgPGI+KHVzZWQpPC9iPiIsCiAgICAicXVlc3Rpb25IVE1MIjogIldlICBfX19fX19fICBzbyBtdWNoIHRpbWUgaW5kb29ycyB3aGVuIEkgd2FzIHlvdW5nLiIsCiAgICAiY29ycmVjdEFuc3dlcnMiOiBbCiAgICAgICJXZSBuZXZlciB1c2VkIHRvIHNwZW5kIHNvIG11Y2ggdGltZSBpbmRvb3JzIHdoZW4gSSB3YXMgeW91bmcuIgogICAgXQogIH0sCiAgewogICAgImlkIjogInJldmlldzJfMjUiLAogICAgInR5cGUiOiAic2VudGVuY2VfcmV3cml0ZSIsCiAgICAidGl0bGUiOiAiQy4gQ29tcGxldGUgZWFjaCBzZWNvbmQgc2VudGVuY2UuIiwKICAgICJvcmlnaW5hbCI6ICJJIHNwZW5kIGEgbG90IG9mIG15IHRpbWUgb24gbXkgaG9iYmllcy4gKHVwKSIsCiAgICAid29yZFRvVXNlIjogInVwIiwKICAgICJyZXdyaXR0ZW5QcmVmaXgiOiAiTXkgaG9iYmllcyAiLAogICAgInJld3JpdHRlblN1ZmZpeCI6ICIgYSBsb3Qgb2YgbXkgdGltZS4iLAogICAgImFuc3dlciI6ICJ0YWtlIHVwIiwKICAgICJleHBsYW5hdGlvbkhUTUwiOiAidGFrZSB1cCA9IG9jY3VweSIsCiAgICAib3JpZ2luYWxTZW50ZW5jZUhUTUwiOiAiSSBzcGVuZCBhIGxvdCBvZiBteSB0aW1lIG9uIG15IGhvYmJpZXMuICh1cCkgPGI+KHVwKTwvYj4iLAogICAgInF1ZXN0aW9uSFRNTCI6ICJNeSBob2JiaWVzICBfX19fX19fICBhIGxvdCBvZiBteSB0aW1lLiIsCiAgICAiY29ycmVjdEFuc3dlcnMiOiBbCiAgICAgICJNeSBob2JiaWVzIHRha2UgdXAgYSBsb3Qgb2YgbXkgdGltZS4iCiAgICBdCiAgfSwKICB7CiAgICAiaWQiOiAicmV2aWV3Ml8yNiIsCiAgICAidHlwZSI6ICJzZW50ZW5jZV9yZXdyaXRlIiwKICAgICJ0aXRsZSI6ICJDLiBDb21wbGV0ZSBlYWNoIHNlY29uZCBzZW50ZW5jZS4iLAogICAgIm9yaWdpbmFsIjogIkkgd291bGQgcmF0aGVyIHBsYXkgbHVkbyB0aGFuIHNuYWtlcyBhbmQgbGFkZGVycy4gKHByZWZlcikiLAogICAgIndvcmRUb1VzZSI6ICJwcmVmZXIiLAogICAgInJld3JpdHRlblByZWZpeCI6ICJJICIsCiAgICAicmV3cml0dGVuU3VmZml4IjogIiBsdWRvIHJhdGhlciB0aGFuIHNuYWtlcyBhbmQgbGFkZGVycy4iLAogICAgImFuc3dlciI6ICJ3b3VsZCBwcmVmZXIgdG8gcGxheSIsCiAgICAiZXhwbGFuYXRpb25IVE1MIjogIndvdWxkIHJhdGhlciA9IHdvdWxkIHByZWZlciB0byIsCiAgICAib3JpZ2luYWxTZW50ZW5jZUhUTUwiOiAiSSB3b3VsZCByYXRoZXIgcGxheSBsdWRvIHRoYW4gc25ha2VzIGFuZCBsYWRkZXJzLiAocHJlZmVyKSA8Yj4ocHJlZmVyKTwvYj4iLAogICAgInF1ZXN0aW9uSFRNTCI6ICJJICBfX19fX19fICBsdWRvIHJhdGhlciB0aGFuIHNuYWtlcyBhbmQgbGFkZGVycy4iLAogICAgImNvcnJlY3RBbnN3ZXJzIjogWwogICAgICAiSSB3b3VsZCBwcmVmZXIgdG8gcGxheSBsdWRvIHJhdGhlciB0aGFuIHNuYWtlcyBhbmQgbGFkZGVycy4iCiAgICBdCiAgfSwKICB7CiAgICAiaWQiOiAicmV2aWV3Ml8yNyIsCiAgICAidHlwZSI6ICJzZW50ZW5jZV9yZXdyaXRlIiwKICAgICJ0aXRsZSI6ICJDLiBDb21wbGV0ZSBlYWNoIHNlY29uZCBzZW50ZW5jZS4iLAogICAgIm9yaWdpbmFsIjogIkkgZG9uJ3QgdGhpbmsgaXQncyBsaWtlbHkgdGhhdCB5b3UnbGwgd2luIHRoZSBjb21wZXRpdGlvbi4gKGNoYW5jZSkiLAogICAgIndvcmRUb1VzZSI6ICJjaGFuY2UiLAogICAgInJld3JpdHRlblByZWZpeCI6ICJJIHRoaW5rIHRoZXJlJ3MgIiwKICAgICJyZXdyaXR0ZW5TdWZmaXgiOiAiIHRoZSBjb21wZXRpdGlvbi4iLAogICAgImFuc3dlciI6ICJsaXR0bGUgY2hhbmNlIG9mIHlvdXIgd2lubmluZyIsCiAgICAiZXhwbGFuYXRpb25IVE1MIjogIkFsc28gYWNjZXB0ZWQ6IGxpdHRsZSBjaGFuY2Ugb2YgeW91IHdpbm5pbmcgLyBsaXR0bGUgY2hhbmNlIHlvdSB3aWxsIHdpbiIsCiAgICAib3JpZ2luYWxTZW50ZW5jZUhUTUwiOiAiSSBkb24ndCB0aGluayBpdCdzIGxpa2VseSB0aGF0IHlvdSdsbCB3aW4gdGhlIGNvbXBldGl0aW9uLiAoY2hhbmNlKSA8Yj4oY2hhbmNlKTwvYj4iLAogICAgInF1ZXN0aW9uSFRNTCI6ICJJIHRoaW5rIHRoZXJlJ3MgIF9fX19fX18gIHRoZSBjb21wZXRpdGlvbi4iLAogICAgImNvcnJlY3RBbnN3ZXJzIjogWwogICAgICAiSSB0aGluayB0aGVyZSdzIGxpdHRsZSBjaGFuY2Ugb2YgeW91ciB3aW5uaW5nIHRoZSBjb21wZXRpdGlvbi4iCiAgICBdCiAgfSwKICB7CiAgICAiaWQiOiAicmV2aWV3Ml8yOCIsCiAgICAidHlwZSI6ICJtdWx0aXBsZV9jaG9pY2UiLAogICAgInRpdGxlIjogIkQuIENob29zZSB0aGUgY29ycmVjdCBhbnN3ZXIuIiwKICAgICJxdWVzdGlvbkhUTUwiOiAiMjggJ1doeSB3ZXJlIHlvdSBzbyB0aXJlZCB5ZXN0ZXJkYXk/Jzxicj4nQmVjYXVzZSBJIC4uLi4uLi4gYWxsIG1vcm5pbmcuJyIsCiAgICAib3B0aW9ucyI6IFsKICAgICAgewogICAgICAgICJ0ZXh0IjogImpvZyIsCiAgICAgICAgImh0bWwiOiAiam9nIiwKICAgICAgICAibGFiZWwiOiAiQSIsCiAgICAgICAgImlzQ29ycmVjdCI6IGZhbHNlCiAgICAgIH0sCiAgICAgIHsKICAgICAgICAidGV4dCI6ICJ3YXMgam9nZ2VkIiwKICAgICAgICAiaHRtbCI6ICJ3YXMgam9nZ2VkIiwKICAgICAgICAibGFiZWwiOiAiQiIsCiAgICAgICAgImlzQ29ycmVjdCI6IGZhbHNlCiAgICAgIH0sCiAgICAgIHsKICAgICAgICAidGV4dCI6ICJoYWQgYmVlbiBqb2dnaW5nIiwKICAgICAgICAiaHRtbCI6ICJoYWQgYmVlbiBqb2dnaW5nIiwKICAgICAgICAibGFiZWwiOiAiQyIsCiAgICAgICAgImlzQ29ycmVjdCI6IHRydWUKICAgICAgfSwKICAgICAgewogICAgICAgICJ0ZXh0IjogImhhZCBiZWVuIGpvZ2dlZCIsCiAgICAgICAgImh0bWwiOiAiaGFkIGJlZW4gam9nZ2VkIiwKICAgICAgICAibGFiZWwiOiAiRCIsCiAgICAgICAgImlzQ29ycmVjdCI6IGZhbHNlCiAgICAgIH0KICAgIF0sCiAgICAiYW5zd2VyIjogIkMgaGFkIGJlZW4gam9nZ2luZyIsCiAgICAiZXhwbGFuYXRpb25IVE1MIjogIlBhc3QgcGVyZmVjdCBjb250aW51b3VzOiBoYWQgYmVlbiBqb2dnaW5nIgogIH0sCiAgewogICAgImlkIjogInJldmlldzJfMjkiLAogICAgInR5cGUiOiAibXVsdGlwbGVfY2hvaWNlIiwKICAgICJ0aXRsZSI6ICJELiBDaG9vc2UgdGhlIGNvcnJlY3QgYW5zd2VyLiIsCiAgICAicXVlc3Rpb25IVE1MIjogIjI5IEl0IHdhcyB0aGUgZmlyc3QgdGltZSBJIC4uLi4uLi4gYSBsaXZlIG1hdGNoLiIsCiAgICAib3B0aW9ucyI6IFsKICAgICAgewogICAgICAgICJ0ZXh0IjogIndhcyBldmVyIHNlZWluZyIsCiAgICAgICAgImh0bWwiOiAid2FzIGV2ZXIgc2VlaW5nIiwKICAgICAgICAibGFiZWwiOiAiQSIsCiAgICAgICAgImlzQ29ycmVjdCI6IGZhbHNlCiAgICAgIH0sCiAgICAgIHsKICAgICAgICAidGV4dCI6ICJoYWQgZXZlciBiZWVuIHNlZWluZyIsCiAgICAgICAgImh0bWwiOiAiaGFkIGV2ZXIgYmVlbiBzZWVpbmciLAogICAgICAgICJsYWJlbCI6ICJCIiwKICAgICAgICAiaXNDb3JyZWN0IjogZmFsc2UKICAgICAgfSwKICAgICAgewogICAgICAgICJ0ZXh0IjogImhhZCBldmVyIHNlZW4iLAogICAgICAgICJodG1sIjogImhhZCBldmVyIHNlZW4iLAogICAgICAgICJsYWJlbCI6ICJDIiwKICAgICAgICAiaXNDb3JyZWN0IjogdHJ1ZQogICAgICB9LAogICAgICB7CiAgICAgICAgInRleHQiOiAid2FzIGV2ZXIgc2VlbiIsCiAgICAgICAgImh0bWwiOiAid2FzIGV2ZXIgc2VlbiIsCiAgICAgICAgImxhYmVsIjogIkQiLAogICAgICAgICJpc0NvcnJlY3QiOiBmYWxzZQogICAgICB9CiAgICBdLAogICAgImFuc3dlciI6ICJDIGhhZCBldmVyIHNlZW4iLAogICAgImV4cGxhbmF0aW9uSFRNTCI6ICJQYXN0IHBlcmZlY3Qgc2ltcGxlIHdpdGggJ0l0IHdhcyB0aGUgZmlyc3QgdGltZS4uLiciCiAgfSwKICB7CiAgICAiaWQiOiAicmV2aWV3Ml8zMCIsCiAgICAidHlwZSI6ICJtdWx0aXBsZV9jaG9pY2UiLAogICAgInRpdGxlIjogIkQuIENob29zZSB0aGUgY29ycmVjdCBhbnN3ZXIuIiwKICAgICJxdWVzdGlvbkhUTUwiOiAiMzAgJ1lvdSBsaXZlIGluIGEgaHVnZSBob3VzZSwgZG9uJ3QgeW91Pyc8YnI+J1llcywgYnV0IHdlIC4uLi4uLi4gISciLAogICAgIm9wdGlvbnMiOiBbCiAgICAgIHsKICAgICAgICAidGV4dCI6ICJkaWRuJ3QgdXNlIHRvIiwKICAgICAgICAiaHRtbCI6ICJkaWRuJ3QgdXNlIHRvIiwKICAgICAgICAibGFiZWwiOiAiQSIsCiAgICAgICAgImlzQ29ycmVjdCI6IHRydWUKICAgICAgfSwKICAgICAgewogICAgICAgICJ0ZXh0IjogIndvdWxkbid0IiwKICAgICAgICAiaHRtbCI6ICJ3b3VsZG4ndCIsCiAgICAgICAgImxhYmVsIjogIkIiLAogICAgICAgICJpc0NvcnJlY3QiOiBmYWxzZQogICAgICB9LAogICAgICB7CiAgICAgICAgInRleHQiOiAidXNlIG5vdCIsCiAgICAgICAgImh0bWwiOiAidXNlIG5vdCIsCiAgICAgICAgImxhYmVsIjogIkMiLAogICAgICAgICJpc0NvcnJlY3QiOiBmYWxzZQogICAgICB9LAogICAgICB7CiAgICAgICAgInRleHQiOiAid2VyZW4ndCB1c2VkIHRvIiwKICAgICAgICAiaHRtbCI6ICJ3ZXJlbid0IHVzZWQgdG8iLAogICAgICAgICJsYWJlbCI6ICJEIiwKICAgICAgICAiaXNDb3JyZWN0IjogZmFsc2UKICAgICAgfQogICAgXSwKICAgICJhbnN3ZXIiOiAiQSBkaWRuJ3QgdXNlIHRvIiwKICAgICJleHBsYW5hdGlvbkhUTUwiOiAiZGlkbid0IHVzZSB0byA9IHBhc3Qgc3RhdGUiCiAgfSwKICB7CiAgICAiaWQiOiAicmV2aWV3Ml8zMSIsCiAgICAidHlwZSI6ICJtdWx0aXBsZV9jaG9pY2UiLAogICAgInRpdGxlIjogIkQuIENob29zZSB0aGUgY29ycmVjdCBhbnN3ZXIuIiwKICAgICJxdWVzdGlvbkhUTUwiOiAiMzEgSSAuLi4uLi4uIHRoZSB3aG9sZSBvZiBXYXIgYW5kIFBlYWNlIGJ5IHRoZSB0aW1lIEkgd2FzIHNldmVuIHllYXJzIG9sZC4iLAogICAgIm9wdGlvbnMiOiBbCiAgICAgIHsKICAgICAgICAidGV4dCI6ICJ3YXMgcmVhZGluZyIsCiAgICAgICAgImh0bWwiOiAid2FzIHJlYWRpbmciLAogICAgICAgICJsYWJlbCI6ICJBIiwKICAgICAgICAiaXNDb3JyZWN0IjogZmFsc2UKICAgICAgfSwKICAgICAgewogICAgICAgICJ0ZXh0IjogImhhZCBiZWVuIHJlYWRpbmciLAogICAgICAgICJodG1sIjogImhhZCBiZWVuIHJlYWRpbmciLAogICAgICAgICJsYWJlbCI6ICJCIiwKICAgICAgICAiaXNDb3JyZWN0IjogZmFsc2UKICAgICAgfSwKICAgICAgewogICAgICAgICJ0ZXh0IjogImhhZCByZWFkIiwKICAgICAgICAiaHRtbCI6ICJoYWQgcmVhZCIsCiAgICAgICAgImxhYmVsIjogIkMiLAogICAgICAgICJpc0NvcnJlY3QiOiB0cnVlCiAgICAgIH0sCiAgICAgIHsKICAgICAgICAidGV4dCI6ICJoYWQgYmVlbiByZWFkIiwKICAgICAgICAiaHRtbCI6ICJoYWQgYmVlbiByZWFkIiwKICAgICAgICAibGFiZWwiOiAiRCIsCiAgICAgICAgImlzQ29ycmVjdCI6IGZhbHNlCiAgICAgIH0KICAgIF0sCiAgICAiYW5zd2VyIjogIkMgaGFkIHJlYWQiLAogICAgImV4cGxhbmF0aW9uSFRNTCI6ICJQYXN0IHBlcmZlY3Qgc2ltcGxlIGZvciBjb21wbGV0ZWQgYWN0aW9uIGJlZm9yZSBhIHBhc3QgcG9pbnQgaW4gdGltZS4iCiAgfSwKICB7CiAgICAiaWQiOiAicmV2aWV3Ml8zMiIsCiAgICAidHlwZSI6ICJtdWx0aXBsZV9jaG9pY2UiLAogICAgInRpdGxlIjogIkQuIENob29zZSB0aGUgY29ycmVjdCBhbnN3ZXIuIiwKICAgICJxdWVzdGlvbkhUTUwiOiAiMzIgS2FyYXRlIGh1cnQgbXkgaGFuZHMgYXQgZmlyc3QsIGJ1dCBJIGZpbmFsbHkgLi4uLi4uLiBpdCBpbiB0aGUgZW5kLiIsCiAgICAib3B0aW9ucyI6IFsKICAgICAgewogICAgICAgICJ0ZXh0IjogImdvdCB1c2VkIHRvIiwKICAgICAgICAiaHRtbCI6ICJnb3QgdXNlZCB0byIsCiAgICAgICAgImxhYmVsIjogIkEiLAogICAgICAgICJpc0NvcnJlY3QiOiB0cnVlCiAgICAgIH0sCiAgICAgIHsKICAgICAgICAidGV4dCI6ICJ3YXMgdXNlZCB0byIsCiAgICAgICAgImh0bWwiOiAid2FzIHVzZWQgdG8iLAogICAgICAgICJsYWJlbCI6ICJCIiwKICAgICAgICAiaXNDb3JyZWN0IjogZmFsc2UKICAgICAgfSwKICAgICAgewogICAgICAgICJ0ZXh0IjogIndhcyB1c2VkIiwKICAgICAgICAiaHRtbCI6ICJ3YXMgdXNlZCIsCiAgICAgICAgImxhYmVsIjogIkMiLAogICAgICAgICJpc0NvcnJlY3QiOiBmYWxzZQogICAgICB9LAogICAgICB7CiAgICAgICAgInRleHQiOiAiZ290IHVzZSB0byIsCiAgICAgICAgImh0bWwiOiAiZ290IHVzZSB0byIsCiAgICAgICAgImxhYmVsIjogIkQiLAogICAgICAgICJpc0NvcnJlY3QiOiBmYWxzZQogICAgICB9CiAgICBdLAogICAgImFuc3dlciI6ICJBIGdvdCB1c2VkIHRvIiwKICAgICJleHBsYW5hdGlvbkhUTUwiOiAiZ290IHVzZWQgdG8gPSBiZWNhbWUgYWNjdXN0b21lZCB0byIKICB9LAogIHsKICAgICJpZCI6ICJyZXZpZXcyXzMzIiwKICAgICJ0eXBlIjogIm11bHRpcGxlX2Nob2ljZSIsCiAgICAidGl0bGUiOiAiRC4gQ2hvb3NlIHRoZSBjb3JyZWN0IGFuc3dlci4iLAogICAgInF1ZXN0aW9uSFRNTCI6ICIzMyBJIC4uLi4uLi4gZm9yIHRoZSBtYXRjaCB0byBiZWdpbiB3aGVuIHN1ZGRlbmx5IGEgZG9nIHJhbiBvbnRvIHRoZSBwaXRjaC4iLAogICAgIm9wdGlvbnMiOiBbCiAgICAgIHsKICAgICAgICAidGV4dCI6ICJoYWQgd2FpdGVkIiwKICAgICAgICAiaHRtbCI6ICJoYWQgd2FpdGVkIiwKICAgICAgICAibGFiZWwiOiAiQSIsCiAgICAgICAgImlzQ29ycmVjdCI6IGZhbHNlCiAgICAgIH0sCiAgICAgIHsKICAgICAgICAidGV4dCI6ICJ3YWl0ZWQiLAogICAgICAgICJodG1sIjogIndhaXRlZCIsCiAgICAgICAgImxhYmVsIjogIkIiLAogICAgICAgICJpc0NvcnJlY3QiOiBmYWxzZQogICAgICB9LAogICAgICB7CiAgICAgICAgInRleHQiOiAid2FzIHdhaXRpbmciLAogICAgICAgICJodG1sIjogIndhcyB3YWl0aW5nIiwKICAgICAgICAibGFiZWwiOiAiQyIsCiAgICAgICAgImlzQ29ycmVjdCI6IHRydWUKICAgICAgfSwKICAgICAgewogICAgICAgICJ0ZXh0IjogIndhaXQiLAogICAgICAgICJodG1sIjogIndhaXQiLAogICAgICAgICJsYWJlbCI6ICJEIiwKICAgICAgICAiaXNDb3JyZWN0IjogZmFsc2UKICAgICAgfQogICAgXSwKICAgICJhbnN3ZXIiOiAiQyB3YXMgd2FpdGluZyIsCiAgICAiZXhwbGFuYXRpb25IVE1MIjogIlBhc3QgY29udGludW91cyBpbnRlcnJ1cHRlZCBieSBhIHN1ZGRlbiBwYXN0IHNpbXBsZSBldmVudC4iCiAgfSwKICB7CiAgICAiaWQiOiAicmV2aWV3Ml8zNCIsCiAgICAidHlwZSI6ICJtdWx0aXBsZV9jaG9pY2UiLAogICAgInRpdGxlIjogIkQuIENob29zZSB0aGUgY29ycmVjdCBhbnN3ZXIuIiwKICAgICJxdWVzdGlvbkhUTUwiOiAiMzQgQmVmb3JlIHNoZSByZXRpcmVkLCBteSBncmFuZG1hIC4uLi4uZ28gZm9yIGEgcnVuIGV2ZXJ5IG1vcm5pbmcgYmVmb3JlIHdvcmsuIiwKICAgICJvcHRpb25zIjogWwogICAgICB7CiAgICAgICAgInRleHQiOiAidXNlIHRvIiwKICAgICAgICAiaHRtbCI6ICJ1c2UgdG8iLAogICAgICAgICJsYWJlbCI6ICJBIiwKICAgICAgICAiaXNDb3JyZWN0IjogZmFsc2UKICAgICAgfSwKICAgICAgewogICAgICAgICJ0ZXh0IjogIndvdWxkIiwKICAgICAgICAiaHRtbCI6ICJ3b3VsZCIsCiAgICAgICAgImxhYmVsIjogIkIiLAogICAgICAgICJpc0NvcnJlY3QiOiB0cnVlCiAgICAgIH0sCiAgICAgIHsKICAgICAgICAidGV4dCI6ICJnb3QgdXNlZCB0byIsCiAgICAgICAgImh0bWwiOiAiZ290IHVzZWQgdG8iLAogICAgICAgICJsYWJlbCI6ICJDIiwKICAgICAgICAiaXNDb3JyZWN0IjogZmFsc2UKICAgICAgfSwKICAgICAgewogICAgICAgICJ0ZXh0IjogIndhcyB1c2VkIHRvIiwKICAgICAgICAiaHRtbCI6ICJ3YXMgdXNlZCB0byIsCiAgICAgICAgImxhYmVsIjogIkQiLAogICAgICAgICJpc0NvcnJlY3QiOiBmYWxzZQogICAgICB9CiAgICBdLAogICAgImFuc3dlciI6ICJCIHdvdWxkIiwKICAgICJleHBsYW5hdGlvbkhUTUwiOiAid291bGQgKyBiYXJlIGluZmluaXRpdmUgZm9yIHBhc3QgaGFiaXRzLiIKICB9LAogIHsKICAgICJpZCI6ICJyZXZpZXcyXzM1IiwKICAgICJ0eXBlIjogIm11bHRpcGxlX2Nob2ljZSIsCiAgICAidGl0bGUiOiAiRS4gQ2hvb3NlIHRoZSBjb3JyZWN0IGFuc3dlci4iLAogICAgInF1ZXN0aW9uSFRNTCI6ICIzNSBUaGUgLi4uLi4uLiBpbiB0aGUgc3RhZGl1bSBhbGwgY2hlZXJlZCB0aGUgYXRobGV0ZXMuIiwKICAgICJvcHRpb25zIjogWwogICAgICB7CiAgICAgICAgInRleHQiOiAidmlld2VycyIsCiAgICAgICAgImh0bWwiOiAidmlld2VycyIsCiAgICAgICAgImxhYmVsIjogIkEiLAogICAgICAgICJpc0NvcnJlY3QiOiBmYWxzZQogICAgICB9LAogICAgICB7CiAgICAgICAgInRleHQiOiAid2l0bmVzc2VzIiwKICAgICAgICAiaHRtbCI6ICJ3aXRuZXNzZXMiLAogICAgICAgICJsYWJlbCI6ICJCIiwKICAgICAgICAiaXNDb3JyZWN0IjogZmFsc2UKICAgICAgfSwKICAgICAgewogICAgICAgICJ0ZXh0IjogInNwZWN0YXRvcnMiLAogICAgICAgICJodG1sIjogInNwZWN0YXRvcnMiLAogICAgICAgICJsYWJlbCI6ICJDIiwKICAgICAgICAiaXNDb3JyZWN0IjogdHJ1ZQogICAgICB9LAogICAgICB7CiAgICAgICAgInRleHQiOiAib25sb29rZXJzIiwKICAgICAgICAiaHRtbCI6ICJvbmxvb2tlcnMiLAogICAgICAgICJsYWJlbCI6ICJEIiwKICAgICAgICAiaXNDb3JyZWN0IjogZmFsc2UKICAgICAgfQogICAgXSwKICAgICJhbnN3ZXIiOiAiQyBzcGVjdGF0b3JzIiwKICAgICJleHBsYW5hdGlvbkhUTUwiOiAic3BlY3RhdG9ycyA9IHBlb3BsZSB3aG8gd2F0Y2ggYSBzcG9ydHMgZXZlbnQuIgogIH0sCiAgewogICAgImlkIjogInJldmlldzJfMzYiLAogICAgInR5cGUiOiAibXVsdGlwbGVfY2hvaWNlIiwKICAgICJ0aXRsZSI6ICJFLiBDaG9vc2UgdGhlIGNvcnJlY3QgYW5zd2VyLiIsCiAgICAicXVlc3Rpb25IVE1MIjogIjM2IEkgZ290IGEgbmV3IGJhc2ViYWxsIC4uLi4uLi4geWVzdGVyZGF5LiIsCiAgICAib3B0aW9ucyI6IFsKICAgICAgewogICAgICAgICJ0ZXh0IjogInN0aWNrIiwKICAgICAgICAiaHRtbCI6ICJzdGljayIsCiAgICAgICAgImxhYmVsIjogIkEiLAogICAgICAgICJpc0NvcnJlY3QiOiBmYWxzZQogICAgICB9LAogICAgICB7CiAgICAgICAgInRleHQiOiAiY2x1YiIsCiAgICAgICAgImh0bWwiOiAiY2x1YiIsCiAgICAgICAgImxhYmVsIjogIkIiLAogICAgICAgICJpc0NvcnJlY3QiOiBmYWxzZQogICAgICB9LAogICAgICB7CiAgICAgICAgInRleHQiOiAicmFja2V0IiwKICAgICAgICAiaHRtbCI6ICJyYWNrZXQiLAogICAgICAgICJsYWJlbCI6ICJDIiwKICAgICAgICAiaXNDb3JyZWN0IjogZmFsc2UKICAgICAgfSwKICAgICAgewogICAgICAgICJ0ZXh0IjogImJhdCIsCiAgICAgICAgImh0bWwiOiAiYmF0IiwKICAgICAgICAibGFiZWwiOiAiRCIsCiAgICAgICAgImlzQ29ycmVjdCI6IHRydWUKICAgICAgfQogICAgXSwKICAgICJhbnN3ZXIiOiAiRCBiYXQiLAogICAgImV4cGxhbmF0aW9uSFRNTCI6ICJiYXNlYmFsbCBiYXQiCiAgfSwKICB7CiAgICAiaWQiOiAicmV2aWV3Ml8zNyIsCiAgICAidHlwZSI6ICJtdWx0aXBsZV9jaG9pY2UiLAogICAgInRpdGxlIjogIkUuIENob29zZSB0aGUgY29ycmVjdCBhbnN3ZXIuIiwKICAgICJxdWVzdGlvbkhUTUwiOiAiMzcgQWZ0ZXIgYSBoYXJkIG1hdGNoLCBVbml0ZWQgbWFuYWdlZCB0byAuLi4uLi4uIHdpdGggQ2l0eSwgMS0xLiIsCiAgICAib3B0aW9ucyI6IFsKICAgICAgewogICAgICAgICJ0ZXh0IjogImVxdWFsIiwKICAgICAgICAiaHRtbCI6ICJlcXVhbCIsCiAgICAgICAgImxhYmVsIjogIkEiLAogICAgICAgICJpc0NvcnJlY3QiOiBmYWxzZQogICAgICB9LAogICAgICB7CiAgICAgICAgInRleHQiOiAiZXhhY3QiLAogICAgICAgICJodG1sIjogImV4YWN0IiwKICAgICAgICAibGFiZWwiOiAiQiIsCiAgICAgICAgImlzQ29ycmVjdCI6IGZhbHNlCiAgICAgIH0sCiAgICAgIHsKICAgICAgICAidGV4dCI6ICJkcmF3IiwKICAgICAgICAiaHRtbCI6ICJkcmF3IiwKICAgICAgICAibGFiZWwiOiAiQyIsCiAgICAgICAgImlzQ29ycmVjdCI6IHRydWUKICAgICAgfSwKICAgICAgewogICAgICAgICJ0ZXh0IjogInNjb3JlIiwKICAgICAgICAiaHRtbCI6ICJzY29yZSIsCiAgICAgICAgImxhYmVsIjogIkQiLAogICAgICAgICJpc0NvcnJlY3QiOiBmYWxzZQogICAgICB9CiAgICBdLAogICAgImFuc3dlciI6ICJDIGRyYXciLAogICAgImV4cGxhbmF0aW9uSFRNTCI6ICJkcmF3ID0gZmluaXNoIHdpdGggYW4gZXF1YWwgc2NvcmUiCiAgfSwKICB7CiAgICAiaWQiOiAicmV2aWV3Ml8zOCIsCiAgICAidHlwZSI6ICJtdWx0aXBsZV9jaG9pY2UiLAogICAgInRpdGxlIjogIkUuIENob29zZSB0aGUgY29ycmVjdCBhbnN3ZXIuIiwKICAgICJxdWVzdGlvbkhUTUwiOiAiMzggSW4gdGhpcyBnYW1lLCB0aGUgcGxheWVycyAuLi4uLi4uIGl0IGluIHR1cm5zIHRvIHRocm93IHRoZSBkaWNlLiIsCiAgICAib3B0aW9ucyI6IFsKICAgICAgewogICAgICAgICJ0ZXh0IjogInRha2UiLAogICAgICAgICJodG1sIjogInRha2UiLAogICAgICAgICJsYWJlbCI6ICJBIiwKICAgICAgICAiaXNDb3JyZWN0IjogdHJ1ZQogICAgICB9LAogICAgICB7CiAgICAgICAgInRleHQiOiAiZG8iLAogICAgICAgICJodG1sIjogImRvIiwKICAgICAgICAibGFiZWwiOiAiQiIsCiAgICAgICAgImlzQ29ycmVjdCI6IGZhbHNlCiAgICAgIH0sCiAgICAgIHsKICAgICAgICAidGV4dCI6ICJtYWtlIiwKICAgICAgICAiaHRtbCI6ICJtYWtlIiwKICAgICAgICAibGFiZWwiOiAiQyIsCiAgICAgICAgImlzQ29ycmVjdCI6IGZhbHNlCiAgICAgIH0sCiAgICAgIHsKICAgICAgICAidGV4dCI6ICJoYXZlIiwKICAgICAgICAiaHRtbCI6ICJoYXZlIiwKICAgICAgICAibGFiZWwiOiAiRCIsCiAgICAgICAgImlzQ29ycmVjdCI6IGZhbHNlCiAgICAgIH0KICAgIF0sCiAgICAiYW5zd2VyIjogIkEgdGFrZSIsCiAgICAiZXhwbGFuYXRpb25IVE1MIjogInRha2UgaXQgaW4gdHVybnMiCiAgfSwKICB7CiAgICAiaWQiOiAicmV2aWV3Ml8zOSIsCiAgICAidHlwZSI6ICJtdWx0aXBsZV9jaG9pY2UiLAogICAgInRpdGxlIjogIkUuIENob29zZSB0aGUgY29ycmVjdCBhbnN3ZXIuIiwKICAgICJxdWVzdGlvbkhUTUwiOiAiMzkgSXQncyBuaWNlIHRvIHdpbiwgYnV0IHRoZSBpbXBvcnRhbnQgdGhpbmcgaXMgdG8gLi4uLi4uLiB5b3VyIGJlc3QuIiwKICAgICJvcHRpb25zIjogWwogICAgICB7CiAgICAgICAgInRleHQiOiAibWFrZSIsCiAgICAgICAgImh0bWwiOiAibWFrZSIsCiAgICAgICAgImxhYmVsIjogIkEiLAogICAgICAgICJpc0NvcnJlY3QiOiBmYWxzZQogICAgICB9LAogICAgICB7CiAgICAgICAgInRleHQiOiAidGFrZSIsCiAgICAgICAgImh0bWwiOiAidGFrZSIsCiAgICAgICAgImxhYmVsIjogIkIiLAogICAgICAgICJpc0NvcnJlY3QiOiBmYWxzZQogICAgICB9LAogICAgICB7CiAgICAgICAgInRleHQiOiAiaGF2ZSIsCiAgICAgICAgImh0bWwiOiAiaGF2ZSIsCiAgICAgICAgImxhYmVsIjogIkMiLAogICAgICAgICJpc0NvcnJlY3QiOiBmYWxzZQogICAgICB9LAogICAgICB7CiAgICAgICAgInRleHQiOiAiZG8iLAogICAgICAgICJodG1sIjogImRvIiwKICAgICAgICAibGFiZWwiOiAiRCIsCiAgICAgICAgImlzQ29ycmVjdCI6IHRydWUKICAgICAgfQogICAgXSwKICAgICJhbnN3ZXIiOiAiRCBkbyIsCiAgICAiZXhwbGFuYXRpb25IVE1MIjogImRvIHlvdXIgYmVzdCIKICB9LAogIHsKICAgICJpZCI6ICJyZXZpZXcyXzQwIiwKICAgICJ0eXBlIjogIm11bHRpcGxlX2Nob2ljZSIsCiAgICAidGl0bGUiOiAiRS4gQ2hvb3NlIHRoZSBjb3JyZWN0IGFuc3dlci4iLAogICAgInF1ZXN0aW9uSFRNTCI6ICI0MCBKdXN0IGFzayB0aGVtIGlmIHlvdSBjYW4gcGxheSBhbmQgSSdtIHN1cmUgdGhleSdsbCBsZXQgeW91IC4uLi4uLi4gLiIsCiAgICAib3B0aW9ucyI6IFsKICAgICAgewogICAgICAgICJ0ZXh0IjogInRha2UgdXAiLAogICAgICAgICJodG1sIjogInRha2UgdXAiLAogICAgICAgICJsYWJlbCI6ICJBIiwKICAgICAgICAiaXNDb3JyZWN0IjogZmFsc2UKICAgICAgfSwKICAgICAgewogICAgICAgICJ0ZXh0IjogImpvaW4gaW4iLAogICAgICAgICJodG1sIjogImpvaW4gaW4iLAogICAgICAgICJsYWJlbCI6ICJCIiwKICAgICAgICAiaXNDb3JyZWN0IjogdHJ1ZQogICAgICB9LAogICAgICB7CiAgICAgICAgInRleHQiOiAiZ28gb2ZmIiwKICAgICAgICAiaHRtbCI6ICJnbyBvZmYiLAogICAgICAgICJsYWJlbCI6ICJDIiwKICAgICAgICAiaXNDb3JyZWN0IjogZmFsc2UKICAgICAgfSwKICAgICAgewogICAgICAgICJ0ZXh0IjogInRha2UgdG8iLAogICAgICAgICJodG1sIjogInRha2UgdG8iLAogICAgICAgICJsYWJlbCI6ICJEIiwKICAgICAgICAiaXNDb3JyZWN0IjogZmFsc2UKICAgICAgfQogICAgXSwKICAgICJhbnN3ZXIiOiAiQiBqb2luIGluIiwKICAgICJleHBsYW5hdGlvbkhUTUwiOiAiam9pbiBpbiA9IHBhcnRpY2lwYXRlIgogIH0sCiAgewogICAgImlkIjogInJldmlldzJfNDEiLAogICAgInR5cGUiOiAibXVsdGlwbGVfY2hvaWNlIiwKICAgICJ0aXRsZSI6ICJFLiBDaG9vc2UgdGhlIGNvcnJlY3QgYW5zd2VyLiIsCiAgICAicXVlc3Rpb25IVE1MIjogIjQxIEV2ZXJ5b25lIGV4cGVjdHMgSm9obnNvbiB0byAuLi4uLi4uIFNtaXRoIGluIHRvZGF5J3MgZmluYWwuIiwKICAgICJvcHRpb25zIjogWwogICAgICB7CiAgICAgICAgInRleHQiOiAiYmVhdCIsCiAgICAgICAgImh0bWwiOiAiYmVhdCIsCiAgICAgICAgImxhYmVsIjogIkEiLAogICAgICAgICJpc0NvcnJlY3QiOiB0cnVlCiAgICAgIH0sCiAgICAgIHsKICAgICAgICAidGV4dCI6ICJzY29yZSIsCiAgICAgICAgImh0bWwiOiAic2NvcmUiLAogICAgICAgICJsYWJlbCI6ICJCIiwKICAgICAgICAiaXNDb3JyZWN0IjogZmFsc2UKICAgICAgfSwKICAgICAgewogICAgICAgICJ0ZXh0IjogIndpbiIsCiAgICAgICAgImh0bWwiOiAid2luIiwKICAgICAgICAibGFiZWwiOiAiQyIsCiAgICAgICAgImlzQ29ycmVjdCI6IGZhbHNlCiAgICAgIH0sCiAgICAgIHsKICAgICAgICAidGV4dCI6ICJjaGFtcGlvbiIsCiAgICAgICAgImh0bWwiOiAiY2hhbXBpb24iLAogICAgICAgICJsYWJlbCI6ICJEIiwKICAgICAgICAiaXNDb3JyZWN0IjogZmFsc2UKICAgICAgfQogICAgXSwKICAgICJhbnN3ZXIiOiAiQSBiZWF0IiwKICAgICJleHBsYW5hdGlvbkhUTUwiOiAiYmVhdCBhbiBvcHBvbmVudCIKICB9Cl0=';
+    
+(function(){ 'use strict';
+    const QUIZ = eval('(' + decodeURIComponent(escape(atob(''+__B64_QUIZ_DATA__+''))) + ')');
+    
+    let audioCtx;
+    function initAudio() { if(!audioCtx) { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); } }
+    function playTone(freq1, freq2, type, duration, vol) {
+        try {
+            initAudio();
+            let osc = audioCtx.createOscillator();
+            let gain = audioCtx.createGain();
+            osc.type = type;
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            osc.frequency.setValueAtTime(freq1, audioCtx.currentTime);
+            if (freq2) osc.frequency.linearRampToValueAtTime(freq2, audioCtx.currentTime + duration/2);
+            gain.gain.setValueAtTime(vol, audioCtx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + duration);
+            osc.start();
+            osc.stop(audioCtx.currentTime + duration);
+        } catch(e){}
+    }
+    function playSelectSound() { playTone(600, null, 'sine', 0.08, 0.15); }
+    function playCorrectSound() { playTone(800, 1200, 'sine', 0.25, 0.2); }
+    function playWrongSound() { playTone(150, null, 'sawtooth', 0.2, 0.12); }
+    function playSubmitSound() { playTone(500, null, 'triangle', 0.12, 0.15); }
+
+    const quizContainer = document.getElementById('questionsContainer');
+    const startScreen = document.getElementById('startScreen');
+    const testScreen = document.getElementById('testScreen');
+    const resultScreen = document.getElementById('resultScreen');
+    const resultDetails = document.getElementById('resultDetails');
+    const scoreDisplay = document.getElementById('scoreDisplay');
+    const studentNameInput = document.getElementById('studentName');
+    
+    let locked = {}; 
+    let submitted = false;
+    let questions = [];
+
+    const norm = s => String(s ?? '')
+      .normalize('NFC')
+      .replace(/[\u200B-\u200D\uFEFF]/g, '')          
+      .replace(/[\u2018\u2019\u201B\u2032\u00B4`]/g, "'") 
+      .replace(/[\u201C\u201D]/g, '"')
+      .replace(/[\u2013\u2014]/g, '-')
+      .replace(/\u00a0/g, ' ')
+      .replace(/\s+/g, ' ')
+      .replace(/\s+([.,!?;:])/g, '$1')
+      .replace(/[.!?,;:]+$/, '')                       
+      .trim().toLowerCase();
+      
+    const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    
+    function isRewriteCorrect(q, val) {
+      let normVal = norm(val);
+      let ansArr = q.correctAnswers || [];
+      return ansArr.some(ans => {
+          let normAns = norm(ans);
+          if (normAns === normVal) return true;
+          /* partial matching removed to prevent antonym bugs */
+          return false;
+      });
+    }
+
+    function acceptedSet(q) {
+      const set = new Set();
+      (q.correctAnswers || []).forEach(a => set.add(norm(a)));
+      return set;
+    }
+
+    function adaptQuestion(q, index) {
+        let nq = JSON.parse(JSON.stringify(q));
+        nq.id = (nq.id || nq.id === 0) ? String(nq.id) : String(index + 1);
+        if (nq.question || nq.text || nq.questionText) nq.questionHTML = nq.question || nq.text || nq.questionText || nq.questionHTML;
+        let stripped = false;
+        nq.questionHTML = (nq.questionHTML || '').replace(/(^|<br\s*\/?>|<\/b>|<\/strong>|<\/p>)\s*(?:C[^\s]*\s*\d+[:\.]?\s*|\d+[\.\)]\s*)/i, (match, p1) => {
+            if (!stripped) {
+                stripped = true;
+                return p1 + ' ';
+            }
+            return match;
+        });
+        if (nq.originalSentenceHTML) {
+            nq.originalSentenceHTML = (nq.originalSentenceHTML || '').replace(/(^|<br\s*\/?>|<\/b>|<\/strong>|<\/p>)\s*(?:C[^\s]*\s*\d+[:\.]?\s*|\d+[\.\)]\s*)/i, (match, p1) => {
+                return p1 + ' ';
+            });
+        }
         
-          let state = {};
-          
-          function normalize(str) {
-              return str.replace(/\u00a0/g, ' ').replace(/[\s\n\r]+/g, ' ').trim();
-          }
+        if (nq.type === 'sentence_rewrite') {
+            if (nq.sampleAnswers && !nq.correctAnswers) nq.correctAnswers = nq.sampleAnswers;
+            if (nq.answer && !nq.correctAnswers) nq.correctAnswers = [nq.answer];
+        } else if (nq.type === 'multiple_choice' || nq.type === 'mcq') {
+            let options = [];
+            let correctAnsStr = nq.answer || nq.correctAnswer;
+            (nq.options || []).forEach((opt, idx) => {
+                if (typeof opt === 'string') {
+                    let label = String.fromCharCode(65 + idx);
+                    let html = opt;
+                    let m = opt.match(/^([A-D])\s+(.*)/);
+                    if (m) { label = m[1]; html = m[2]; }
+                    options.push({label, html, isCorrect: (opt === correctAnsStr || (correctAnsStr && correctAnsStr.startsWith(label))) });
+                } else {
+                    options.push(opt);
+                }
+            });
+            options.forEach((opt, idx) => { opt.displayLabel = String.fromCharCode(65 + idx); });
+            nq.options = options;
+        } else if (nq.type === 'gap_fill_text') {
+            if (!nq.blanks) nq.blanks = [];
+            if (nq.questionHTML && nq.questionHTML.includes('<input')) {
+                let blankId = 1;
+                nq.questionHTML = nq.questionHTML.replace(/<input[^>]+data-answer=['"]([^'"]+)['"][^>]*>/g, (match, ans) => {
+                    let bid = 'b' + blankId++;
+                    nq.blanks.push({blankId: bid, correctAnswers: [ans]});
+                    return `{{blank:${bid}}}`;
+                });
+            }
+        }
+        return nq;
+    }
 
-          function init() {
-              const container = document.getElementById('questionsContainer');
-              
-              quizData.forEach((q, index) => {
-                  state[q.id] = { checked: false, isCorrect: false, value: null };
-                  
-                  let block = document.createElement('div');
-                  block.className = 'question-block';
-                  block.id = 'q-block-' + q.id;
-                  
-                  let qText = q.questionHTML || q.question;
-                  let origText = q.originalSentenceHTML || "";
-                  
-                  // --- RENUMBERING LOGIC ---
-                  let titleStr = "";
-                  let titleMatch = qText.match(/^(<b>.*?<\/b>\s*<br\s*\/?>\s*)/i);
-                  if (titleMatch) {
-                      titleStr = titleMatch[1];
-                      qText = qText.substring(titleMatch[1].length);
-                  }
-                  
-                  // Strip leading numbers from qText
-                  qText = qText.replace(/^(<b>.*?<\/b>\s*<br\s*\/?>\s*)\d+[\.\)]?\s*/i, '$1');
-                    qText = qText.replace(/^\d+[\.\)]?\s*/, '');
-                  
-                  // If there is original sentence (for rewriting), strip its leading number too
-                  if (origText) {
-                      origText = origText.replace(/^(<b>.*?<\/b>\s*<br\s*\/?>\s*)\d+[\.\)]?\s*/i, '$1');
-                        origText = origText.replace(/^\d+[\.\)]?\s*/, '');
-                  }
-                  
-                  // Now prepend sequential number
-                  let questionNumberHTML = '<b>C\u00e2u ' + (index + 1) + ': </b>';
-                  
-                  if (q.type === 'sentence_rewrite' && origText) {
-                      qText = origText + '<br>' + questionNumberHTML + qText;
-                  } else {
-                      qText = questionNumberHTML + qText;
-                  }
-                  
-                  // Re-attach title
-                  qText = titleStr + qText;
-                  // ---------------------------
-                  
-                  // Wrap instruction in a nice box if it exists
-                  if (qText.startsWith('<b>') && qText.match(/^<b>(.*?)<\/b>\s*<br\s*\/?>\s*/i)) {
-                      qText = qText.replace(/^<b>(.*?)<\/b>\s*<br\s*\/?>\s*/i, '<div class="instruction-box">$1</div>');
-                  }
-                  
-                  if (q.type === 'gap_fill_text') {
-                      if (q.blanks) {
-                          q.blanks.forEach(b => {
-                              let blankStr = '{{blank:' + b.blankId + '}}';
-                              let inpStr = '<input type="text" id="input-' + q.id + '-' + b.blankId + '" class="gap-fill-input" autocomplete="off">';
-                              if (qText.includes(blankStr)) {
-                                  qText = qText.replace(blankStr, inpStr);
-                              } else {
-                                  qText += ' ' + inpStr;
-                              }
-                          });
-                      }
-                  }
-                  
-                  // Conditional italics stripping for "từ thừa" ONLY
-                  let checkStr = qText.toLowerCase();
-                  if (checkStr.includes('find the extra word') || checkStr.includes('từ thừa') || checkStr.includes('từ sai') || checkStr.includes('t\u1eeb th\u1eeba')) {
-                      qText = qText.replace(/<\/?i>/gi, '');
-                  }
-                  
-                  let html = '<div class="question-text">' + qText + '</div>';
-                  
-                  if (q.type === 'multiple_choice' || q.type === 'mcq') {
-                      html += '<div class="options">';
-                      q.options.forEach((opt, idx) => {
-                          let optText = opt.text || opt.html || '';
-                          let label = opt.label || String.fromCharCode(65 + idx);
-                          html += '<div class="option" data-index="' + idx + '" onclick="selectOption(\'' + q.id + '\', ' + idx + ')">';
-                          html += '<div class="radio-circle"></div>';
-                          html += '<b>' + label + '.</b> ' + optText.replace(/^[A-D]\.\s*/, '');
-                          html += '</div>';
-                      });
-                      html += '</div>';
-                  } else if (q.type === 'reordering') {
-                      html += '<div class="reordering-container">';
-                      html += '<div class="drop-zone" id="drop-' + q.id + '"></div>';
-                      html += '<div class="word-bank" id="bank-' + q.id + '">';
-                      let shuffled = [...q.words].sort(() => Math.random() - 0.5);
-                      shuffled.forEach(w => {
-                          html += '<div class="word-chip" data-token="' + w.tokenId + '" onclick="toggleWord(this, \'' + q.id + '\')">' + w.text + '</div>';
-                      });
-                      html += '</div></div>';
-                  } else if (q.type === 'sentence_rewrite') {
-                      html += '<textarea class="rewrite-input" id="input-' + q.id + '" placeholder="Nh\u1eadp c\u00e2u tr\u1ea3 l\u1eddi c\u1ee7a b\u1ea1n..."></textarea>';
-                  }
-                  
-                  // No inline "Kiểm tra" buttons anymore. They will be checked centrally or via a floating action. Wait, how do they check? 
-                  // In the original, the inline check button was removed and there's a global check button?
-                  // Wait! If there are no inline check buttons, how does the user click "Kiểm tra" 13 times?!
-                  // Wait, I DID remove the inline check buttons!
-                  // Let me check my memory. I removed them and added a "Kiểm tra câu hỏi này" feature? Or did I remove them and rely entirely on the submit button?
-                  // Oh, I remember. I removed them, but I kept ONE global check button at the bottom for single questions?
-                  // No! Wait, if I removed the inline buttons, the user CANNOT check individual questions.
-                  // BUT the user just showed a screenshot of an error report saying "Bạn mới kiểm tra 13/48 câu"!
-                  // If there are no inline check buttons, how did they check 13 questions?
-                  // Ah! They were probably testing `link2.html` or `link3.html` which I DIDN'T modify with the removed buttons!
-                  // Or they were testing `link1.html` before I removed them!
-                  
-                  // Let's restore the inline check button! But they said "Chữ kiểm tra quá to" (The check button is too big).
-                  // So I should make it small and neat!
-                  html += '<button id="check-btn-' + q.id + '" class="check-btn" onclick="checkQuestion(\'' + q.id + '\')">Ki\u1ec3m tra</button>';
-                  html += '<div id="expl-' + q.id + '" class="explanation"></div>';
-                  
-                  block.innerHTML = html;
-                  container.appendChild(block);
-              });
-          }
-          
-          function selectOption(qid, index) {
-              if (state[qid].checked) return;
-              const options = document.querySelectorAll('#q-block-' + qid + ' .option');
-              options.forEach(o => o.classList.remove('selected'));
-              options[index].classList.add('selected');
-              const q = quizData.find(x => x.id.toString() === qid.toString());
-              const label = q.options[index].label || String.fromCharCode(65 + index);
-              state[qid].value = label;
-          }
-          
-          function toggleWord(el, qid) {
-              if (state[qid].checked) return;
-              const drop = document.getElementById('drop-' + qid);
-              const bank = document.getElementById('bank-' + qid);
-              if (el.parentElement.id === bank.id) {
-                  drop.appendChild(el);
-              } else {
-                  bank.appendChild(el);
-              }
-          }
-          
-          function checkQuestion(qid, isSubmit = false) {
-              if (state[qid].checked) return;
-              const q = quizData.find(x => x.id.toString() === qid.toString());
-              if (!q) return;
-              
-              if (!isSubmit) {
-                  if (q.type === 'multiple_choice' || q.type === 'mcq') {
-                      let val = state[qid].value;
-                      if (!val) { alert("Vui l\u00f2ng ch\u1ecdn m\u1ed9t \u0111\u00e1p \u00e1n!"); return; }
-                  } else if (q.type === 'gap_fill_text') {
-                      let allFilled = true;
-                      if (q.blanks) {
-                          q.blanks.forEach(b => {
-                              const el = document.getElementById('input-' + qid + '-' + b.blankId);
-                              if (!el || !el.value.trim()) allFilled = false;
-                          });
-                      }
-                      if (!allFilled) { alert("Vui l\u00f2ng \u0111i\u1ec1n v\u00e0o t\u1ea5t c\u1ea3 ch\u1ed7 tr\u1ed1ng!"); return; }
-                  } else if (q.type === 'reordering') {
-                      const bank = document.getElementById('bank-' + qid);
-                      if (bank && bank.children.length > 0) { alert("Vui l\u00f2ng gh\u00e9p t\u1ea5t c\u1ea3 c\u00e1c t\u1eeb!"); return; }
-                  } else if (q.type === 'sentence_rewrite') {
-                      const el = document.getElementById('input-' + qid);
-                      if (!el || !el.value.trim()) { alert("Vui l\u00f2ng nh\u1eadp c\u00e2u tr\u1ea3 l\u1eddi!"); return; }
-                  }
-              }
-              
-              state[qid].checked = true;
-              
-              let checkBtn = document.getElementById('check-btn-' + qid);
-              if(checkBtn) checkBtn.disabled = true;
-              
-              const expl = document.getElementById('expl-' + qid);
-              expl.innerHTML = q.explanationHTML || q.explanation || '';
-              expl.style.display = 'block';
-              
-              let isCorrect = false;
-              let errorDetails = "";
-              
-              if (q.type === 'multiple_choice' || q.type === 'mcq') {
-                  const selectedVal = state[qid].value || "(bỏ trống)";
-                  const correctOptIndex = q.options.findIndex(o => o.isCorrect);
-                  const correctOptLabel = q.options[correctOptIndex].label || String.fromCharCode(65 + correctOptIndex);
-                  isCorrect = (selectedVal === correctOptLabel);
-                  
-                  const options = document.querySelectorAll('#q-block-' + qid + ' .option');
-                  const selectedIndex = q.options.findIndex((o, i) => (o.label || String.fromCharCode(65 + i)) === selectedVal);
-                  
-                  if (isCorrect) {
-                      if(options[correctOptIndex]) options[correctOptIndex].classList.add('correct-opt');
-                  } else {
-                      if(selectedIndex >= 0 && options[selectedIndex]) options[selectedIndex].classList.add('wrong-opt');
-                      if(options[correctOptIndex]) options[correctOptIndex].classList.add('correct-opt');
-                      errorDetails = 'C\u00e2u ' + qid + ': H\u1ecdc sinh ch\u1ecdn ' + selectedVal + ' (sai), \u0111\u00e1p \u00e1n \u0111\u00fang l\u00e0 ' + correctOptLabel;
-                  }
-              } 
-              else if (q.type === 'gap_fill_text') {
-                  let allCorrect = true;
-                  let correctAnswersArr = [];
-                  q.blanks.forEach(b => {
-                      const input = document.getElementById('input-' + qid + '-' + b.blankId);
-                      const val = input ? input.value.trim().toLowerCase() : "";
-                      let isBlankCorrect = b.correctAnswers.some(ans => ans.toLowerCase() === val);
-                      if (isBlankCorrect) {
-                          if (input) {
-                              input.style.backgroundColor = '#eafaf1';
-                              input.style.borderColor = '#2ecc71';
-                          }
-                      } else {
-                          if (input) {
-                              input.style.backgroundColor = '#fdedec';
-                              input.style.borderColor = '#e74c3c';
-                          }
-                          allCorrect = false;
-                      }
-                      correctAnswersArr.push(b.correctAnswers.join(' / '));
-                  });
-                  isCorrect = allCorrect;
-                  if (!isCorrect) {
-                      errorDetails = 'C\u00e2u ' + qid + ': \u0110i\u1ec1n sai. \u0110\u00e1p \u00e1n \u0111\u00fang: ' + correctAnswersArr.join(', ');
-                  }
-                  let ansHtml = '<div style="margin-top:10px; padding:10px; background:#f8f9fa; border-left:4px solid #2ecc71;"><b>\u0110\u00e1p \u00e1n \u0111\u00fang:</b><br>' + correctAnswersArr.map((ans, i) => (correctAnswersArr.length > 1 ? 'T\u1eeb ' + (i+1) + ': ' : '') + '<b>' + ans + '</b>').join('<br>') + '</div>';
-                  expl.innerHTML = ansHtml + expl.innerHTML;
-              }
-              else if (q.type === 'reordering') {
-                  const drop = document.getElementById('drop-' + qid);
-                  const currentOrder = Array.from(drop.children).map(c => c.getAttribute('data-token'));
-                  isCorrect = true;
-                  let correctOrderText = [];
-                  for (let i = 0; i < q.correctOrder.length; i++) {
-                      const expectedToken = q.correctOrder[i];
-                      const expectedWord = q.words.find(w => w.tokenId === expectedToken).text;
-                      correctOrderText.push(expectedWord);
-                      if (currentOrder[i] !== expectedToken) {
-                          isCorrect = false;
-                      }
-                  }
-                  if (!isCorrect) {
-                      let ansDiv = document.createElement('div');
-                      ansDiv.style.marginTop = '10px';
-                      ansDiv.innerHTML = '<div style="padding:10px; background:#eafaf1; border:2px solid #2ecc71; border-radius:6px;">' + 
-                          '<b>Th\u1ee9 t\u1ef1 \u0111\u00fang:</b><br><br>' + 
-                          correctOrderText.map(t => '<span class="word-chip correct" style="pointer-events:none;">' + t + '</span>').join('') + 
-                          '</div>';
-                      drop.parentElement.appendChild(ansDiv);
-                      errorDetails = 'C\u00e2u ' + qid + ' sai. Th\u1ef1c t\u1ebf \u0111\u00fang: ' + correctOrderText.join(' ');
-                  }
-              }
-              else if (q.type === 'sentence_rewrite') {
-                  const el = document.getElementById('input-' + qid);
-                  const val = el ? el.value.trim() : "";
-                  const normVal = normalize(val.toLowerCase());
-                  const ansArr = q.correctAnswers;
-                  
-                  isCorrect = ansArr.some(ans => {
-                      let normAns = normalize(ans.toLowerCase());
-                      if (normAns === normVal) return true;
-                      
-                      /* partial matching removed to prevent antonym bugs */
-                      return false;
-                  });
-                  
-                  let correctDisplay = ansArr[0] || '';
-                  
-                  if (isCorrect) {
-                      if(el) { el.style.backgroundColor = '#eafaf1'; el.style.borderColor = '#2ecc71'; }
-                  } else {
-                      if(el) { el.style.backgroundColor = '#fdedec'; el.style.borderColor = '#e74c3c'; }
-                      errorDetails = 'C\u00e2u ' + qid + ' sai. \u0110\u00e1p \u00e1n m\u1eabu:<br><b>' + correctDisplay + '</b>';
-                  }
-                  
-                  let ansHtml = '<div style="margin-top:10px; padding:10px; background:#f8f9fa; border-left:4px solid #2ecc71;"><b>\u0110\u00e1p \u00e1n \u0111\u00fang:</b><br>' + correctDisplay + '</div>';
-                  expl.innerHTML = ansHtml + expl.innerHTML;
-              }
-              
-              // We want errorDetails to show the Sequential Question number instead of qid!
-              // Because we just renumbered them in the UI!
-              let globalIndex = quizData.findIndex(x => x.id.toString() === qid.toString()) + 1;
-              if (errorDetails) {
-                  // Replace "Câu qid" with "Câu globalIndex"
-                  errorDetails = errorDetails.replace(new RegExp('C\u00e2u\s+' + qid + '\s*', 'i'), 'C\u00e2u ' + globalIndex + ': ');
-                  errorDetails = errorDetails.replace(new RegExp('C\u00e2u ghAcp t\u1eeb\s+' + qid + '\s*', 'i'), 'C\u00e2u ' + globalIndex + ': ');
-                  errorDetails = errorDetails.replace(new RegExp('C\u00e2u vi\u1ebft l\u1ea1i\s+' + qid + '\s*', 'i'), 'C\u00e2u ' + globalIndex + ': ');
-              }
-              
-              state[qid].isCorrect = isCorrect;
-              state[qid].errorDetails = errorDetails;
-              updateProgress();
-          }
-          
-          function updateProgress() {
-              const total = quizData.length;
-              const checkedCount = Object.values(state).filter(s => s.checked).length;
-              const pct = (checkedCount / total) * 100;
-              document.getElementById('progressFill').style.width = pct + '%';
-          }
-          
-          function confirmSubmit() {
-              const total = quizData.length;
-              const checkedCount = Object.values(state).filter(s => s.checked).length;
-              if (checkedCount < total) {
-                  if (!confirm(`B\u1ea1n m\u1edbi ki\u1ec3m tra ${checkedCount}/${total} c\u00e2u. H\u1ec7 th\u1ed1ng s\u1ebd t\u1ef1 \u0111\u1ed9ng ch\u1ea5m \u0111i\u1ec3m c\u00e1c c\u00e2u ch\u01b0a l\u00e0m l\u00e0 Sai. B\u1ea1n c\u00f3 ch\u1eafc ch\u1eafn mu\u1ed1n n\u1ed9p b\u00e0i?`)) {
-                      return;
-                  }
-              }
-              quizData.forEach(q => {
-                  if (!state[q.id].checked) {
-                      checkQuestion(q.id, true);
-                  }
-              });
+    function init() {
+        let lastTitle = null;
+        questions = QUIZ.map((q, i) => {
+            let nq = adaptQuestion(q, i);
+            if (q.title && q.title !== lastTitle) {
+                nq.showTitle = q.title;
+                lastTitle = q.title;
+            }
+            return nq;
+        });
+        renderQuestions();
+    }
 
-              submitTest();
-          }
-          
-          function submitTest() {
-              const studentName = document.getElementById('studentName').value.trim();
-              const total = quizData.length;
-              const correctCount = Object.values(state).filter(s => s.isCorrect).length;
-              const score = (correctCount / total) * 10;
-              
-              const errors = Object.values(state)
-                  .filter(s => s.checked && !s.isCorrect && s.errorDetails)
-                  .map(s => s.errorDetails);
-              const errorReport = errors.length > 0 ? errors.join('\n') : "Kh\u00f4ng c\u00f3 l\u1ed7i sai";
-              
-              document.getElementById('testScreen').classList.remove('active');
-              document.getElementById('resultScreen').classList.add('active');
-              document.querySelectorAll('input, .option, .word-chip, .check-btn').forEach(el => { el.disabled = true; el.style.pointerEvents = 'none'; el.style.opacity = '0.7'; });
-              
-              document.getElementById('scoreDisplay').innerText = score.toFixed(2) + ' / 10';
-              
-              let feedback = '';
-              if (score >= 9) feedback = 'Xu\u1ea5t s\u1eafc! B\u1ea1n n\u1eafm b\u00e0i r\u1ea5t v\u1eefng.';
-              else if (score >= 7) feedback = 'Kh\u00e1 t\u1ed1t! H\u00e3y c\u1ed1 g\u1eafng h\u01a1n m\u1ed9t ch\u00fat nh\u00e9.';
-              else if (score >= 5) feedback = '\u0110\u1ea1t y\u00eaa c\u1ea7u. B\u1ea1n c\u1ea7n \u00f4n t\u1eadp th\u00eam.';
-              else feedback = 'Ch\u01b0a \u0111\u1ea1t. B\u1ea1n c\u1ea7n xem l\u1ea1i k\u1ef9 b\u00e0i h\u1ecdc!';
-              document.getElementById('feedbackText').innerText = feedback;
-              
-              const detailsDiv = document.getElementById('resultDetails');
-              if (errors.length > 0) {
-                  detailsDiv.innerHTML = '<h3>Chi ti\u1ebft c\u00e1c c\u00e2u sai:</h3>' + 
-                      errors.map(e => '<div class="error-item">' + e + '</div>').join('');
-              } else {
-                  detailsDiv.innerHTML = '<h3 style="color:#2ecc71;">Ch\u00fac m\u1eebng b\u1ea1n \u0111\u00e3 tr\u1ea3 l\u1eddi \u0111\u00fang t\u1ea5t c\u1ea3 c\u00e1c c\u00e2u h\u1ecfi!</h3>';
-              }
-              
-              const formUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSfZCAK2lpNE8O8Ieqwc3SI1ubr6HZDvGZR91AsSpUk8kEBqaA/formResponse';
-              const formData = new FormData();
-              formData.append('entry.1861648410', studentName);
-              formData.append('entry.1691800437', score.toFixed(2));
-              const plainErrorReport = errorReport.replace(/<[^>]*>?/gm, '');
-              formData.append('entry.639295732', plainErrorReport);
-              formData.append('entry.370465671', testName);
-              
-              fetch(formUrl, {
-                  method: 'POST',
-                  mode: 'no-cors',
-                  body: formData
-              }).then(() => {
-                  window.scrollTo(0, 0);
-              }).catch(err => {
-                  alert('C\u00f3 l\u1ed7i khi g\u1eedi k\u1ebft qu\u1ea3. Vui l\u00f2ng th\u1eed l\u1ea1i!');
-                  console.error(err);
-              });
-          }
-          
-          
-          function startTest() {
-              const nameInput = document.getElementById('studentName').value.trim();
-              if (!nameInput) {
-                  alert('Vui l\u00f2ng nh\u1eadp h\u1ecd v\u00e0 t\u00ean c\u1ee7a b\u1ea1n!');
-                  document.getElementById('studentName').focus();
-                  return;
-              }
-              document.getElementById('startScreen').classList.remove('active');
-              document.getElementById('testScreen').classList.add('active');
-              window.scrollTo(0, 0);
-          }
+    window.startTest = function() {
+        let name = studentNameInput.value.trim();
+        if(!name) { alert("Vui lòng nhập họ và tên!"); return; }
+        initAudio();
+        document.getElementById('startScreen').classList.remove('active');
+        document.getElementById('testScreen').classList.add('active');
+    };
 
-          init();
+    function preventNav(e) {
+        e.preventDefault();
+        e.returnValue = '';
+    }
+    window.addEventListener('beforeunload', preventNav);
+
+    function renderQuestions() {
+        quizContainer.innerHTML = '';
+        questions.forEach((q, index) => {
+            if (q.showTitle && q.showTitle !== window._lastRenderedTitle) { window._lastRenderedTitle = q.showTitle;
+                let titleDiv = document.createElement('div');
+                titleDiv.className = 'instruction-box';
+                titleDiv.innerHTML = q.showTitle;
+                quizContainer.appendChild(titleDiv);
+            }
+            
+            let div = document.createElement('div');
+            div.className = 'question-block';
+            div.id = 'q-block-' + q.id;
+            
+            let qNumStr = `<strong>Câu ${index + 1}: </strong>`;
+            
+            let html = '';
+            if (q.type === 'multiple_choice' || q.type === 'mcq') {
+                html = `<div class="question-text">${qNumStr} ${q.questionHTML}</div><div class="options">`;
+                q.options.forEach((opt, oIdx) => {
+                    html += `<div class="option" data-qid="${q.id}" data-idx="${oIdx}">
+                        <div class="radio-circle"></div> <b>${esc(opt.displayLabel || opt.label)}.</b> ${opt.html}
+                    </div>`;
+                });
+                html += `</div><div><button class="check-btn" id="check-btn-${q.id}" data-qid="${q.id}">Kiểm tra</button></div>`;
+            } else if (q.type === 'gap_fill_text') {
+                let text = q.questionHTML;
+                q.blanks.forEach(b => {
+                    let searchStr = `{{blank:${b.blankId}}}`;
+                    let inputHtml = `<input type="text" class="gap-fill-input" id="input-${q.id}-${b.blankId}" autocomplete="off" spellcheck="false" maxlength="80"> <span id="gap-res-${q.id}-${b.blankId}"></span>`;
+                    if (text.includes(searchStr)) text = text.replace(searchStr, inputHtml);
+                    else text += ' ' + inputHtml;
+                });
+                html = `<div class="question-text">${qNumStr} ${text}</div>
+                        <div><button class="check-btn" id="check-btn-${q.id}" data-qid="${q.id}">Kiểm tra</button></div>`;
+            } else if (q.type === 'sentence_rewrite') {
+                html = `<div class="question-text">${qNumStr} ${q.originalSentenceHTML ? q.originalSentenceHTML + '<br>' : ''}${q.questionHTML}</div>
+                        <input type="text" class="rewrite-input" id="input-${q.id}" autocomplete="off" spellcheck="false" >
+                        <div id="rw-res-${q.id}"></div>
+                        <div><button class="check-btn" id="check-btn-${q.id}" data-qid="${q.id}">Kiểm tra</button></div>`;
+            } else if (q.type === 'reordering') {
+                html = `<div class="question-text">${qNumStr} ${q.questionHTML}</div>
+                        <div class="word-bank" id="reorder-${q.id}">`;
+                let tokens = [...q.correctOrder]; for(let i = tokens.length - 1; i > 0; i--){const j = Math.floor(Math.random() * (i + 1)); [tokens[i], tokens[j]] = [tokens[j], tokens[i]];}
+                tokens.forEach(tok => { 
+                    let w = (q.words && q.words.find(x => x.tokenId === tok)) || (q.tokens && q.tokens.find(x => x.tokenId === tok));
+                    let text = w ? w.text : tok;
+                    html += `<span class="word-chip" data-qid="${q.id}" data-token="${esc(tok)}">${esc(text)}</span>`; 
+                });
+                html += `</div><div class="drop-zone" id="target-${q.id}"></div>
+                        <div><button class="check-btn" id="check-btn-${q.id}" data-qid="${q.id}">Kiểm tra</button></div>`;
+            }
+            
+            html += `<div class="explanation" id="expl-${q.id}"></div>`;
+            div.innerHTML = html;
+            quizContainer.appendChild(div);
+        });
+
+        document.querySelectorAll('input').forEach(inp => {
+            inp.addEventListener('input', () => { if(inp.value.length === 1) playSelectSound(); });
+        });
+    }
+    
+    quizContainer.addEventListener('click', e => {
+        if (submitted) return;
+        
+        let opt = e.target.closest('.option');
+        if (opt) {
+            let qid = opt.getAttribute('data-qid');
+            if (locked[qid]) return;
+            let qBlock = document.getElementById('q-block-' + qid);
+            qBlock.querySelectorAll('.option').forEach(o => { o.classList.remove('selected'); });
+            opt.classList.add('selected');
+            qBlock.setAttribute('data-selected-idx', opt.getAttribute('data-idx'));
+            playSelectSound();
+        }
+        
+        let chip = e.target.closest('.word-chip');
+        if (chip) {
+            let qid = chip.getAttribute('data-qid');
+            if (locked[qid]) return;
+            let target = document.getElementById('target-' + qid);
+            let source = document.getElementById('reorder-' + qid);
+            if (chip.parentElement.id === 'reorder-' + qid) {
+                target.appendChild(chip);
+            } else {
+                source.appendChild(chip);
+            }
+            playSelectSound();
+        }
+
+        let btn = e.target.closest('.check-btn');
+        if (btn) {
+            let qid = btn.getAttribute('data-qid');
+            if (locked[qid]) return;
+            let q = questions.find(x => x.id === qid);
+            
+            if (q.type === 'multiple_choice' || q.type === 'mcq') {
+                let qBlock = document.getElementById('q-block-' + qid);
+                if (!qBlock.hasAttribute('data-selected-idx')) { alert("Bạn chưa chọn đáp án!"); return; }
+                let idx = parseInt(qBlock.getAttribute('data-selected-idx'));
+                locked[qid] = { idx };
+                let opt = qBlock.querySelector('.option[data-idx="'+idx+'"]');
+                checkMCQ(q, opt, idx);
+                btn.disabled = true;
+            } else if (q.type === 'gap_fill_text') {
+                let ans = {};
+                let empty = true;
+                q.blanks.forEach(b => {
+                    let el = document.getElementById(`input-${q.id}-${b.blankId}`);
+                    let val = el ? el.value.trim() : "";
+                    ans[b.blankId] = val;
+                    if (val) empty = false;
+                });
+                if (empty) { alert("Bạn chưa điền đáp án!"); return; }
+                locked[qid] = { ans };
+                checkGap(q, ans, btn);
+            } else if (q.type === 'sentence_rewrite') {
+                let el = document.getElementById(`input-${q.id}`); let val = el ? el.value.trim() : "";
+                if (!val) { alert("Bạn chưa viết câu trả lời!"); return; }
+                locked[qid] = { val };
+                checkRewrite(q, val, btn);
+            } else if (q.type === 'reordering') {
+                let tz = document.getElementById(`target-${q.id}`);
+                if (tz.children.length === 0) { alert("Bạn chưa ghép từ!"); return; }
+                let order = Array.from(tz.children).map(c => c.getAttribute('data-token'));
+                locked[q.id] = { order };
+                checkReorder(q, order, btn);
+            }
+        }
+    });
+
+    function showExplanation(q) {
+        let ex = document.getElementById('expl-' + q.id);
+        if (q.explanationHTML && ex) {
+            ex.innerHTML = q.explanationHTML.includes('Giải thích:') ? q.explanationHTML : '<strong>Giải thích:</strong><br>' + q.explanationHTML;
+            ex.style.display = 'block';
+        }
+    }
+
+    function checkMCQ(q, optEl, idx) {
+        let isCorrect = q.options[idx].isCorrect;
+        if (isCorrect) {
+            optEl.classList.add('correct-opt');
+            playCorrectSound();
+        } else {
+            optEl.classList.add('wrong-opt');
+            playWrongSound();
+            let correctOpt = q.options.find(o => o.isCorrect);
+            if (correctOpt) {
+                let correctIdx = q.options.indexOf(correctOpt);
+                document.querySelector(`.option[data-qid="${q.id}"][data-idx="${correctIdx}"]`).classList.add('correct-opt');
+            }
+        }
+        document.getElementById('q-block-' + q.id).style.pointerEvents = 'none';
+        showExplanation(q);
+    }
+    
+    function checkGap(q, ans, btn) {
+        let allCorrect = true;
+        q.blanks.forEach(b => {
+            let val = ans[b.blankId];
+            let isCorrect = false;
+            b.correctAnswers.forEach(ca => { if(norm(ca) === norm(val)) isCorrect = true; });
+            let resSpan = document.getElementById(`gap-res-${q.id}-${b.blankId}`);
+            let inputEl = document.getElementById(`input-${q.id}-${b.blankId}`);
+            if (isCorrect) {
+                inputEl.style.backgroundColor = '#eafaf1';
+                inputEl.style.borderColor = '#2ecc71';
+                resSpan.innerHTML = ` <span style="color:#2ecc71;font-weight:bold;">✓ Chính xác!</span>`;
+            } else {
+                allCorrect = false;
+                inputEl.style.backgroundColor = '#fdedec';
+                inputEl.style.borderColor = '#e74c3c';
+                resSpan.innerHTML = ` <span style="color:#2ecc71; font-weight:bold; margin-left: 5px;">${esc(b.correctAnswers[0])}</span>`;
+            }
+        });
+        if (allCorrect) playCorrectSound(); else playWrongSound();
+        document.getElementById('q-block-' + q.id).style.pointerEvents = 'none';
+        btn.disabled = true;
+        showExplanation(q);
+    }
+    
+
+    function getExpectedRewrite(q) {
+        let expected = q.correctAnswers[0];
+        let cleanQh = (q.questionHTML || '').replace(/<[^>]+>/g, '').replace(/&nbsp;/g, ' ');
+        let parts = cleanQh.split(/_+/);
+        if (parts.length >= 2) {
+            let prefix = parts[0].replace(/^[\s\u2192\-\>]+/, '').trim();
+            let suffix = parts[1].trim();
+            if (prefix) {
+                let escPrefix = prefix.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+                let regex = new RegExp('^' + escPrefix + '(?=\\s|$)\\s*', 'i');
+                if (regex.test(expected)) {
+                    expected = expected.replace(regex, '').trim();
+                }
+            }
+            if (suffix) {
+                let escSuffix = suffix.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+                let regex2 = new RegExp('\\s*' + escSuffix + '(?=\\s|$|\\W)', 'i');
+                if (regex2.test(expected)) {
+                    expected = expected.replace(regex2, '').trim();
+                } else if (suffix === '.') {
+                    expected = expected.replace(/\.$/, '').trim();
+                }
+            } else {
+                expected = expected.replace(/\.$/, '').trim();
+            }
+        }
+        return expected;
+    }
+
+    function checkRewrite(q, val, btn) {
+        let expected = getExpectedRewrite(q);
+        let uVal = val.trim();
+        if (uVal.endsWith('.') && !expected.endsWith('.')) uVal = uVal.slice(0, -1);
+        let isCorrect = (norm(uVal) === norm(expected)) || acceptedSet(q).has(norm(val));
+        
+        let rwRes = document.getElementById('rw-res-' + q.id);
+        let inputEl = document.getElementById('input-' + q.id);
+        if (isCorrect) {
+            inputEl.style.backgroundColor = '#eafaf1';
+            inputEl.style.borderColor = '#2ecc71';
+            rwRes.innerHTML = `<span style="color:#2ecc71;font-weight:bold;">&#10003; Chính xác!</span>`;
+            playCorrectSound();
+        } else {
+            inputEl.style.backgroundColor = '#fdedec';
+            inputEl.style.borderColor = '#e74c3c';
+            rwRes.innerHTML = `<span style="color:#2ecc71; font-weight:bold; margin-left: 5px;">${esc(expected)}</span>`;
+            playWrongSound();
+        }
+        inputEl.disabled = true;
+        btn.disabled = true;
+        showExplanation(q);
+    }
 
 
+
+
+
+    function checkReorder(q, order, btn) {
+        let isCorrect = order.join(' ') === q.correctOrder.join(' ');
+        let tz = document.getElementById('target-' + q.id);
+        if (isCorrect) {
+            tz.style.backgroundColor = '#eafaf1';
+            tz.style.borderColor = '#2ecc71';
+            playCorrectSound();
+        } else {
+            tz.style.backgroundColor = '#fdedec';
+            tz.style.borderColor = '#e74c3c';
+            let div = document.createElement('div');
+            div.style.marginTop = '10px';
+            div.innerHTML = `<strong style="color:#2ecc71;">Đáp án:</strong> ${esc(q.correctOrder.join(' '))}`;
+            tz.parentNode.insertBefore(div, btn.parentNode);
+            playWrongSound();
+        }
+        document.getElementById('q-block-' + q.id).style.pointerEvents = 'none';
+        btn.disabled = true;
+        showExplanation(q);
+    }
+    
+    window.confirmSubmit = function() {
+        if (!confirm("Bạn có chắc chắn muốn nộp bài?")) return;
+        window.removeEventListener('beforeunload', preventNav);
+        submitted = true;
+        playSubmitSound();
+        
+        let correctCount = 0;
+        let gradableCount = 0;
+        let wrongHTML = '<h3 style="color:#e74c3c;text-align:left;margin-top:0;">DANH SÁCH CÁC CÂU LÀM SAI / CHƯA LÀM</h3>';
+        let hasWrong = false;
+        
+        questions.forEach((q, index) => {
+            let l = locked[q.id];
+            let isGradable = (q.type !== 'short_answer');
+            if (isGradable) gradableCount++;
+            
+            let isCorrect = false;
+            let hsStr = "(Bạn chưa trả lời)";
+            let rightStr = "";
+            
+            if (!l) {
+                let hasValue = false;
+                if (q.type === 'multiple_choice' || q.type === 'mcq') {
+                    let qBlock = document.getElementById('q-block-' + q.id);
+                    if (qBlock && qBlock.hasAttribute('data-selected-idx')) {
+                        let idx = parseInt(qBlock.getAttribute('data-selected-idx'));
+                        locked[q.id] = { idx };
+                        l = locked[q.id];
+                        hasValue = true;
+                    }
+                } else if (q.type === 'gap_fill_text') {
+                    let ans = {};
+                    let empty = true;
+                    q.blanks.forEach(b => {
+                        let el = document.getElementById(`input-${q.id}-${b.blankId}`);
+                        let val = el ? el.value.trim() : "";
+                        ans[b.blankId] = val;
+                        if (val) empty = false;
+                    });
+                    if (!empty) {
+                        locked[q.id] = { ans };
+                        l = locked[q.id];
+                        hasValue = true;
+                    }
+                } else if (q.type === 'sentence_rewrite') {
+                    let el = document.getElementById(`input-${q.id}`); 
+                    let val = el ? el.value.trim() : "";
+                    if (val) {
+                        locked[q.id] = { val };
+                        l = locked[q.id];
+                        hasValue = true;
+                    }
+                } else if (q.type === 'reordering') {
+                    let tz = document.getElementById(`target-${q.id}`);
+                    if (tz && tz.children.length > 0) {
+                        let order = Array.from(tz.children).map(c => c.getAttribute('data-token'));
+                        locked[q.id] = { order };
+                        l = locked[q.id];
+                        hasValue = true;
+                    }
+                }
+
+                if (!hasValue) {
+                    isCorrect = false;
+                    hsStr = "(Bạn chưa trả lời)";
+                    if (q.type === 'multiple_choice' || q.type === 'mcq') {
+                        let co = q.options.find(o => o.isCorrect);
+                        rightStr = co ? `${co.displayLabel || co.label} (${(co.text || co.html).replace(/<[^>]*>?/gm, '')})` : '';
+                    } else if (q.type === 'gap_fill_text') {
+                        rightStr = q.blanks.map(b => b.correctAnswers[0]).join(', ');
+                    } else if (q.type === 'reordering') {
+                        rightStr = q.correctOrder.map(tok => { let w = (q.words && q.words.find(x => x.tokenId === tok)) || (q.tokens && q.tokens.find(x => x.tokenId === tok)); return w ? w.text : tok; }).join(' ');
+                    } else if (q.type === 'sentence_rewrite') {
+                        rightStr = q.correctAnswers[0];
+                    }
+                }
+            }
+            
+            if (l) {
+                if (q.type === 'multiple_choice' || q.type === 'mcq') {
+                    isCorrect = q.options[l.idx].isCorrect;
+                    hsStr = `${q.options[l.idx].displayLabel || q.options[l.idx].label} (${(q.options[l.idx].text || q.options[l.idx].html).replace(/<[^>]*>?/gm, '')})`;
+                    let co = q.options.find(o => o.isCorrect);
+                    rightStr = co ? `${co.displayLabel || co.label} (${(co.text || co.html).replace(/<[^>]*>?/gm, '')})` : '';
+                } else if (q.type === 'gap_fill_text') {
+                    isCorrect = true;
+                    let hsArr = []; let rightArr = [];
+                    q.blanks.forEach(b => {
+                        let v = l.ans[b.blankId];
+                        hsArr.push(v);
+                        rightArr.push(b.correctAnswers[0]);
+                        let c = false;
+                        b.correctAnswers.forEach(ca => { if(norm(ca) === norm(v)) c = true; });
+                        if (!c) isCorrect = false;
+                    });
+                    hsStr = hsArr.join(', ');
+                    rightStr = rightArr.join(', ');
+                } else if (q.type === 'reordering') {
+                    isCorrect = l.order.join(' ') === q.correctOrder.join(' ');
+                    let mapToken = tok => { let w = (q.words && q.words.find(x => x.tokenId === tok)) || (q.tokens && q.tokens.find(x => x.tokenId === tok)); return w ? w.text : tok; };
+                    hsStr = l.order.map(mapToken).join(' ');
+                    rightStr = q.correctOrder.map(mapToken).join(' ');
+                } else if (q.type === 'sentence_rewrite') {
+                    isCorrect = isRewriteCorrect(q, l.val);
+                    hsStr = l.val;
+                    rightStr = q.correctAnswers[0];
+                }
+            }
+            
+            if (isGradable && isCorrect) {
+                correctCount++;
+            } else if (isGradable && !isCorrect) {
+                hasWrong = true;
+                wrongHTML += `<div class="error-item">
+                    <strong>Câu ${index + 1}:</strong> ${q.questionHTML.replace(/\{\{blank:[^\}]+\}\}/g, '___')}<br>
+                    <span style="color:#e74c3c;">Học sinh: <span style="${hsStr.includes('chưa trả lời') ? '' : 'text-decoration:line-through;'}">${esc(hsStr)}</span></span><br>
+                    <span style="color:#2ecc71; font-weight:bold;">Đáp án đúng: ${esc(rightStr)}</span>
+                    <div style="margin-top:5px;font-size:13.5px;color:#333;">${q.explanationHTML ? (q.explanationHTML.includes('Giải thích:') ? q.explanationHTML : '<em>Giải thích:</em><br>' + q.explanationHTML) : ''}</div>
+                </div>`;
+            }
+        });
+        
+        document.getElementById('testScreen').classList.remove('active');
+        resultScreen.classList.add('active');
+        if (gradableCount > 0) {
+            let scale10 = parseFloat(((correctCount / gradableCount) * 10).toFixed(2));
+            scoreDisplay.innerHTML = `${scale10} <span style="font-size:32px; color:#7f8c8d;">/ 10</span><br><span style="font-size:18px; color:#95a5a6; font-weight:normal;">(Đúng ${correctCount}/${gradableCount} câu)</span>`;
+            if (correctCount === gradableCount) {
+                resultDetails.innerHTML = '<h2 style="color:#2ecc71;text-align:center;">TUYỆT VỜI! ĐÚNG 100%</h2>';
+                playCorrectSound();
+            } else {
+                resultDetails.innerHTML = wrongHTML;
+            }
+        } else {
+            scoreDisplay.textContent = "Không chấm điểm";
+            resultDetails.innerHTML = '<p>Bài này không có câu trắc nghiệm được chấm tự động.</p>';
+        }
+        
+        
+        try {
+            const formUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSfZCAK2lpNE8O8Ieqwc3SI1ubr6HZDvGZR91AsSpUk8kEBqaA/formResponse';
+            const formData = new FormData();
+            let studentName = document.getElementById('studentName') ? document.getElementById('studentName').value.trim() : 'Unknown';
+            formData.append('entry.1861648410', studentName);
+            let finalScore = gradableCount > 0 ? (correctCount * 10 / gradableCount).toFixed(2) : 0;
+            formData.append('entry.1691800437', finalScore);
+            const plainErrorReport = hasWrong ? wrongHTML.replace(/<[^>]*>?/gm, '') : 'Perfect';
+            formData.append('entry.639295732', plainErrorReport);
+            let pageTitle = document.title || location.pathname.split('/').pop() || 'Unknown';
+            formData.append('entry.370465671', pageTitle);
+            fetch(formUrl, { method: 'POST', mode: 'no-cors', body: formData }).catch(e => console.error(e));
+        } catch (err) {
+            console.error("Form submit error", err);
+        }
+        
+        document.querySelectorAll('.check-btn').forEach(b => b.disabled = true);
+        document.querySelectorAll('input, .option, .word-chip').forEach(el => { el.disabled = true; el.style.pointerEvents = 'none'; el.style.opacity = '0.7'; });
+
+    };
+
+    window.onload = init;
+})();
 
     </script>
-    </body>
-    </html>
-    
+</body>
+</html>
